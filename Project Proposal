@@ -10,11 +10,14 @@ Recipe Recommendation:
 
 Utilize the Spoonacular Food API to suggest personalized recipes based on users' dietary preferences, allergies, and available ingredients.
 Maybe allow users to search for specific recipes, browse categories, and save their favorite dishes.
+
 Meal Planning:
 Enable users to create weekly meal plans by selecting recipes from the recommendation list or adding custom meals.
+
 Nutrition Analysis:
 Display detailed nutritional information for each recipe, helping users make informed dietary choices.
 Track daily calorie intake, macronutrients, and other nutritional metrics.
+
 Calendar Integration:
 Integrate with Google Calendar API to sync meal plans with users' Google Calendars.
 Schedule cooking and meal times, set reminders, and receive notifications for meal prep and cooking activities.
@@ -38,12 +41,15 @@ Key Features:
 Trip Planning Assistant:
 Utilize the OpenAI ChatGPT API to offer users a conversational AI assistant for trip planning.
 Assist users in specifying their travel preferences, such as destination, budget, dates, and interests.
+
 Destination Recommendations:
 Provide personalized destination recommendations based on users' preferences, interests, and past travel history.
 Offer information on popular attractions, local cuisine, and cultural experiences at each suggested destination.
+
 Flight Booking Integration:
 Integrate with a Flight API to enable users to search, compare, and book flights directly within the app.
 Display real-time flight information, including prices, departure times, and airlines.
+
 Travel Itinerary Generation:
 Automatically generate detailed travel itineraries based on users' flight bookings, including flight details, accommodation information, and planned activities.
 Allow users to customize their itineraries by adding additional activities, reservations, or notes.
