@@ -1,1 +1,50 @@
-Here are our Project Ideas:
+Here are the Project Ideas for Team 22:
+Meal Planner Web-App
+Project Summary:
+
+The Meal Planner App is a comprehensive and user-friendly platform that leverages the Spoonacular Food API and Google Calendar API to help users plan their meals, create shopping lists, and schedule their cooking activities. This app aims to streamline the meal planning process and improve users' culinary experiences by providing personalized recipes, nutritional information, and seamless integration with their Google Calendar.
+
+Key Features:
+
+Recipe Recommendation:
+
+Utilize the Spoonacular Food API to suggest personalized recipes based on users' dietary preferences, allergies, and available ingredients.
+Maybe allow users to search for specific recipes, browse categories, and save their favorite dishes.
+Meal Planning:
+Enable users to create weekly meal plans by selecting recipes from the recommendation list or adding custom meals.
+Nutrition Analysis:
+Display detailed nutritional information for each recipe, helping users make informed dietary choices.
+Track daily calorie intake, macronutrients, and other nutritional metrics.
+Calendar Integration:
+Integrate with Google Calendar API to sync meal plans with users' Google Calendars.
+Schedule cooking and meal times, set reminders, and receive notifications for meal prep and cooking activities.
+
+User Profiles:
+Create user profiles to store dietary preferences, allergies, and cooking skill levels.
+Offer personalized recipe recommendations based on user profiles.
+Social Sharing:
+
+Enable users to share their meal plans, recipes, and cooking experiences with friends and family through social media or messaging apps.
+
+The Meal Planner App combines the power of the Spoonacular Food API's recipe data with the organization and scheduling capabilities of the Google Calendar API, creating a valuable tool for individuals looking to simplify meal planning, eat healthier, and enjoy a more organized culinary lifestyle.
+
+Travel Itinerary Web-App:
+Project Summary:
+
+The Travel Itinerary App is a smart and user-friendly platform that utilizes the OpenAI ChatGPT API and a Flight API to help travelers plan and manage their trips with ease. This app aims to streamline the travel planning process, provide personalized recommendations, and assist users in booking flights and creating comprehensive travel itineraries.
+
+Key Features:
+
+Trip Planning Assistant:
+Utilize the OpenAI ChatGPT API to offer users a conversational AI assistant for trip planning.
+Assist users in specifying their travel preferences, such as destination, budget, dates, and interests.
+Destination Recommendations:
+Provide personalized destination recommendations based on users' preferences, interests, and past travel history.
+Offer information on popular attractions, local cuisine, and cultural experiences at each suggested destination.
+Flight Booking Integration:
+Integrate with a Flight API to enable users to search, compare, and book flights directly within the app.
+Display real-time flight information, including prices, departure times, and airlines.
+Travel Itinerary Generation:
+Automatically generate detailed travel itineraries based on users' flight bookings, including flight details, accommodation information, and planned activities.
+Allow users to customize their itineraries by adding additional activities, reservations, or notes.
+The Travel Itinerary App leverages the power of conversational AI provided by the OpenAI ChatGPT API and integrates seamlessly with a Flight API to simplify the travel planning process for users. It assists travelers in making informed decisions, provides personalized recommendations, and offers a one-stop solution for planning, booking, and managing their trips.
