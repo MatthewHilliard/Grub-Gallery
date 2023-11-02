@@ -4,6 +4,8 @@ const app = express();
 const mongoose = require('mongoose')
 const UserModel = require('./models/Users')
 
+app.use(express.json());
+
 mongoose.connect("mongodb+srv://matthewhilliard:birjit@cluster0.yoaoe5y.mongodb.net/MealPlanner?retryWrites=true&w=majority&appName=AtlasApp")
 
 app.get("/getUsers", async (req, res) => {
@@ -13,6 +15,14 @@ app.get("/getUsers", async (req, res) => {
       } catch (error){
         res.status(500).json(users)
       }
+})
+
+app.post("/createUser", async (req, res) =>{
+    const user = req.body;
+    const newUser = new UserModel(user);
+    await newUser.save();
+
+    res.json(user);
 })
 
 app.listen(5173, () => {
