@@ -10,6 +10,7 @@ app.use(cors());
 
 mongoose.connect("mongodb+srv://matthewhilliard:birjit@cluster0.yoaoe5y.mongodb.net/MealPlanner?retryWrites=true&w=majority&appName=AtlasApp")
 
+// endpoint to obtain all users
 app.get("/getUsers", async (req, res) => {
     try{
         const users = await UserModel.find()
@@ -18,6 +19,8 @@ app.get("/getUsers", async (req, res) => {
         res.status(500).json({ message: error.message })
       }
 })
+
+
 
 app.post("/createUser", async (req, res) =>{
     const user = req.body;
