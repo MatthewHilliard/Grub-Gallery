@@ -11,8 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <h1 class="text-7xl font-semibold px-10">Find. Plan. Eat</h1>
       </div>
       <div class="row-span-3">
-        <div class="box-border h-80 w-90 rounded-3xl bg-[#B28370] boxShadow">
-
+        <div class="box-border h-80 w-90 rounded-3xl bg-[#B28370] boxShadow max-w-[600px] ml-auto mr-[20px]">
         </div>
         <div>
             <img></img>
