@@ -5,14 +5,32 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    age: {
-        type: Number,
-        required: true,
-    },
-    username: {
+    email: {
         type: String,
         required: true,
     },
+    id: {
+        type: String,
+        required: true,
+    },
+    dietary_restrict: {
+        type: [String],
+        required: true,
+    },
+    favorites : {
+        recipe_id: {
+            type: String,
+            required: true
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        calories: {
+            type: Number,
+            required: true
+        }
+    }
 })
 
 const UserModel = mongoose.model("users", UserSchema)
