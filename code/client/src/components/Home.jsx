@@ -1,12 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import NavBar from './NavBar'
-import './index.css'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <NavBar/>
-    <div class="grid grid-cols-2 gap-y-6 relative top-[200px]"> 
+function Home(){
+    return(
+        <div class="grid grid-cols-2 gap-y-6 relative top-[200px]"> 
       <div class="">
         <h1 class="text-7xl font-semibold px-10">Find. Plan. Eat.</h1>
       </div>
@@ -25,6 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           Browse Meals
         </button>
       </div>
-    </div>
-  </React.StrictMode>,
-)
+    </div> 
+    )
+}
+
+export default Home
