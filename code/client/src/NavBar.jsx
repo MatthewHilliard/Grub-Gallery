@@ -5,18 +5,17 @@ import profile_photo from './assets/profile.png'
 function NavBar(){
     return(
         <div class="flex flex-row mx-auto my-auto overflow-hidden">
-            <div class="">
+            <div class='flex items-center'>
                 <img class='h-16 py-2 px-2' src={logo}/>
+                <h1 class="py-3 text-4xl font-light">Meal Planner</h1>
             </div>
-            <div class="py-3 text-4xl font-light">
-                <h1>Meal Planner</h1>
-            </div>
+
             <div class='flex items-center ml-auto mr-5'>
-                <button className=''>
-                    <img className='h-10' src={profile_photo}/>
+                <button class=''>
+                    <img class='h-10' src={profile_photo}/>
                 </button>
-                <button className='ml-2'> {/* Adjust the ml-2 (margin-left) as needed */}
-                    <img className='h-12' src={menu_bar}/>
+                <button class='ml-5'> {/* Adjust the ml-2 (margin-left) as needed */}
+                    <img class='h-12' src={menu_bar}/>
                 </button>
             </div>
         </div>
