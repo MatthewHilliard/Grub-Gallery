@@ -11,9 +11,12 @@ function NavBar(){
             <div class="py-3 text-4xl font-light">
                 <h1>Meal Planner</h1>
             </div>
-            <div class='absolute top-0 right-0 h-16 w-16 py-2'>
-                <button class=''>
-                    <img class='h-12' src={menu_bar}/>
+            <div class='flex items-center ml-auto mr-5'>
+                <button className=''>
+                    <img className='h-10' src={profile_photo}/>
+                </button>
+                <button className='ml-2'> {/* Adjust the ml-2 (margin-left) as needed */}
+                    <img className='h-12' src={menu_bar}/>
                 </button>
             </div>
         </div>
