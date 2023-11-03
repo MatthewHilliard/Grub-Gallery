@@ -6,12 +6,17 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <NavBar/>
-    <div class="grid grid-cols-2 gap-y-6"> 
+    <div class="grid grid-cols-2 gap-y-6 relative top-[200px]"> 
       <div class="">
         <h1 class="text-7xl font-semibold px-10">Find. Plan. Eat</h1>
       </div>
-      <div class="row-span-2">
-        <h1>Images go here</h1>
+      <div class="row-span-3">
+        <div class="box-border h-80 w-90 rounded-3xl bg-[#B28370] boxShadow">
+
+        </div>
+        <div>
+            <img></img>
+        </div>
       </div>
       <div class="px-10">
         <h2>Discover delectable dishes and seamlessly integrate them into your schedule with Google Calender integration. Elevate your dining experience effortlessly with Meal Planner.</h2>
