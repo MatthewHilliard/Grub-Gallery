@@ -1,5 +1,6 @@
 import logo from './assets/forkandknife.png'
 import menu_bar from './assets/menu_bar.png'
+import profile_photo from './assets/profile.png'
 
 function NavBar(){
     return(
@@ -10,9 +11,11 @@ function NavBar(){
             <div class="py-3 text-4xl font-light">
                 <h1>Meal Planner</h1>
             </div>
-            <button class=''>
-                <img class='h-16' src={menu_bar}/>
-            </button>
+            <div class='absolute top-0 right-0 h-16 w-16 py-2'>
+                <button class=''>
+                    <img class='h-12' src={menu_bar}/>
+                </button>
+            </div>
         </div>
     )
 }
