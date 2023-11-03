@@ -15,7 +15,7 @@ app.get("/getUsers", async (req, res) => {
         const users = await UserModel.find()
         res.status(200).json(users);
       } catch (error){
-        res.status(500).json(users)
+        res.status(500).json({ message: error.message })
       }
 })
 
@@ -27,6 +27,6 @@ app.post("/createUser", async (req, res) =>{
     res.json(user);
 })
 
-app.listen(5173, () => {
+app.listen(3001, () => {
     console.log("SERVER RUNS")
 })
