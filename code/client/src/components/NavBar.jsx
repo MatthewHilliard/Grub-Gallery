@@ -29,7 +29,7 @@ function NavBar() {
                     <input 
                         type="search" 
                         placeholder="What would you like to eat today?" 
-                        className="w-full p-4 rounded-full"
+                        className="w-full p-4 rounded-full focus:outline-none"
                         name="seachbar"
                         onChange={handleChange}
                     />
