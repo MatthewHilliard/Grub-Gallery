@@ -2,8 +2,22 @@ import logo from '../assets/forkandknife.png'
 import menu_bar from '../assets/menu_bar.png'
 import profile_photo from '../assets/profile.png'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
-function NavBar(){
+function NavBar() {
+    // create and maintain "searchString" within searchbar
+    const [searchString, setSearchString] = useState("")
+    
+    function handleChange(event) {
+        const {name, value} = event.target
+        setSearchString(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
+
+    console.log(searchString)
+
     return(
         <div className="flex flex-row mx-auto my-auto overflow-hidden">
             <div className='flex items-center flex-shrink-0'>
@@ -12,11 +26,13 @@ function NavBar(){
             </div>
 
             <div className="ml-5 mr-5 mt-2 w-[350px]"> {/*Can change the placement as needed*/}
-                <form className="relative">
-                    <div className="relative">
-                        <input type="search" placeholder="What would you like to eat today?" className="w-full p-4 rounded-full" /> {/*Color*/}
-                    </div>
-                </form>
+                    <input 
+                        type="search" 
+                        placeholder="What would you like to eat today?" 
+                        className="w-full p-4 rounded-full"
+                        name="seachbar"
+                        onChange={handleChange}
+                    />
             </div>
 
             <div className='flex items-center ml-auto mr-5 flex-shrink-0'>
