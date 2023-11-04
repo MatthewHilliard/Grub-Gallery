@@ -6,20 +6,20 @@ import { Link } from 'react-router-dom'
 function NavBar(){
     return(
         <div className="flex flex-row mx-auto my-auto overflow-hidden">
-            <div className='flex items-center'>
+            <div className='flex items-center flex-shrink-0'>
                 <Link to="/"><img className='h-16 py-2 px-2' src={logo}/></Link>
                 <h1 className="py-3 text-4xl font-light">Meal Planner</h1>
             </div>
-            <div className="ml-5 mt-2"> {/*Can change the placement as needed*/}
 
-                <form className="w-[480px] relative">
+            <div className="ml-5 mr-5 mt-2 w-[350px]"> {/*Can change the placement as needed*/}
+                <form className="relative">
                     <div className="relative">
                         <input type="search" placeholder="What would you like to eat today?" className="w-full p-4 rounded-full" /> {/*Color*/}
                     </div>
                 </form>
             </div>
 
-            <div className='flex items-center ml-auto mr-5'>
+            <div className='flex items-center ml-auto mr-5 flex-shrink-0'>
                 <button className=''>
                     <Link to="/login"><img className='h-10' src={profile_photo}/></Link>
                 </button>
