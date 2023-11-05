@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Axios from 'axios'
 
-function NavBar() {
+function NavBar({ setSearchMealsList }) {
     // create and maintain "searchString" within searchbar
     const [searchString, setSearchString] = useState("")
     
@@ -29,7 +29,17 @@ function NavBar() {
             searchString
 		}
 		Axios.post("http://localhost:3000/search/meals", body).then((response) => {
-			console.log("res", response.data)
+            // parse response data
+            const data = JSON.parse(response.data)
+            
+            // obtain array of results from api call
+            const results = data.results
+
+            // map each item to a meal (and reassign searchMealsList)
+            
+            // reassign searchMealsList
+            setSearchMealsList(results)
+			console.log("res", results[0])
 		})
     }
 

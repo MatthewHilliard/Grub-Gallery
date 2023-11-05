@@ -1,10 +1,16 @@
-function Home(){
+function Home(props) {
+    console.log(props.searchMealsList)
+    const mealsList = props.searchMealsList.map((element, index) => (
+      <div key={index}>
+        <h3>{element.title}</h3>
+        <img className='h-10' src={element.image}/>
+      </div>
+    ))
+    
     return(
       <div className="grid grid-cols-2 gap-y-6 relative top-[200px]"> 
       
-        <div className="">
-          <h1 className="text-7xl font-semibold px-10">Find. Plan. Eat.</h1>
-        </div>
+        <h1 className="text-7xl font-semibold px-10">Find. Plan. Eat.</h1>
 
         <div className="row-span-3">
           <div className="box-border h-80 w-90 rounded-3xl bg-[#B28370] boxShadow max-w-[600px] ml-auto mr-[20px]">
@@ -23,6 +29,8 @@ function Home(){
             Browse Meals
           </button>
         </div>
+
+        {mealsList}
         
       </div> 
     )
