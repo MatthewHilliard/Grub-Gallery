@@ -1,12 +1,5 @@
-function Home(props) {
-    console.log(props.searchMealsList)
-    const mealsList = props.searchMealsList.map((element, index) => (
-      <div key={index}>
-        <h3>{element.title}</h3>
-        <img className='h-10' src={element.image}/>
-      </div>
-    ))
-    
+function Home() {
+  
     return(
       <div className="grid grid-cols-2 gap-y-6 relative top-[200px]"> 
       
@@ -29,8 +22,6 @@ function Home(props) {
             Browse Meals
           </button>
         </div>
-
-        {mealsList}
         
       </div> 
     )

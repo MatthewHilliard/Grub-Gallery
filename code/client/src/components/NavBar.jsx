@@ -1,11 +1,15 @@
 import logo from '../assets/forkandknife.png'
 import menu_bar from '../assets/menu_bar.png'
 import profile_photo from '../assets/profile.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Axios from 'axios'
 
+
 function NavBar({ setSearchMealsList }) {
+    // navigate : used to redirect user to other urls...
+    const navigate = useNavigate()
+
     // create and maintain "searchString" within searchbar
     const [searchString, setSearchString] = useState("")
     
@@ -28,19 +32,25 @@ function NavBar({ setSearchMealsList }) {
         const body = {
             searchString
 		}
-		Axios.post("http://localhost:3000/search/meals", body).then((response) => {
-            // parse response data
-            const data = JSON.parse(response.data)
-            
-            // obtain array of results from api call
-            const results = data.results
+        try {
+            Axios.post("http://localhost:3000/search/meals", body).then((response) => {
+                // parse response data
+                const data = JSON.parse(response.data)
+                
+                // obtain array of results from api call
+                const results = data.results
+    
+                // map each item to a meal (and reassign searchMealsList)
+                
+                // reassign searchMealsList
+                setSearchMealsList(results)
 
-            // map each item to a meal (and reassign searchMealsList)
-            
-            // reassign searchMealsList
-            setSearchMealsList(results)
-			console.log("res", results[0])
-		})
+                // redirect to the search results page
+                navigate('/search-results')
+            })
+        } catch (error) {
+            console.log("Error fetching data from backend:", error)
+        }
     }
 
     return(
