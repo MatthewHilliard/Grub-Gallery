@@ -1,7 +1,14 @@
+import { jwtDecode } from 'jwt-decode';
 import { useEffect } from 'react';
 
 function Login() {
     
+    function handleCallbackResponse(response) {
+        console.log("Encoded JWT ID Token: " + response.credential);
+        var userObject = jwtDecode(response.credential);
+        console.log(userObject);
+    }
+
     useEffect(() => {
         /* global google */
         google.accounts.id.initialize({
@@ -15,10 +22,6 @@ function Login() {
         )
     }, []);
 
-    function handleCallbackResponse(response) {
-        console.log("Encoded JWT ID Token: " + response.credential);
-    }
-  
     return (
         <div>
             this is a page to register users
