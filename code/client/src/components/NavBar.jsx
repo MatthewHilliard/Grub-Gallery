@@ -8,6 +8,7 @@ function NavBar() {
     // create and maintain "searchString" within searchbar
     const [searchString, setSearchString] = useState("")
     
+    // handleChange : update "searchString" for each keypress in searchbar
     function handleChange(event) {
         const {name, value} = event.target
         setSearchString(prevState => ({
@@ -16,7 +17,17 @@ function NavBar() {
         }))
     }
 
-    console.log(searchString)
+    // handleKeyDown : grabs keyboard symbol that user entered (check for 'Enter')
+    function handleKeyDown(event) {
+        if (event.key === 'Enter') {
+            search()
+        }
+    }
+
+    // make request to backend for search
+    function search() {
+        console.log(searchString)
+    }
 
     return(
         <div className="flex flex-row mx-auto my-auto overflow-hidden">
@@ -32,6 +43,7 @@ function NavBar() {
                         className="w-full p-4 rounded-full focus:outline-none"
                         name="seachbar"
                         onChange={handleChange}
+                        onKeyDown={handleKeyDown}
                     />
             </div>
 
