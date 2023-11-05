@@ -7,16 +7,17 @@ import './index.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
-  
+
   return (
     <Router>
-        <NavBar/>
-        <Routes>
-            <Route path='/' element={<Home />} /> 
-            <Route path='/login' element={<Login />} />
-        </Routes>
+      <NavBar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
     </Router>
   )
 }
+//testing push again
 
 export default App
