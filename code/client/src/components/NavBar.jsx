@@ -3,6 +3,7 @@ import menu_bar from '../assets/menu_bar.png'
 import profile_photo from '../assets/profile.png'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import Axios from 'axios'
 
 function NavBar() {
     // create and maintain "searchString" within searchbar
@@ -10,11 +11,8 @@ function NavBar() {
     
     // handleChange : update "searchString" for each keypress in searchbar
     function handleChange(event) {
-        const {name, value} = event.target
-        setSearchString(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
+        const { value } = event.target
+        setSearchString(value)
     }
 
     // handleKeyDown : grabs keyboard symbol that user entered (check for 'Enter')
@@ -26,7 +24,13 @@ function NavBar() {
 
     // make request to backend for search
     function search() {
-        console.log(searchString)
+        // console.log(searchString)
+        const body = {
+            searchString
+		}
+		Axios.post("http://localhost:3000/search/meals", body).then((response) => {
+			console.log("res", response.data)
+		})
     }
 
     return(
