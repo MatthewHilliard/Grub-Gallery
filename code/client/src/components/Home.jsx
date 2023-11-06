@@ -6,9 +6,9 @@ function Home() {
         <h1 className="text-7xl font-semibold px-10">Find. Plan. Eat.</h1>
 
         <div className="row-span-3">
-          <div className="box-border h-80 w-90 rounded-3xl bg-[#B28370] boxShadow max-w-[600px] ml-auto mr-[20px]">
+          <div className="box-border h-[500px] w-[800px] rounded-3xl bg-[#B28370] boxShadow ml-auto mr-[20px]">
           </div>
-          <div>
+          <div className="grid col-span-3">
             <img></img>
           </div>
         </div>

@@ -59,15 +59,15 @@ function Login() {
             <div className="col-span-2 pl-[130px] py-4">
                 <h1 className="text-4xl font-semibold">Find healthy and trusted recipes</h1>
             </div>
-            <div className="col-span-2 pl-[200px] flex">
+            <div className="col-span-2 pl-[160px] flex">
                 <img src={checkmark} class="h-8 pr-5"/>
                 <h1 className="text-2xl">Find your favorite meals and recipes</h1>
             </div>
-            <div className="col-span-2 pl-[200px] flex">
+            <div className="col-span-2 pl-[160px] flex">
                 <img src={checkmark} class="h-8 pr-5"/>
                 <h1 className="text-2xl">Filter suggestions for allergens, macros... etc.</h1>
             </div>
-            <div className="col-span-2 pl-[200px] flex">
+            <div className="col-span-2 pl-[160px] flex">
                 <img src={checkmark} class="h-8 pr-5"/>
                 <h1 className="text-2xl">Instantly save recipes with Google Calender</h1>
             </div>
