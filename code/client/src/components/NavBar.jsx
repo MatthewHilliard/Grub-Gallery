@@ -61,7 +61,6 @@ function NavBar({ setSearchMealsList }) {
                     <h1 className="py-3 text-4xl font-light">Meal Planner</h1>
                 </div>
             </Link>
-
             <div className="ml-5 mr-5 mt-2 w-[350px]"> {/*Can change the placement as needed*/}
                     <input 
                         type="search" 
