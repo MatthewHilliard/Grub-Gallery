@@ -1,5 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
+import checkmark from "../assets/checkmark.png";
+import foodsafety from "../assets/food-safety.png";
 
 function Login() {
     const [ user, setUser ] = useState({});
@@ -38,12 +40,14 @@ function Login() {
     //If we have a user: show the log out button
 
     return (
-        <div>
-            this is a page to register users
-            <div id="signInDiv" className="w-64"></div>
+        <div className="grid grid-cols-2 gap-y-6 relative top-[150px] flex-shrink-0">
+            <div className="pl-60">
+                <img src={foodsafety} className="h-80 w-80"/>
+            </div>
+            <div id="signInDiv" className="row-span-2"></div>
             {/* If the user is not empty, show sign out button*/}
             { Object.keys(user).length != 0 &&
-                <button onClick={ (e) => handleSignOut(e)}>Sign Out</button>
+                <button className = "w-64" onClick={ (e) => handleSignOut(e)}>Sign Out</button>
             }
             {/* shows name and pfp of google user */}
             {   user && 
@@ -51,7 +55,22 @@ function Login() {
                     <img src={user.picture}></img>
                     <h3>{user.name}</h3>
                 </div>
-            }   
+            }       
+            <div className="col-span-2 pl-[130px] py-4">
+                <h1 className="text-4xl font-semibold">Find healthy and trusted recipes</h1>
+            </div>
+            <div className="col-span-2 pl-[200px] flex">
+                <img src={checkmark} class="h-8 pr-5"/>
+                <h1 className="text-2xl">Find your favorite meals and recipes</h1>
+            </div>
+            <div className="col-span-2 pl-[200px] flex">
+                <img src={checkmark} class="h-8 pr-5"/>
+                <h1 className="text-2xl">Filter suggestions for allergens, macros... etc.</h1>
+            </div>
+            <div className="col-span-2 pl-[200px] flex">
+                <img src={checkmark} class="h-8 pr-5"/>
+                <h1 className="text-2xl">Instantly save recipes with Google Calender</h1>
+            </div>
         </div>
     )
 }
