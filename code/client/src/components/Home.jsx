@@ -4,9 +4,26 @@ import food3 from "../assets/food3.jpg"
 import food4 from "../assets/food4.jpg"
 import food5 from "../assets/food5.jpg"
 import food6 from "../assets/food6.jpg"
+import { Link } from 'react-router-dom'
+import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
-  
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    // Perform the API request using Axios (replace with your API endpoint)
+    // Once data is fetched, navigate to the "APIDataPage"
+    axios.get('https://api.spoonacular.com/recipes/random')
+      .then(response => {
+        const apiData = response.data;
+        // Pass the data as state to the "APIDataPage"
+        navigate('Browse_Meals', { state: { apiData } });
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  };
     return(
       <div className="grid grid-cols-2 gap-y-6 relative top-[200px]"> 
         <h1 className="text-8xl font-semibold px-10">Find. Plan. Eat.</h1>
@@ -28,9 +45,11 @@ function Home() {
         </div>
 
         <div className="px-10">
-          <button className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
+        <Link to="/browse_meals">
+          <button onClick={handleButtonClick} className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
             Browse Meals
           </button>
+          </Link>
         </div>
         
       </div> 
