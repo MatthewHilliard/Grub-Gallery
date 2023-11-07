@@ -9,10 +9,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    id: {
-        type: String,
-        required: true,
-    },
     dietary_restrict: {
         type: [String],
         required: false,

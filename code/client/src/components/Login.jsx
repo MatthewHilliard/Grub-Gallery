@@ -2,6 +2,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import checkmark from "../assets/checkmark.png";
 import foodsafety from "../assets/food-safety.png";
+import Axios from 'axios'
 
 function Login() {
     const [ user, setUser ] = useState({});
@@ -13,6 +14,13 @@ function Login() {
         setUser(userObject);
         //hides sign in button when user is logged in
         document.getElementById("signInDiv").hidden = true;
+        Axios.post("http://localhost:3000/users/createUsers", {
+            name: userObject.name,
+            email: userObject.email
+          })
+          .then((response) => {
+            console.log(response);
+          });
     }
     
     function handleSignOut(event) {
@@ -60,15 +68,15 @@ function Login() {
                 <h1 className="text-4xl font-semibold">Find healthy and trusted recipes</h1>
             </div>
             <div className="col-span-2 pl-[160px] flex">
-                <img src={checkmark} class="h-8 pr-5"/>
+                <img src={checkmark} className="h-8 pr-5"/>
                 <h1 className="text-2xl">Find your favorite meals and recipes</h1>
             </div>
             <div className="col-span-2 pl-[160px] flex">
-                <img src={checkmark} class="h-8 pr-5"/>
+                <img src={checkmark} className="h-8 pr-5"/>
                 <h1 className="text-2xl">Filter suggestions for allergens, macros... etc.</h1>
             </div>
             <div className="col-span-2 pl-[160px] flex">
-                <img src={checkmark} class="h-8 pr-5"/>
+                <img src={checkmark} className="h-8 pr-5"/>
                 <h1 className="text-2xl">Instantly save recipes with Google Calender</h1>
             </div>
         </div>
