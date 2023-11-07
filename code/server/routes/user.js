@@ -14,9 +14,14 @@ router.get("/getUsers", async (req, res) => {
 
 router.post("/createUsers", async (req, res) =>{
     const user = req.body
-    const newUser = new UserModel(user)
-    await newUser.save()
-
+    const existUsername = await UserModel.findOne({id: user.id})
+    if(existUsername){
+      console.log("username exists")
+    }
+    else{
+      const newUser = new UserModel(user)
+      await newUser.save()
+    }
     res.json(user)
 })
 

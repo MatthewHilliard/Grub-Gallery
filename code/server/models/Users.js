@@ -15,20 +15,20 @@ const UserSchema = new mongoose.Schema({
     },
     dietary_restrict: {
         type: [String],
-        required: true,
+        required: false,
     },
     favorites : {
         recipe_id: {
             type: String,
-            required: true
+            required: false
         },
         title: {
             type: String,
-            required: true
+            required: false
         },
         calories: {
             type: Number,
-            required: true
+            required: false
         }
     }
 })
