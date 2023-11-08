@@ -26,5 +26,22 @@ router.post("/createUsers", async (req, res) =>{
     res.json(user)
 })
 
+router.put("/addFavorite", async (req, res) =>{
+  const user = req.body
+  const result = await UserModel.findOneAndUpdate(
+    { email: user.email },
+    { $push: {favorites : {recipe_id: "12345", title: "Borgir", calories: "10000"}}},
+  )
+  res.send(result)
+})
+
+router.remove("removeFavorite", async(req, res) =>{
+  const user = req.body
+  const result = await UserModel.findOneAndDelete(
+    {email: user.email},
+    {}
+  )
+  res.send(result)
+})
 
 module.exports = router
