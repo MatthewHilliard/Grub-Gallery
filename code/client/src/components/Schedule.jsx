@@ -1,5 +1,7 @@
 function Schedule(){
-    <h1>Page to display schedule and google calender stuff</h1>
+    return(
+        <h1>Page to display schedule and google calender stuff</h1>
+    )
 }
 
 export default Schedule
