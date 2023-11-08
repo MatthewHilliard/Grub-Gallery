@@ -64,9 +64,9 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
     }
     
     function handleSignOut(event) {
-        //hides sign in button when user is logged in
-        document.getElementById("signInDiv").hidden = false
         setUser({})
+        // hides sign in button when user is logged in
+        document.getElementById("signInDiv").hidden = false
         // clear user from local storage
         localStorage.removeItem('user')
     }
