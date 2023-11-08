@@ -11,12 +11,25 @@ import Browse_Meals from './components/Browse_Meals'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
-  {/* Setting "globally" the searchMeals useState so that multiple components can change/use its information */ }
+  // Setting "globally" the searchMeals useState so that multiple components can change/use its information
   const [searchMealsList, setSearchMealsList] = useState([])
   const [browseMealsList, setBrowseMealsList] = useState([])
   // states to hold user and authentication status
   const [ user, setUser ] = useState({})
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
+
+  useEffect(() => {
+    console.log("1 APP")
+    // check localStorage cache to see if user has been saved
+    const localStorageUser = localStorage.getItem('user')
+    if (localStorageUser) {
+        // update user and authentication status
+        setUser(JSON.parse(localStorageUser))
+        setIsAuthenticated(true)
+    }
+  }, [])
+
+  console.log("app domain user:", user, isAuthenticated)
 
   return (
     <Router>
