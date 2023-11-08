@@ -35,13 +35,16 @@ router.put("/addFavorite", async (req, res) =>{
   res.send(result)
 })
 
-router.remove("removeFavorite", async(req, res) =>{
+router.delete("/removeFavorite", async(req, res) =>{
   const user = req.body
-  const result = await UserModel.findOneAndDelete(
-    {email: user.email},
-    {}
-  )
-  res.send(result)
+  try{
+    const result = await UserModel.deleteOne(    
+      {"email": user.email},
+      {"favorites": {"recipe_id": "12345"}})
+      res.send(result)
+  } catch (error){
+    res.status(500).json({ message: error.message })
+  }
 })
 
 module.exports = router
