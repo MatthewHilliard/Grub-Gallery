@@ -26,5 +26,25 @@ router.post("/createUsers", async (req, res) =>{
     res.json(user)
 })
 
+router.put("/addFavorite", async (req, res) =>{
+  const user = req.body
+  const result = await UserModel.findOneAndUpdate(
+    { email: user.email },
+    { $push: {favorites : {recipe_id: "12345", title: "Borgir", calories: "10000"}}},
+  )
+  res.send(result)
+})
+
+router.delete("/removeFavorite", async(req, res) =>{
+  const user = req.body
+  try{
+    const result = await UserModel.deleteOne(    
+      {"email": user.email},
+      {"favorites": {"recipe_id": "12345"}})
+      res.send(result)
+  } catch (error){
+    res.status(500).json({ message: error.message })
+  }
+})
 
 module.exports = router
