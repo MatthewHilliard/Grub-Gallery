@@ -10,15 +10,15 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [searchMealsList, setSearchMealsList] = useState([])
-
+  const [browseMealsList, setBrowseMealsList] = useState([])
   return (
     <Router>
       <NavBar setSearchMealsList={setSearchMealsList} />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home setBrowseMealsList={setBrowseMealsList}/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/search-results' element={<SearchResults searchMealsList={searchMealsList}/>} />
-        <Route path='/Browse_Meals' element={<Browse_Meals />} />
+        <Route path='/Browse_Meals' element={<Browse_Meals browseMealsList={browseMealsList}/>} />
       </Routes>
     </Router>
   )

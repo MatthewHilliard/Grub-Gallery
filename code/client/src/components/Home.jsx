@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Axios from "axios"
 import { useNavigate } from 'react-router-dom';
 
-function Home() {
+function Home({ setBrowseMealsList }) {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
@@ -19,8 +19,11 @@ function Home() {
         .then(response => {
         const apiData = JSON.parse(response.data)
         // Pass the data as state to the "APIDataPage"
-        const results = apiData.results
+        console.log(apiData)
+        const results = apiData.recipes
+        
 
+        setBrowseMealsList(results)
       })
     } catch (error) {
       console.log("Error fetching data from backend:", error)
