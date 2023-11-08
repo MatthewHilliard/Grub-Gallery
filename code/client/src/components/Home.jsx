@@ -15,12 +15,12 @@ function Home() {
     // Perform the API request using Axios (replace with your API endpoint)
     // Once data is fetched, navigate to the "APIDataPage"
     try{
-      Axios.post('http://localhost:3000/search/browse', body)
+      Axios.post('http://localhost:3000/search/browse')
         .then(response => {
         const apiData = JSON.parse(response.data)
         // Pass the data as state to the "APIDataPage"
-        const results = data.results
-        navigate('/Browse_Meals', { state: { apiData } });
+        const results = apiData.results
+
       })
     } catch (error) {
       console.log("Error fetching data from backend:", error)
@@ -47,7 +47,7 @@ function Home() {
         </div>
 
         <div className="px-10">
-        <Link to="/browse_meals">
+        <Link to="/Browse_Meals">
           <button onClick={handleButtonClick} className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
             Browse Meals
           </button>
