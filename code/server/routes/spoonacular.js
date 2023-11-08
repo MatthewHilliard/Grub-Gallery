@@ -37,6 +37,34 @@ router.post("/meals", async (req, res) => {
   }
 })
 
+router.post("/browse", async (req, res) => {
+  try {
+    const numberOfRecipes = 5;
+    // initialization for spoonacular api call
+    const param = req.body.searchString
+    let config = {
+      method: 'get',
+      url: `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=ea7e76522981472aaa961dde6913a48e`,
+      headers: { }
+    }
+
+    // call spoonacular api
+    try {
+      const response = await axios.request(config)
+      meals = JSON.stringify(response.data)
+      console.log(meals)
+      res.status(200).json(meals)
+    }
+    catch (error) {
+      console.log("Error calling Spoonacular API:", error)
+      res.status(500).json({ message: 'Error calling Spoonacular API' })
+    }
 
 
-module.exports = router
+  } catch (error) {
+    console.log("Error in post to Spoonacular:", error)
+    res.status(500).json({ message: 'Error in post to Spoonacular' })
+  }
+})
+
+module.exports = router;
