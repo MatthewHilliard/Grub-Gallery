@@ -5,7 +5,7 @@ import foodsafety from "../assets/food-safety.png";
 import Axios from 'axios'
 
 function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
-
+    console.log("user:", user, isAuthenticated)
     // initialize (or retrieve) `user`
     useEffect(() => {
         // check localStorage cache to see if user has been saved
