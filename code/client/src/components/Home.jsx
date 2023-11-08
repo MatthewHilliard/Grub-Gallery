@@ -5,7 +5,7 @@ import food4 from "../assets/food4.jpg"
 import food5 from "../assets/food5.jpg"
 import food6 from "../assets/food6.jpg"
 import { Link } from 'react-router-dom'
-import axios from "axios"
+import Axios from "axios"
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
@@ -14,15 +14,17 @@ function Home() {
   const handleButtonClick = () => {
     // Perform the API request using Axios (replace with your API endpoint)
     // Once data is fetched, navigate to the "APIDataPage"
-    axios.get('https://api.spoonacular.com/recipes/random')
-      .then(response => {
-        const apiData = response.data;
+    try{
+      Axios.post('http://localhost:3000/search/browse', body)
+        .then(response => {
+        const apiData = JSON.parse(response.data)
         // Pass the data as state to the "APIDataPage"
-        navigate('Browse_Meals', { state: { apiData } });
+        const results = data.results
+        navigate('/Browse_Meals', { state: { apiData } });
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+    } catch (error) {
+      console.log("Error fetching data from backend:", error)
+    }
   };
     return(
       <div className="grid grid-cols-2 gap-y-6 relative top-[200px]"> 
