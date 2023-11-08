@@ -4,6 +4,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import SearchResults from './components/SearchResults'
 import './index.css'
+import Browse_Meals from './components/Browse_Meals'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/search-results' element={<SearchResults searchMealsList={searchMealsList}/>} />
+        <Route path='/Browse_Meals' element={<Browse_Meals />} />
       </Routes>
     </Router>
   )
