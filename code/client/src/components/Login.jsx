@@ -84,7 +84,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
             {/* If the user is not empty, show sign out button (otherwise show sign-in */}
             {isAuthenticated &&
                 <>
-                    <button className = "w-64" onClick={ (e) => handleSignOut(e)}>Sign Out</button>
+                    <button className="google-btn w-60 h-10" onClick={(e) => handleSignOut(e)}>Sign Out</button>
                     <div> 
                         <img src={user.picture}></img>
                         <h3>{user.name}</h3>
