@@ -3,6 +3,8 @@ import NavBar from './components/NavBar'
 import Home from './components/Home'
 import Login from './components/Login'
 import SearchResults from './components/SearchResults'
+import Favorites from './components/Favorites'
+import Schedule from './components/Schedule'
 import './index.css'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -20,6 +22,10 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/search-results' element={<SearchResults searchMealsList={searchMealsList} />} /> {/* Will configure search result page based on the searchMealsList */}
+        <Route path='/favorites' element={<Favorites />} />
+        <Route path='/schedule' element={<Schedule />} />
+        <Route path='/favorites' element={<Favorites />} />
+        <Route path='/schedule' element={<Schedule />} />
       </Routes>
     </Router>
   )
