@@ -10,11 +10,9 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
     useEffect(() => {
         // if authenticated, don't render login button
         if (isAuthenticated) {
-            console.log("YAY")
             // hide sign in button when user is logged in
             document.getElementById("signInDiv").hidden = true
         } else {
-            console.log("1 login")
             // only attempt to login if NOT authenticated
             try {
                 /* global google */
@@ -43,7 +41,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
     function handleCallbackResponse(response) {
         // console.log("Encoded JWT ID Token: " + response.credential)
         var userObject = jwtDecode(response.credential)
-        // console.log("user:", userObject)
+        console.log("user:", userObject)
         // update `user` state
         setUser(userObject)
 
@@ -51,7 +49,6 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
         localStorage.setItem('user', JSON.stringify(userObject))
 
         // hide sign in button when user is logged in
-        console.log("2")
         document.getElementById("signInDiv").hidden = true
 
         // call MongoDB `createUsers` endpoint
