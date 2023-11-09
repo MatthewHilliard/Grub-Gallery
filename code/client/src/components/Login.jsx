@@ -83,10 +83,6 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
             {isAuthenticated &&
                 <>
                     <button className="google-btn w-60 h-10" onClick={(e) => handleSignOut(e)}>Sign Out</button>
-                    <div> 
-                        <img src={user.picture}></img>
-                        <h3>{user.name}</h3>
-                    </div>
                 </>
             }
             <div id="signInDiv" className="row-span-2"></div>

@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Axios from 'axios'
 
 
-function NavBar({ setSearchMealsList }) {
+function NavBar({ setSearchMealsList, user, isAuthenticated }) {
     // navigate : used to redirect user to other urls...
     const navigate = useNavigate()
     const ref = useRef(null);
@@ -59,8 +59,18 @@ function NavBar({ setSearchMealsList }) {
         }
     }
 
-    //Hamburger menu opened or closed state
+    // Hamburger menu opened or closed state
     const [isOpen, setOpen] = useState(false)
+    
+    // initialize firstName variable
+    let firstName
+    let profilePic
+
+    // extract first name from `user` (update variable)
+    if (isAuthenticated) {
+        firstName = user.name.split(" ")[0]
+        profilePic = user.picture
+    }
 
     return (
         
@@ -88,10 +98,20 @@ function NavBar({ setSearchMealsList }) {
 
             <div className='flex items-center ml-auto mr-5 flex-shrink-0'>
 
-                <button className=''>
-                    {/* Makes everything within this Link container a href, which points to the login route of pathname "/login" */}
-                    <Link to="/login"><img className='h-10' src={profile_photo} /></Link>
-                </button>
+                {isAuthenticated ?
+                    <>
+                        <div className='mr-5'>Hello, {firstName}</div>
+                        <button className=''>
+                            <Link to="/login"><img className='h-10 rounded-full' src={profilePic} /></Link>
+                        </button>
+                    </>
+                    :
+                    <button className=''>
+                        {/* Makes everything within this Link container a href, which points to the login route of pathname "/login" */}
+                        <Link to="/login"><img className='h-10' src={profile_photo} /></Link>
+                    </button>
+                }
+
 
                 {/* menu bar button */}
                 {/* UNDER CONSTRUCTION */}
@@ -112,19 +132,19 @@ function NavBar({ setSearchMealsList }) {
                                           damping: 20,
                                           delay: 0.1 + idx / 10,
                                         }}
-                                    key={route.title}
-                                    className="w-full p-[0.08rem] rounded-xl bg-gradient-to-tr from-neutral-800 via-neutral-950 to-neutral-700"
-                                    >
-                                    <Link to={route.href}
-                                        onClick={() => setOpen((prev) => !prev)}
-                                        className={
-                                        "flex items-center justify-between w-full p-5 rounded-xl bg-gray-700"
-                                        }
-                                    >
-                                        <span className="flex gap-1 text-lg text-white">{route.title}</span>
-                                    </Link>
-                                    </motion.li>
-                                );
+                                        key={route.title}
+                                        className="w-full p-[0.08rem] rounded-xl bg-gradient-to-tr from-neutral-800 via-neutral-950 to-neutral-700"
+                                        >
+                                        <Link to={route.href}
+                                            onClick={() => setOpen((prev) => !prev)}
+                                            className={
+                                            "flex items-center justify-between w-full p-5 rounded-xl bg-gray-700"
+                                            }
+                                        >
+                                            <span className="flex gap-1 text-lg text-white">{route.title}</span>
+                                        </Link>
+                                        </motion.li>
+                                    )
                                 })}
                             </ul>
                             </div>
