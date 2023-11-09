@@ -32,7 +32,7 @@ function App() {
   return (
     <Router>
       {/* Will change searchMealsList depending on the search. Not a web-page so will be outside of <Routes> */}
-      <NavBar setSearchMealsList={setSearchMealsList} />
+      <NavBar setSearchMealsList={setSearchMealsList} user={user} isAuthenticated={isAuthenticated} />
       <Routes>
         <Route path='/' element={<Home setBrowseMealsList={setBrowseMealsList} />} />
         <Route path='/Browse_Meals' element={<Browse_Meals browseMealsList={browseMealsList} />} />

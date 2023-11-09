@@ -102,12 +102,6 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
                 isAuthenticated &&
                 <>
                     <button className="google-btn w-60 h-10" onClick={(e) => handleSignOut(e)}>Sign Out</button>
-
-                    {/* shows name and pfp of google user */}
-                    <div>
-                        <img src={user.picture}></img>
-                        <h3>{user.name}</h3>
-                    </div>
                 </>
             }
             {/* This is for the "login" page, displays checkmarks and text about the benefits of loggin in */}
