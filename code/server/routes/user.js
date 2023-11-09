@@ -12,6 +12,7 @@ router.get("/getUsers", async (req, res) => {
       }
 })
 
+// endpoint to create new user, will only store if user does not already exist
 router.post("/createUsers", async (req, res) =>{
     const user = req.body
     const existUsername = await UserModel.findOne({email: user.email})
@@ -26,15 +27,28 @@ router.post("/createUsers", async (req, res) =>{
     res.json(user)
 })
 
+// endpoint to retrieve all of user's favorite recipes
+router.get("/getFavorites", async (req, res) => {
+  try{
+      const user = req.body
+      const favorites = await UserModel.find({"email": user.email}, {"favorites" : 1, "_id": 0}) 
+      res.status(200).json(favorites)
+    } catch (error){
+      res.status(500).json({ message: error.message })
+    }
+})
+
+// endpoint to add recipe to user's favorites
 router.put("/addFavorite", async (req, res) =>{
   const user = req.body
   const result = await UserModel.findOneAndUpdate(
     { email: user.email },
-    { $push: {favorites : {recipe_id: "12345", title: "Borgir", calories: "10000"}}},
+    { $push: {favorites : {recipe_id: "123", title: "Salmon Borgir", calories: "10000"}}},
   )
   res.send(result)
 })
 
+// endpoint to remove recipe from user's favorites
 router.delete("/removeFavorite", async(req, res) =>{
   const user = req.body
   try{
