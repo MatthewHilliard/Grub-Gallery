@@ -38,9 +38,15 @@ router.put("/addFavorite", async (req, res) =>{
 router.delete("/removeFavorite", async(req, res) =>{
   const user = req.body
   try{
-    const result = await UserModel.deleteOne(    
+    const result = await UserModel.updateOne(    
       {"email": user.email},
-      {"favorites": {"recipe_id": "12345"}})
+      {
+        "$pull": {
+          "favorites": {
+            "recipe_id": "123"
+          }
+        }
+      })
       res.send(result)
   } catch (error){
     res.status(500).json({ message: error.message })
