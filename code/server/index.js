@@ -9,6 +9,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+// Connects to MongoDB using ???
 mongoose.connect("mongodb+srv://matthewhilliard:birjit@cluster0.yoaoe5y.mongodb.net/MealPlanner?retryWrites=true&w=majority&appName=AtlasApp")
 
 // use express Router to specific endpoints

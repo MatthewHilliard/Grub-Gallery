@@ -11,28 +11,29 @@ import Browse_Meals from './components/Browse_Meals'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
-  
+
   // Setting "globally" the searchMeals useState so that multiple components can change/use its information
   const [searchMealsList, setSearchMealsList] = useState([])
   const [browseMealsList, setBrowseMealsList] = useState([])
+
   // states to hold user and authentication status
   const [user, setUser] = useState({})
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    // check localStorage cache to see if user has been saved
+    // check localStorage cache to see if user has been saved (How is it checking if localStorageUser = true?)
     const localStorageUser = localStorage.getItem('user')
     if (localStorageUser) {
-        // update user and authentication status
-        setUser(JSON.parse(localStorageUser))
-        setIsAuthenticated(true)
+      // update user and authentication status
+      setUser(JSON.parse(localStorageUser))
+      setIsAuthenticated(true)
     }
   }, [])
 
   return (
     <Router>
       {/* Will change searchMealsList depending on the search. Not a web-page so will be outside of <Routes> */}
-      <NavBar setSearchMealsList={setSearchMealsList} />
+      <NavBar setSearchMealsList={setSearchMealsList} user={user} isAuthenticated={isAuthenticated} />
       <Routes>
         <Route path='/' element={<Home setBrowseMealsList={setBrowseMealsList} />} />
         <Route path='/Browse_Meals' element={<Browse_Meals browseMealsList={browseMealsList} />} />
