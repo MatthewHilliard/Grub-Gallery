@@ -66,6 +66,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
     let firstName
     let profilePic
 
+    console.log(user, isAuthenticated)
     // extract first name from `user` (update variable)
     if (isAuthenticated) {
         firstName = user.name.split(" ")[0]

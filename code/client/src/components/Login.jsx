@@ -74,8 +74,9 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
     // For when the user clicks the sign out button
     function handleSignOut(event) {
 
-        // Sets current user to nothing
+        // Sets current `user` to nothing and updates `isAuthenticated`
         setUser({})
+        setIsAuthenticated(false)
 
         // Restores the sign in button (Makes it re-appear)
         // NOTE: likely want to replace this with something that will automatically navigate user back to "login" page. (Assuming currently NOT in login page)
