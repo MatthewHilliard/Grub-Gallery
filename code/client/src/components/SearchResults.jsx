@@ -1,7 +1,10 @@
 function SearchResults(props) {
     {/* note: can also use "props" to represent every input taken for these functions. So props.searchMealsList is the same thing */ }
+        // "props" is just a standard way of passing parameters from a high level to lower level component - De Rocco
     {/* why does it print props.searchMealsList twice in test console? */ }
+        // that's just how react works lol ig they wanna make sure we don't miss anything :// lol - De Rocco
     { /* Uses the map function on the searchMealsList and does some "work" using the element and an index which starts from 0 */ }
+        // Yuh
     const mealsList = props.searchMealsList.map((element, index) => (
 
         // LOOKS UNDER CONSTRUCTION
