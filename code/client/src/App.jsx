@@ -16,8 +16,8 @@ function App() {
   const [searchMealsList, setSearchMealsList] = useState([])
   const [browseMealsList, setBrowseMealsList] = useState([])
   // states to hold user and authentication status
-  const [ user, setUser ] = useState({})
-  const [ isAuthenticated, setIsAuthenticated ] = useState(false)
+  const [user, setUser] = useState({})
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
     // check localStorage cache to see if user has been saved
@@ -34,15 +34,15 @@ function App() {
       {/* Will change searchMealsList depending on the search. Not a web-page so will be outside of <Routes> */}
       <NavBar setSearchMealsList={setSearchMealsList} user={user} isAuthenticated={isAuthenticated} />
       <Routes>
-        <Route path='/' element={<Home setBrowseMealsList={setBrowseMealsList}/>} />
-        <Route path='/Browse_Meals' element={<Browse_Meals browseMealsList={browseMealsList}/>} />
-        {/* Sets the route pathnames to X, to used later when trying to route Y to X */}
-        <Route path='/login' element={<Login 
-                                        user={user} 
-                                        setUser={setUser} 
-                                        isAuthenticated={isAuthenticated} 
-                                        setIsAuthenticated={setIsAuthenticated} 
-                                      />} 
+        <Route path='/' element={<Home setBrowseMealsList={setBrowseMealsList} />} />
+        <Route path='/Browse_Meals' element={<Browse_Meals browseMealsList={browseMealsList} />} />
+        {/* Sets the route pathnames to X, to be used later when trying to route Y to the X's element. So X is used as a pathname to route to X's element */}
+        <Route path='/login' element={<Login
+          user={user}
+          setUser={setUser}
+          isAuthenticated={isAuthenticated}
+          setIsAuthenticated={setIsAuthenticated}
+        />}
         />
         <Route path='/search-results' element={<SearchResults searchMealsList={searchMealsList} />} /> {/* Will configure search result page based on the searchMealsList */}
         <Route path='/favorites' element={<Favorites />} />

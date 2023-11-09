@@ -1,8 +1,8 @@
-function SearchResults({ searchMealsList }) {
+function SearchResults(props) {
     {/* note: can also use "props" to represent every input taken for these functions. So props.searchMealsList is the same thing */ }
-    {/* why does it print props twice in test console? */ }
+    {/* why does it print props.searchMealsList twice in test console? */ }
     { /* Uses the map function on the searchMealsList and does some "work" using the element and an index which starts from 0 */ }
-    const mealsList = searchMealsList.map((element, index) => (
+    const mealsList = props.searchMealsList.map((element, index) => (
 
         // LOOKS UNDER CONSTRUCTION
 
