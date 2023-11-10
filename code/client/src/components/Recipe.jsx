@@ -1,28 +1,39 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react"
+import styled from "styled-components"
+import { useParams } from "react-router-dom"
+import Axios from "axios"
 
 import React from 'react'
 
-function Recipe( {recipe}) {
-    console.log(recipe)
+function Recipe({ recipe }) {
+  console.log("recipe HELLO", recipe)
+  // const parsedRecipe = JSON.parse(recipe)
+  // console.log(parsedRecipe)
 
   return (
-    <div>
-      HELLOOOOOOOOOO recipes
+    <div className="mt-20">
+      <Card>
+          <img src={recipe.image} alt={recipe.title}/>
+          <h4>{recipe.title}</h4>
+      </Card>
     </div>
   )
 }
 
 export default Recipe
+
+
+
 const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 20rem;
   border-radius: 2rem;
   overflow: hidden;
   img {
     border-radius: 2rem;
-    width: 100%;
-    max-height: 100%; /* Ensure the image doesn't exceed the container height */
+    max-height: 300px; /* Ensure the image doesn't exceed the container height */
   }
   h4 {
     text-align: center;

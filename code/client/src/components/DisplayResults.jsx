@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
+import Axios from "axios"
 
 function DisplayResults(props) {
     // handleRecipeClick : calls spoonacular api from backend `/search/recipe` endpoint and updates `recipe` object
@@ -11,12 +12,11 @@ function DisplayResults(props) {
           (response) => {
             const apiData = response.data
             // Pass the data as state to the "APIDataPage"
-            console.log(apiData)
-            const results = apiData.recipes
+            const parsedData = JSON.parse(apiData)
             // Use the setRecipe prop directly
-            setRecipe(apiData);
+            props.setRecipe(parsedData)
           }
-        );
+        )
       } catch (error) {
         console.log("Error fetching data from backend:", error);
       }
