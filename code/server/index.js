@@ -7,8 +7,11 @@ const port = 3000
 const app = express()
 
 app.use(express.json())
+
+// Cors is needed to connect APIs to the frontend
 app.use(cors())
 
+// Connects to the MongoDB 
 mongoose.connect("mongodb+srv://matthewhilliard:birjit@cluster0.yoaoe5y.mongodb.net/MealPlanner?retryWrites=true&w=majority&appName=AtlasApp")
 
 // use express Router to specific endpoints

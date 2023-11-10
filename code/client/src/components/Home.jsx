@@ -14,51 +14,59 @@ function Home({ setBrowseMealsList }) {
   const handleButtonClick = () => {
     // Perform the API request using Axios (replace with your API endpoint)
     // Once data is fetched, navigate to the "APIDataPage"
-    try{
+    try {
       Axios.post('http://localhost:3000/search/browse')
         .then(response => {
-        const apiData = JSON.parse(response.data)
-        // Pass the data as state to the "APIDataPage"
-        console.log(apiData)
-        const results = apiData.recipes
-        
+          const apiData = JSON.parse(response.data)
+          // Pass the data as state to the "APIDataPage"
+          console.log("apiData response: " + apiData)
+          const results = apiData.recipes
 
-        setBrowseMealsList(results)
-      })
+
+          setBrowseMealsList(results)
+        })
     } catch (error) {
       console.log("Error fetching data from backend:", error)
     }
   };
-    return(
-      <div className="grid grid-cols-2 gap-y-6 relative top-[200px]"> 
-        <h1 className="text-8xl font-semibold px-10">Find. Plan. Eat.</h1>
-        <div className="row-span-4">
-          <div className="box-border h-[500px] w-[800px] rounded-3xl bg-[#B28370] boxShadow ml-auto mr-[20px]">
-            <div className="grid grid-cols-3 p-9 gap-12">
-              <img src={food1} className ="h-48 rounded-xl"/>
-              <img src={food2} className ="h-48 rounded-xl"/>
-              <img src={food3} className ="h-48 rounded-xl"/>
-              <img src={food4} className ="h-48 rounded-xl"/>
-              <img src={food5} className ="h-48 rounded-xl"/>
-              <img src={food6} className ="h-48 rounded-xl"/>
-            </div>
+  return (
+    <div className="grid grid-cols-2 gap-y-6 relative top-[200px]"> {/* creates outter grid for home, grids entries start from topleft to bottom right */}
+
+      {/* first outter grid entry */}
+      <h1 className="text-8xl font-semibold px-10">Find. Plan. Eat.</h1>
+      <div className="row-span-4">
+
+        {/* second outter grid entry */}
+        <div className="box-border h-[500px] w-[800px] rounded-3xl bg-[#B28370] boxShadow ml-auto mr-[20px]">
+          <div className="grid grid-cols-3 p-9 gap-12">
+            <img src={food1} className="h-48 rounded-xl" />
+            <img src={food2} className="h-48 rounded-xl" />
+            <img src={food3} className="h-48 rounded-xl" />
+            <img src={food4} className="h-48 rounded-xl" />
+            <img src={food5} className="h-48 rounded-xl" />
+            <img src={food6} className="h-48 rounded-xl" />
           </div>
         </div>
+      </div>
 
-        <div className="px-10 text-lg py-6">
-          <h2>Discover delectable dishes and seamlessly integrate them into your schedule with Google Calender integration. Elevate your dining experience effortlessly with Meal Planner.</h2>
-        </div>
+      {/* third outter grid entry */}
+      <div className="px-10 text-lg py-6">
+        <h2>Discover delectable dishes and seamlessly integrate them into your schedule with Google Calender integration. Elevate your dining experience effortlessly with Meal Planner.</h2>
+      </div>
 
-        <div className="px-10">
+      {/* fourth outter grid entry */}
+      <div className="px-10">
+
+        {/* Makes button link to pathname "/Browse_Meals" */}
         <Link to="/Browse_Meals">
           <button onClick={handleButtonClick} className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
             Browse Meals
           </button>
-          </Link>
-        </div>
-        
-      </div> 
-    )
+        </Link>
+      </div>
+
+    </div>
+  )
 }
 
 export default Home
