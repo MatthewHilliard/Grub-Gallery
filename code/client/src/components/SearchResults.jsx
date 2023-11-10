@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 function SearchResults(props) {
@@ -11,8 +12,10 @@ function SearchResults(props) {
         //Sets a unique key based on the index for each div container
         <Grid key={element.id}>
           <Card>
-            <img src={element.image} alt={element.title}/>
-            <h4>{element.title}</h4>
+            <Link to={"/recipe"}>
+                <img src={element.image} alt={element.title}/>
+                <h4>{element.title}</h4>
+            </Link>
           </Card>
         </Grid>
     ))
