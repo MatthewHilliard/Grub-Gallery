@@ -2,17 +2,34 @@ import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 function DisplayResults(props) {
+    // handleRecipeClick : calls spoonacular api from backend `/search/recipe` endpoint and updates `recipe` object
+    const handleRecipeClick = async (id) => {
+      // Perform the API request using Axios (replace with your API endpoint)
+      // Once data is fetched, navigate to the "APIDataPage"
+      try {
+        Axios.post("http://localhost:3000/search/recipe", { id: id }).then(
+          (response) => {
+            const apiData = response.data
+            // Pass the data as state to the "APIDataPage"
+            console.log(apiData)
+            const results = apiData.recipes
+            // Use the setRecipe prop directly
+            setRecipe(apiData);
+          }
+        );
+      } catch (error) {
+        console.log("Error fetching data from backend:", error);
+      }
+    }
+
     {/* note: we use "props" as a standard to represent every input taken for these lower level components. So props.searchMealsList is the same thing.  */ }
     { /* Uses the map function on the searchMealsList and does some "work" using the element and an index which starts from 0 */ }
     const mealsList = props.mealsList.map((element, index) => (
 
-        // LOOKS UNDER CONSTRUCTION
-
-        //Work:
         //Sets a unique key based on the index for each div container
         <Grid key={element.id}>
           <Card>
-            <Link to={"/recipe"}>
+            <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id)}>
                 <img src={element.image} alt={element.title}/>
                 <h4>{element.title}</h4>
             </Link>
