@@ -30,6 +30,8 @@ function DisplayResults(props) {
       }
     }
 
+
+
     {/* note: we use "props" as a standard to represent every input taken for these lower level components. So props.searchMealsList is the same thing.  */ }
     { /* Uses the map function on the searchMealsList and does some "work" using the element and an index which starts from 0 */ }
     const mealsList = props.mealsList.map((element, index) => (
@@ -40,12 +42,18 @@ function DisplayResults(props) {
             <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id)}>
                 <img src={element.image} alt={element.title}/>
                 <h4>{element.title}</h4>
+
+                {props.isAuthenticated &&
+                  <button>
+                    Add favorite
+                  </button>
+                }
             </Link>
           </Card>
         </Grid>
     ))
     return (
-        <div>
+        <div className="mt-20">
             {/* Displays the newly mapped list, which is just a bunch of div containers of information for each element */}
             <Grid>{mealsList}</Grid>
         </div>
