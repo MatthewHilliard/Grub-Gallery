@@ -3,16 +3,23 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
 html {
     height: 100%;
 }
 body {
     height: 100%;
     margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-size: cover;
     background: rgb(255,209,175);
     background: linear-gradient(180deg, rgba(255,209,175,1) 0%, rgba(255,255,255,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: 'Exo 2', sans-serif;
 }
 
