@@ -12,7 +12,6 @@ function Browse_Meals({ browseMealsList, setRecipe }) {
         (response) => {
           const apiData = response.data;
           // Pass the data as state to the "APIDataPage"
-          console.log(apiData);
           const results = apiData.recipes;
 
           // Use the setRecipe prop directly

@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 
 import React from 'react'
 
-function Recipe(props) {
+function Recipe( {recipe}) {
+    console.log(recipe)
+
   return (
     <div>
-      HELLO
+      {recipe}
     </div>
   )
 }
