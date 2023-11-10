@@ -10,11 +10,12 @@ router.use(cors())
 
 router.post("/meals", async (req, res) => {
   try {
+    const numberOfRecipes = 100
     // initialization for spoonacular api call
     const param = req.body.searchString
     let config = {
       method: 'get',
-      url: `https://api.spoonacular.com/recipes/complexSearch?query=${param}&apiKey=ea7e76522981472aaa961dde6913a48e`,
+      url: `https://api.spoonacular.com/recipes/complexSearch?query=${param}&number=${numberOfRecipes}&apiKey=ea7e76522981472aaa961dde6913a48e`,
       headers: { }
     }
 
@@ -39,7 +40,7 @@ router.post("/meals", async (req, res) => {
 
 router.post("/browse", async (req, res) => {
   try {
-    const numberOfRecipes = 9;
+    const numberOfRecipes = 100
     // initialization for spoonacular api call
     const param = req.body.searchString
     let config = {

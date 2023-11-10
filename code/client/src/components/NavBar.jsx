@@ -51,8 +51,8 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
                 // reassign searchMealsList
                 setSearchMealsList(results)
 
-                // redirect to the search results page
-                navigate('/search-results')
+                // redirect to the `search/display-results` page
+                navigate('/search/display-results')
             })
         } catch (error) {
             console.log("Error fetching data from backend:", error)

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
 
-function SearchResults(props) {
+function DisplayResults(props) {
     {/* note: we use "props" as a standard to represent every input taken for these lower level components. So props.searchMealsList is the same thing.  */ }
     { /* Uses the map function on the searchMealsList and does some "work" using the element and an index which starts from 0 */ }
-    const mealsList = props.searchMealsList.map((element, index) => (
+    const mealsList = props.mealsList.map((element, index) => (
 
         // LOOKS UNDER CONSTRUCTION
 
@@ -27,6 +27,7 @@ function SearchResults(props) {
     )
 }
 
+// template strings below used for styling custom divs
 
 const Card = styled.div`
   min-height: 20rem;
@@ -41,7 +42,7 @@ const Card = styled.div`
     text-align: center;
     padding: 1rem;
   }
-`;
+`
 
 const Grid = styled.div`
 display: grid;
@@ -50,7 +51,7 @@ grid-gap: 2rem;
 margin: 0 auto; /* Center the grid horizontally */
 max-width: 1200px; /* Set a maximum width for the grid */
 margin-top: 20px; /* Adjust the value as needed */
-`;
+`
 
 const PopularPicksHeader = styled.h1`
 margin-top: 40px;
@@ -58,6 +59,7 @@ margin-top: 40px;
   font-weight: bold;
   text-align: left;
   margin-left: 100px;
-`;
-export default SearchResults
+`
+
+export default DisplayResults
 

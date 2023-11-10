@@ -56,7 +56,7 @@ function Home({ setBrowseMealsList }) {
 
       {/* fourth outter grid entry */}
       <div className="px-10">
-        <Link to="/Browse_Meals">
+        <Link to="/browse/display-results">
           <button onClick={handleButtonClick} className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
             Browse Meals
           </button>
