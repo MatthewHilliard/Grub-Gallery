@@ -5,8 +5,7 @@ import foodsafety from "../assets/food-safety.png";
 import Axios from 'axios'
 
 function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
-    //console.log("user:", user, isAuthenticated)
-
+    
     // initialize (or retrieve) `user`
     // useEffect renders or loads everything inside, "[isAuthenticated]" makes this render everytime isAuthenticated changes
     useEffect(() => {

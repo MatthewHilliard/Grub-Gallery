@@ -4,12 +4,11 @@ import food3 from "../assets/food3.jpg"
 import food4 from "../assets/food4.jpg"
 import food5 from "../assets/food5.jpg"
 import food6 from "../assets/food6.jpg"
-import { Link } from 'react-router-dom'
 import Axios from "axios"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 function Home({ setBrowseMealsList }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleButtonClick = () => {
     // Perform the API request using Axios (replace with your API endpoint)
@@ -19,11 +18,15 @@ function Home({ setBrowseMealsList }) {
         .then(response => {
           const apiData = JSON.parse(response.data)
           // Pass the data as state to the "APIDataPage"
-          console.log("apiData response: " + apiData)
           const results = apiData.recipes
-
-
+          
+          // update browseMealsList
           setBrowseMealsList(results)
+
+          // update localStorage with `browseMealsList` (aka `results`)
+          localStorage.setItem('browseMealsList', JSON.stringify(results))
+
+          navigate('/browse/display-results')
         })
     } catch (error) {
       console.log("Error fetching data from backend:", error)
@@ -56,13 +59,9 @@ function Home({ setBrowseMealsList }) {
 
       {/* fourth outter grid entry */}
       <div className="px-10">
-
-        {/* Makes button link to pathname "/Browse_Meals" */}
-        <Link to="/Browse_Meals">
-          <button onClick={handleButtonClick} className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
-            Browse Meals
-          </button>
-        </Link>
+        <button onClick={handleButtonClick} className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
+          Browse Meals
+        </button>
       </div>
 
     </div>

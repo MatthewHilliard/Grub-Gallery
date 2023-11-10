@@ -1,37 +1,37 @@
+import { useEffect, useState } from "react"
 import styled from "styled-components"
+import { useParams } from "react-router-dom"
+import Axios from "axios"
 
-function Browse_Meals(props) {
-  // Goes through each meal in browseMealsList and displays them 
-  const mealsList = props.browseMealsList.map((element, index) => (
-    <Grid key={element.id}>
-      <Card>
-        <img src={element.image} alt={element.title} />
-        <h4>{element.title}</h4>
-      </Card>
-    </Grid>
-  ))
+import React from 'react'
+
+function Recipe({ recipe }) {
+  console.log("RECIPE:", recipe)
+
   return (
-    <div>
-      <PopularPicksHeader>Our Popular Picks:</PopularPicksHeader>
-      <Grid>
-        {mealsList}
-      </Grid>
+    <div className="mt-20">
+      <Card>
+          <img src={recipe.image} alt={recipe.title}/>
+          <h4>{recipe.title}</h4>
+      </Card>
     </div>
   )
 }
 
-const Wrapper = styled.div`
-  margin: 4rem 0rem;
-`;
+export default Recipe
+
+
 
 const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 20rem;
   border-radius: 2rem;
   overflow: hidden;
   img {
     border-radius: 2rem;
-    width: 100%;
-    max-height: 100%; /* Ensure the image doesn't exceed the container height */
+    max-height: 300px; /* Ensure the image doesn't exceed the container height */
   }
   h4 {
     text-align: center;
@@ -55,4 +55,3 @@ margin-top: 40px;
   text-align: left;
   margin-left: 100px;
 `;
-export default Browse_Meals
