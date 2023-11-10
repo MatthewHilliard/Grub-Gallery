@@ -9,7 +9,7 @@ import Axios from "axios"
 import { useNavigate } from 'react-router-dom';
 
 function Home({ setBrowseMealsList }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleButtonClick = () => {
     // Perform the API request using Axios (replace with your API endpoint)
@@ -19,7 +19,6 @@ function Home({ setBrowseMealsList }) {
         .then(response => {
           const apiData = JSON.parse(response.data)
           // Pass the data as state to the "APIDataPage"
-          console.log(apiData)
           const results = apiData.recipes
           
           // update browseMealsList
@@ -27,7 +26,8 @@ function Home({ setBrowseMealsList }) {
 
           // update localStorage with `browseMealsList` (aka `results`)
           localStorage.setItem('browseMealsList', JSON.stringify(results))
-          
+
+          navigate('/browse/display-results')
         })
     } catch (error) {
       console.log("Error fetching data from backend:", error)
@@ -60,11 +60,9 @@ function Home({ setBrowseMealsList }) {
 
       {/* fourth outter grid entry */}
       <div className="px-10">
-        <Link to="/browse/display-results">
-          <button onClick={handleButtonClick} className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
-            Browse Meals
-          </button>
-        </Link>
+        <button onClick={handleButtonClick} className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
+          Browse Meals
+        </button>
       </div>
 
     </div>
