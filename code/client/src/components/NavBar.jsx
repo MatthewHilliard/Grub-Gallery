@@ -34,7 +34,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
 
     // make request to backend for search
     function search() {
-        //console.log(searchString) question: when it hits "enter" it does not reflect this change for handleChange?
+        // Body init here, will be passed into the API call for searching meals
         const body = {
             searchString
         }
@@ -64,7 +64,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
 
     // Hamburger menu opened or closed state
     const [isOpen, setOpen] = useState(false)
-    
+
     // initialize firstName variable
     let firstName
     let profilePic
@@ -77,7 +77,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
     }
 
     return (
-        
+
         <div className="flex flex-row mx-auto my-auto overflow-hidden">
 
             {/* Makes everything within this Link container a href, which points to the home route of pathname "/" */}
@@ -122,35 +122,35 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
                 <button className='ml-5'> {/* NOT COMMENT: Adjust the ml-2 (margin-left) as needed */}
                     <Hamburger toggled={isOpen} toggle={setOpen} />
                     <AnimatePresence>
-                    {isOpen && (
-                        <div className="fixed shadow-4xl right-0 top-[4.0rem] p-5 pt-0 border-b border-b-white/20">
-                            <ul className="grid gap-2">
-                                {routes.map((route, idx) => {
-                                    return (
-                                        <motion.li
-                                        initial={{ scale: 0, opacity: 0 }}
-                                        animate={{ scale: 1, opacity: 1 }}
-                                        transition={{
-                                          type: "spring",
-                                          stiffness: 260,
-                                          damping: 20,
-                                          delay: 0.1 + idx / 10,
-                                        }}
-                                        key={route.title}
-                                        className="w-full p-[0.08rem] rounded-xl bg-gradient-to-tr from-neutral-800 via-neutral-950 to-neutral-700"
-                                        >
-                                        <Link to={route.href}
-                                            onClick={() => setOpen((prev) => !prev)}
-                                            className={
-                                            "flex items-center justify-between w-full p-5 rounded-xl bg-gray-700"
-                                            }
-                                        >
-                                            <span className="flex gap-1 text-lg text-white">{route.title}</span>
-                                        </Link>
-                                        </motion.li>
-                                    )
-                                })}
-                            </ul>
+                        {isOpen && (
+                            <div className="fixed shadow-4xl right-0 top-[4.0rem] p-5 pt-0 border-b border-b-white/20">
+                                <ul className="grid gap-2">
+                                    {routes.map((route, idx) => {
+                                        return (
+                                            <motion.li
+                                                initial={{ scale: 0, opacity: 0 }}
+                                                animate={{ scale: 1, opacity: 1 }}
+                                                transition={{
+                                                    type: "spring",
+                                                    stiffness: 260,
+                                                    damping: 20,
+                                                    delay: 0.1 + idx / 10,
+                                                }}
+                                                key={route.title}
+                                                className="w-full p-[0.08rem] rounded-xl bg-gradient-to-tr from-neutral-800 via-neutral-950 to-neutral-700"
+                                            >
+                                                <Link to={route.href}
+                                                    onClick={() => setOpen((prev) => !prev)}
+                                                    className={
+                                                        "flex items-center justify-between w-full p-5 rounded-xl bg-gray-700"
+                                                    }
+                                                >
+                                                    <span className="flex gap-1 text-lg text-white">{route.title}</span>
+                                                </Link>
+                                            </motion.li>
+                                        )
+                                    })}
+                                </ul>
                             </div>
                         )}
                     </AnimatePresence>
