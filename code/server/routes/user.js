@@ -49,7 +49,7 @@ router.put("/addRestriction", async (req, res) => {
     { email: user.email },
     { $push: { dietary_restrict: "gluten free" } },
   )
-  res.send(result)
+  res.send(result) //is this needed? 
 })
 
 // endpoint to remove dietary restriction from user

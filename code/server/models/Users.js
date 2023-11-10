@@ -42,7 +42,7 @@ const UserSchema = new mongoose.Schema({
     }
 })
 
-// Connects with the MongoDB and sets this model for the "users" collection
+// Connects with the MongoDB and sets this model for the "users" collection. Should be called "UserCollection"
 const UserModel = mongoose.model("users", UserSchema)
 
 // Exports this model so that we can use it outside this file. Makes it so that we can update/change the "users" collection

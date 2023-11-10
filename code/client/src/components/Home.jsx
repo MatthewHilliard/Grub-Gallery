@@ -19,7 +19,7 @@ function Home({ setBrowseMealsList }) {
         .then(response => {
           const apiData = JSON.parse(response.data)
           // Pass the data as state to the "APIDataPage"
-          console.log(apiData)
+          console.log("apiData response: " + apiData)
           const results = apiData.recipes
 
 
@@ -56,6 +56,8 @@ function Home({ setBrowseMealsList }) {
 
       {/* fourth outter grid entry */}
       <div className="px-10">
+
+        {/* Makes button link to pathname "/Browse_Meals" */}
         <Link to="/Browse_Meals">
           <button onClick={handleButtonClick} className="bg-gray-700 hover:bg-gray-900 text-white py-2 px-5 rounded">
             Browse Meals

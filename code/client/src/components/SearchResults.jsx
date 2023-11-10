@@ -1,27 +1,27 @@
 import styled from "styled-components"
 
 function SearchResults(props) {
-    {/* note: we use "props" as a standard to represent every input taken for these lower level components. So props.searchMealsList is the same thing.  */ }
-    { /* Uses the map function on the searchMealsList and does some "work" using the element and an index which starts from 0 */ }
-    const mealsList = props.searchMealsList.map((element, index) => (
+  {/* note: we use "props" as a standard to represent every input taken for these lower level components. So props.searchMealsList is the same thing.  */ }
+  { /* Uses the map function on the searchMealsList and does some "work" using the element and an index which starts from 0 */ }
+  const mealsList = props.searchMealsList.map((element, index) => (
 
-        // LOOKS UNDER CONSTRUCTION
+    // LOOKS UNDER CONSTRUCTION
 
-        //Work:
-        //Sets a unique key based on the index for each div container
-        <Grid key={element.id}>
-          <Card>
-            <img src={element.image} alt={element.title}/>
-            <h4>{element.title}</h4>
-          </Card>
-        </Grid>
-    ))
-    return (
-        <div>
-            {/* Displays the newly mapped list, which is just a bunch of div containers of information for each element */}
-            <Grid>{mealsList}</Grid>
-        </div>
-    )
+    //Work:
+    //Sets a unique key based on the ID for each meal
+    <Grid key={element.id}>
+      <Card>
+        <img src={element.image} alt={element.title} />
+        <h4>{element.title}</h4>
+      </Card>
+    </Grid>
+  ))
+  return (
+    <div>
+      {/* Displays the newly mapped list, which is just a bunch of div containers of information for each element */}
+      <Grid>{mealsList}</Grid>
+    </div>
+  )
 }
 
 

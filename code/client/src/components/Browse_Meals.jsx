@@ -1,20 +1,21 @@
 import styled from "styled-components"
 
 function Browse_Meals(props) {
+  // Goes through each meal in browseMealsList and displays them 
   const mealsList = props.browseMealsList.map((element, index) => (
-        <Grid key={element.id}>
-          <Card>
-            <img src={element.image} alt={element.title}/>
-            <h4>{element.title}</h4>
-          </Card>
-        </Grid>
-    ))
+    <Grid key={element.id}>
+      <Card>
+        <img src={element.image} alt={element.title} />
+        <h4>{element.title}</h4>
+      </Card>
+    </Grid>
+  ))
   return (
     <div>
       <PopularPicksHeader>Our Popular Picks:</PopularPicksHeader>
-    <Grid>
-      {mealsList}
-    </Grid>
+      <Grid>
+        {mealsList}
+      </Grid>
     </div>
   )
 }
