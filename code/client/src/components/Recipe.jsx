@@ -6,9 +6,7 @@ import Axios from "axios"
 import React from 'react'
 
 function Recipe({ recipe }) {
-  console.log("recipe HELLO", recipe)
-  // const parsedRecipe = JSON.parse(recipe)
-  // console.log(parsedRecipe)
+  console.log("RECIPE:", recipe)
 
   return (
     <div className="mt-20">

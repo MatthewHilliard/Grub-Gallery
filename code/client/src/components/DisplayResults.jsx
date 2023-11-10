@@ -15,6 +15,8 @@ function DisplayResults(props) {
             const parsedData = JSON.parse(apiData)
             // Use the setRecipe prop directly
             props.setRecipe(parsedData)
+            // update `recipe` (aka `parsedData`) in localStorage
+            localStorage.setItem('recipe', JSON.stringify(parsedData))
           }
         )
       } catch (error) {

@@ -21,9 +21,13 @@ function Home({ setBrowseMealsList }) {
           // Pass the data as state to the "APIDataPage"
           console.log(apiData)
           const results = apiData.recipes
-
-
+          
+          // update browseMealsList
           setBrowseMealsList(results)
+
+          // update localStorage with `browseMealsList` (aka `results`)
+          localStorage.setItem('browseMealsList', JSON.stringify(results))
+          
         })
     } catch (error) {
       console.log("Error fetching data from backend:", error)

@@ -51,6 +51,9 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
                 // reassign searchMealsList
                 setSearchMealsList(results)
 
+                // store `searchMealsList` (aka `results`) in local storage
+                localStorage.setItem('searchMealsList', JSON.stringify(results))
+
                 // redirect to the `search/display-results` page
                 navigate('/search/display-results')
             })
