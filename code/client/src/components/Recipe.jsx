@@ -9,7 +9,7 @@ function Recipe( {recipe}) {
 
   return (
     <div>
-      {recipe}
+        {recipe}
     </div>
   )
 }
