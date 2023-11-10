@@ -16,7 +16,7 @@ function App() {
   const [searchMealsList, setSearchMealsList] = useState([])
   const [browseMealsList, setBrowseMealsList] = useState([])
 
-  // states to hold user and authentication status
+  // states to hold user and authentication status, also set "globally"
   const [user, setUser] = useState({})
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 

@@ -8,7 +8,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
     //console.log("user:", user, isAuthenticated)
 
     // initialize (or retrieve) `user`
-    // useEffect renders or loads everything inside, "[]" makes this render once
+    // useEffect renders or loads everything inside, "[isAuthenticated]" makes this render everytime isAuthenticated changes
     useEffect(() => {
         // if authenticated, don't render login button
         if (isAuthenticated) {
@@ -67,7 +67,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
             email: userObject.email
         })
             .then((response) => {
-                console.log(response)
+                console.log("Create User API call response: " + response)
             })
     }
 
@@ -106,6 +106,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
                 </>
             }
             {/* This is for the "login" page, displays checkmarks and text about the benefits of loggin in */}
+
 
             <div id="signInDiv" className="row-span-2"></div>
 
