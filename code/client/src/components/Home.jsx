@@ -4,9 +4,8 @@ import food3 from "../assets/food3.jpg"
 import food4 from "../assets/food4.jpg"
 import food5 from "../assets/food5.jpg"
 import food6 from "../assets/food6.jpg"
-import { Link } from 'react-router-dom'
 import Axios from "axios"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 function Home({ setBrowseMealsList }) {
   const navigate = useNavigate()

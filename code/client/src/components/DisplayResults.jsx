@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
 import Axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 function DisplayResults(props) {
+    const navigate = useNavigate()
+
     // handleRecipeClick : calls spoonacular api from backend `/search/recipe` endpoint and updates `recipe` object
     const handleRecipeClick = async (id) => {
       // Perform the API request using Axios (replace with your API endpoint)
@@ -17,6 +20,9 @@ function DisplayResults(props) {
             props.setRecipe(parsedData)
             // update `recipe` (aka `parsedData`) in localStorage
             localStorage.setItem('recipe', JSON.stringify(parsedData))
+            
+            // navigate to recipe page
+            navigate('/recipe')
           }
         )
       } catch (error) {
@@ -56,6 +62,11 @@ const Card = styled.div`
     border-radius: 2rem;
     width: 100%;
     max-height: 100%; /* Ensure the image doesn't exceed the container height */
+
+    &:hover {
+      transform: scale(0.97);
+      filter: brightness(0.8)
+    }
   }
   h4 {
     text-align: center;
