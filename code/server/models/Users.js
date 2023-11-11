@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema({
             required: false
         },
         image: {
-            type: Number,
+            type: String,
             required: false
         }
     }

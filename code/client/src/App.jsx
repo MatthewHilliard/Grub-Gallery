@@ -57,7 +57,7 @@ function App() {
       <NavBar setSearchMealsList={setSearchMealsList} user={user} isAuthenticated={isAuthenticated} />
       <Routes>
         <Route path='/' element={<Home setBrowseMealsList={setBrowseMealsList}  />} />
-        <Route path='/browse/display-results' element={<DisplayResults mealsList={browseMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
+        <Route path='/browse/display-results' element={<DisplayResults user={user} mealsList={browseMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
         {/* Sets the route pathnames to X, to be used later when trying to route Y to the X's element. So X is used as a pathname to route to X's element */}
         <Route path='/login' element={<Login
           user={user}
