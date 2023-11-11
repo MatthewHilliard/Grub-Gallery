@@ -83,7 +83,7 @@ router.post("/recipe", async (req, res) => {
     // initialization for spoonacular api call
     let config = {
       method: 'get',
-      url: `https://api.spoonacular.com/recipes/${id}/information?apiKey=2ad32db11bc142a9ab36a432b8037889`,
+      url: `https://api.spoonacular.com/recipes/${id}/information?apiKey=af7e54fc940247eea38d894e383d7fa9`,
       headers: { }
     }
 

@@ -6,52 +6,70 @@ import Axios from "axios"
 import React from 'react'
 
 function Recipe({ recipe }) {
+    const [activeTab, setActiveTab] = useState('instructions')
   console.log("RECIPE:", recipe)
 
   return (
-    <div className="mt-20">
-      <Card>
-          <img src={recipe.image} alt={recipe.title}/>
-          <h4>{recipe.title}</h4>
-      </Card>
-    </div>
+    <DetailWrapper>
+        <div>
+            <h2>{recipe.title}</h2>
+            <img src={recipe.image} alt="" style={{ marginRight: '400px' }}/>
+        </div>
+        <Info>
+        
+            <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab("instructions")}>Instructions</Button> 
+            <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab("ingredients")}>Ingredients</Button>
+            {activeTab === 'instructions' && (
+                            <div>
+                            <h1>Overview:</h1>
+                            <h3 dangerouslySetInnerHTML={{ __html: recipe.summary }}></h3>
+                            <h1>Instructions:</h1>
+                            <h3 dangerouslySetInnerHTML={{ __html: recipe.instructions }}></h3>
+                            </div>
+            )}
+            {activeTab === 'ingredients' &&(
+                            <div>{recipe.extendedIngredients.map((ingredient) => (
+                                <li key={ingredient.id}>{ingredient.original}</li>
+                            ))}</div>
+            )}
+
+        </Info>
+    </DetailWrapper>
   )
 }
 
 export default Recipe
 
 
+const DetailWrapper = styled.div`
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+    display: flex;
+    h2 {
+        margin-bottom: 2rem;
+    }
+`;
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 20rem;
-  border-radius: 2rem;
-  overflow: hidden;
+const Button = styled.button`
+    padding: 1rem 2rem;
+    color: #313131;
+    background: white;
+    border: 2px solid black;
+    margin-right: 2rem;
+    font-weight: 600;
+    &.active {
+        background: black;
+        color: white;
+    }
+`;
+
+const Info = styled.div`
+margin-left: ${props => (props.activeTab === 'instructions' ? '4rem' : props.activeTab === 'ingredients' ? '-196rem' : '0')};
+  padding: 0 2rem; /* Adjust padding as needed */
+  h3 {
+    font-size: 1.2rem;
+  }
   img {
-    border-radius: 2rem;
-    max-height: 300px; /* Ensure the image doesn't exceed the container height */
+    max-height: 600px;
   }
-  h4 {
-    text-align: center;
-    padding: 1rem;
-  }
-`;
-
-const Grid = styled.div`
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-grid-gap: 2rem;
-margin: 0 auto; /* Center the grid horizontally */
-max-width: 1200px; /* Set a maximum width for the grid */
-margin-top: 20px; /* Adjust the value as needed */
-`;
-
-const PopularPicksHeader = styled.h1`
-margin-top: 40px;
-  font-size: 1.5rem; /* Adjust the font size as needed */
-  font-weight: bold;
-  text-align: left;
-  margin-left: 100px;
 `;
