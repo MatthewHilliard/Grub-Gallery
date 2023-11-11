@@ -59,12 +59,15 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
         // hides sign in button when user is logged in (caution: only hides it, user can still click on it)
         document.getElementById("signInDiv").hidden = true
 
+        // body : object of data being sent to backend endpoint
+        const body = {
+            name: userObject.name,
+            email: userObject.email,
+            user_id: userObject.sub
+        }
         // Call backend's MongoDB 'createUsers' endpoint to create the user, backend sends "response" back ("response" pretty useless unless debugging)
         // Backend takes in "req.body", which is the name & email retrieved from Google
-        Axios.post("http://localhost:3000/users/createUsers", {
-            name: userObject.name,
-            email: userObject.email
-        })
+        Axios.post("http://localhost:3000/users/createUsers", body)
             .then((response) => {
                 console.log("Create User API call response: " + response)
             })

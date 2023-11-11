@@ -46,8 +46,6 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
                 // obtain array of results from api call. Results is an attribute of the newly created object
                 const results = data.results
 
-                // map each item to a meal (and reassign searchMealsList)
-
                 // reassign searchMealsList
                 setSearchMealsList(results)
 
@@ -69,7 +67,6 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
     let firstName
     let profilePic
 
-    console.log(user, isAuthenticated)
     // extract first name from `user` (update variable)
     if (isAuthenticated) {
         firstName = user.name.split(" ")[0]
