@@ -15,6 +15,12 @@ const UserSchema = new mongoose.Schema({
         required: true,
     },
 
+    // Users are required to have a unique identifier (`sub` in google user object)
+    user_id: {
+        type: String,
+        required: true,
+    },
+
     // Users are not required to have dietary restricts
     dietary_restrict: {
         type: [String],
@@ -32,11 +38,7 @@ const UserSchema = new mongoose.Schema({
             required: false
         },
         image: {
-            type: Number,
-            required: false
-        },
-        calories: {
-            type: Number,
+            type: String,
             required: false
         }
     }

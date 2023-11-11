@@ -30,6 +30,25 @@ function DisplayResults(props) {
       }
     }
 
+    function addFavorite(response) {
+      // console.log("favorite clicked", response)
+
+      // body : object of data being sent to backend endpoint
+      const body = {
+          user_id: props.user.sub,
+          recipe_id: response.id,
+          title: response.title,
+          image: response.image
+      }
+      console.log("BODY", body)
+      // Call backend's MongoDB 'createUsers' endpoint to create the user, backend sends "response" back ("response" pretty useless unless debugging)
+      // Backend takes in "req.body", which is the name & email retrieved from Google
+      Axios.put("http://localhost:3000/users/addFavorite", body)
+          .then((response) => {
+              console.log("Create User API call response: " + response)
+          })
+      }
+
 
 
     {/* note: we use "props" as a standard to represent every input taken for these lower level components. So props.searchMealsList is the same thing.  */ }
@@ -41,14 +60,14 @@ function DisplayResults(props) {
           <Card>
             <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id)}>
                 <img src={element.image} alt={element.title}/>
-                <h4>{element.title}</h4>
+              </Link>
+              <h4>{element.title}</h4>
 
-                {props.isAuthenticated &&
-                  <button>
-                    Add favorite
-                  </button>
-                }
-            </Link>
+              {props.isAuthenticated &&
+                <button onClick={() => addFavorite(element)}>
+                  Add favorite
+                </button>
+              }
           </Card>
         </Grid>
     ))
