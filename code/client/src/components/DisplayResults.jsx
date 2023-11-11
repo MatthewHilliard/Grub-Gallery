@@ -30,6 +30,37 @@ function DisplayResults(props) {
       }
     }
 
+    function handleCallbackResponse(response) {
+      //console.log("Encoded JWT ID Token: " + response.credential)
+
+      // response.credential are the Google user's credentials, jwtDecode is for decryption
+      var userObject = jwtDecode(response.credential)
+
+      //console.log("user:", userObject)
+
+      // Sets the user to userObject, which is an class with attributes that represent credentials about the user
+      setUser(userObject)
+
+      // store user in local storage
+      localStorage.setItem('user', JSON.stringify(userObject))
+
+      // hides sign in button when user is logged in (caution: only hides it, user can still click on it)
+      document.getElementById("signInDiv").hidden = true
+
+      // body : object of data being sent to backend endpoint
+      const body = {
+          name: userObject.name,
+          email: userObject.email,
+          user_id: userObject.sub
+      }
+      // Call backend's MongoDB 'createUsers' endpoint to create the user, backend sends "response" back ("response" pretty useless unless debugging)
+      // Backend takes in "req.body", which is the name & email retrieved from Google
+      Axios.post("http://localhost:3000/users/createUsers", body)
+          .then((response) => {
+              console.log("Create User API call response: " + response)
+          })
+      }
+
 
 
     {/* note: we use "props" as a standard to represent every input taken for these lower level components. So props.searchMealsList is the same thing.  */ }
@@ -41,14 +72,14 @@ function DisplayResults(props) {
           <Card>
             <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id)}>
                 <img src={element.image} alt={element.title}/>
-                <h4>{element.title}</h4>
+              </Link>
+              <h4>{element.title}</h4>
 
-                {props.isAuthenticated &&
-                  <button>
-                    Add favorite
-                  </button>
-                }
-            </Link>
+              {props.isAuthenticated &&
+                <button>
+                  Add favorite
+                </button>
+              }
           </Card>
         </Grid>
     ))
