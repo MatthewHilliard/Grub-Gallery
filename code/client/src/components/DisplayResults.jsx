@@ -30,32 +30,20 @@ function DisplayResults(props) {
       }
     }
 
-    function handleCallbackResponse(response) {
-      //console.log("Encoded JWT ID Token: " + response.credential)
-
-      // response.credential are the Google user's credentials, jwtDecode is for decryption
-      var userObject = jwtDecode(response.credential)
-
-      //console.log("user:", userObject)
-
-      // Sets the user to userObject, which is an class with attributes that represent credentials about the user
-      setUser(userObject)
-
-      // store user in local storage
-      localStorage.setItem('user', JSON.stringify(userObject))
-
-      // hides sign in button when user is logged in (caution: only hides it, user can still click on it)
-      document.getElementById("signInDiv").hidden = true
+    function addFavorite(response) {
+      // console.log("favorite clicked", response)
 
       // body : object of data being sent to backend endpoint
       const body = {
-          name: userObject.name,
-          email: userObject.email,
-          user_id: userObject.sub
+          user_id: props.user.sub,
+          recipe_id: response.id,
+          title: response.title,
+          image: response.image
       }
+      console.log("BODY", body)
       // Call backend's MongoDB 'createUsers' endpoint to create the user, backend sends "response" back ("response" pretty useless unless debugging)
       // Backend takes in "req.body", which is the name & email retrieved from Google
-      Axios.post("http://localhost:3000/users/createUsers", body)
+      Axios.put("http://localhost:3000/users/addFavorite", body)
           .then((response) => {
               console.log("Create User API call response: " + response)
           })
@@ -76,7 +64,7 @@ function DisplayResults(props) {
               <h4>{element.title}</h4>
 
               {props.isAuthenticated &&
-                <button>
+                <button onClick={() => addFavorite(element)}>
                   Add favorite
                 </button>
               }
