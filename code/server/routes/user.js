@@ -105,14 +105,15 @@ router.put("/addFavorite", async (req, res) => {
 
 // Endpoint to remove recipe from user's favorites .delete is for deleting existing data
 router.delete("/removeFavorite", async (req, res) => {
-  const user = req.body
+  const user = req.user
+  const recipe = req.response
   try {
     const result = await UserModel.updateOne(
       { "email": user.email },
       {
         "$pull": {
           "favorites": {
-            "recipe_id": "123"
+            "recipe_id": recipe.recipe_id
           }
         }
       })

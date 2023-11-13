@@ -1,8 +1,6 @@
 import Axios from 'axios'
 import { useEffect, useState } from 'react';
 import styled from "styled-components"
-import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom'
 
 function Favorites({ user }) {
 
@@ -10,7 +8,6 @@ function Favorites({ user }) {
   const [favoritesList, setFavoritesList] = useState([])
 
   function listFavorites() {
-
     // Send "get" request using Axios to the backend and sets favoritesList to its data returned back
     Axios.get('http://localhost:3000/users/getFavorites',
       {
@@ -19,44 +16,53 @@ function Favorites({ user }) {
         }
       })
       .then((response) => {
+        console.log(response)
         // Need to get favorites
         setFavoritesList(response.data)
+        // update `recipe` (aka `parsedData`) in localStorage
+        localStorage.setItem('favoritesList', JSON.stringify(response.data))
       })
+      .catch((error) => {
+        console.error('Error fetching favorites:', error);
+      })
+  }
+
+  function removeFavorite(response){
+    Axios.delete("http://localhost:3000/users/removeFavorite", {
+      params: {
+        user,
+        response
+      }
+    })
+    .then((response) => {
+      console.log("Removed from favorited recipes")
+    })
+    .catch((error) => {
+      console.error('Error removing favorite:', error);
+    })
   }
 
   useEffect(() => {
     listFavorites()
   }, [])
 
-  function removeFavorite(response){
-    const body = {
-      user,
-      response
-    }
-
-    Axios.delete("http://localhost:3000/users/removeFavorite", body)
-    .then((response) => {
-      console.log("Removed from favorited recipes")
-    })
-  }
-
   const favoritesDisplayList = favoritesList.map((element, index) => (
     <Grid key={element.id}>
       <Card>
         <h4>{element.title}</h4>
         <img className="h-64" src={element.image}/>
-        <button className="pl-14" onClick={() => removeFavorite(element)}>Remove from Favorites</button>
+        <button className="pl-14 pt-2" onClick={() => removeFavorite(element)}>Remove from Favorites</button>
       </Card>
     </Grid>
   ))
 
   return (
     <div>
-      <h1 className="text-5xl"> Your Favorites </h1>
+      <h1 className="text-5xl text-center pt-5"> Your Favorites </h1>
       <Grid>
         { /* console.log(favoritesList) */}
         {favoritesDisplayList}
-        </Grid>
+      </Grid>
     </div>
   )
 }

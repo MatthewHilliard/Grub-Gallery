@@ -18,6 +18,7 @@ function App() {
   const [recipe, setRecipe] = useState({})
   // states to hold user and authentication status
   const [user, setUser] = useState({})
+  const [favoritesList, setFavoritesList] = useState([])
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
@@ -49,6 +50,13 @@ function App() {
       // update `browseMealsList` state array
       setRecipe(JSON.parse(localStorageRecipe))
     }
+
+    // check localStorage cache to see if `favorite` has been saved
+    const localStorageFavorites = localStorage.getItem('favoritesList')
+    if (localStorageFavorites) {
+      // update `browseMealsList` state array
+      setFavoritesList(JSON.parse(localStorageFavorites))
+    }
   }, [])
 
   return (
@@ -67,7 +75,7 @@ function App() {
         />}
         />
         <Route path='/search/display-results' element={<DisplayResults mealsList={searchMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
-        <Route path='/favorites' element={<Favorites user={user} />} />
+        <Route path='/favorites' element={<Favorites user={user} setFavoritesList={favoritesList}/>} />
         <Route path='/schedule' element={<Schedule />} />
         <Route path='/favorites' element={<Favorites />} />
         <Route path='/recipe' element={<Recipe recipe={recipe} />} />
