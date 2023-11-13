@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components"
 import Axios from "axios"
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react';
-
 
 function DisplayResults(props) {
     const navigate = useNavigate()
