@@ -11,7 +11,7 @@ import Recipe from './components/Recipe'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
-  
+
   // Setting "globally" the searchMeals useState so that multiple components can change/use its information
   const [searchMealsList, setSearchMealsList] = useState([])
   const [browseMealsList, setBrowseMealsList] = useState([])
@@ -19,7 +19,7 @@ function App() {
   // states to hold user and authentication status
   const [user, setUser] = useState({})
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  
+
   useEffect(() => {
     // check localStorage cache to see if user has been saved (How is it checking if localStorageUser = true?)
     const localStorageUser = localStorage.getItem('user')
@@ -56,7 +56,7 @@ function App() {
       {/* Will change searchMealsList depending on the search. Not a web-page so will be outside of <Routes> */}
       <NavBar setSearchMealsList={setSearchMealsList} user={user} isAuthenticated={isAuthenticated} />
       <Routes>
-        <Route path='/' element={<Home setBrowseMealsList={setBrowseMealsList}  />} />
+        <Route path='/' element={<Home setBrowseMealsList={setBrowseMealsList} />} />
         <Route path='/browse/display-results' element={<DisplayResults user={user} mealsList={browseMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
         {/* Sets the route pathnames to X, to be used later when trying to route Y to the X's element. So X is used as a pathname to route to X's element */}
         <Route path='/login' element={<Login
@@ -67,10 +67,10 @@ function App() {
         />}
         />
         <Route path='/search/display-results' element={<DisplayResults mealsList={searchMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
-        <Route path='/favorites' element={<Favorites />} />
+        <Route path='/favorites' element={<Favorites user={user} />} />
         <Route path='/schedule' element={<Schedule />} />
         <Route path='/favorites' element={<Favorites />} />
-        <Route path='/recipe' element={<Recipe recipe={recipe}/>} />
+        <Route path='/recipe' element={<Recipe recipe={recipe} />} />
       </Routes>
     </Router>
   )
