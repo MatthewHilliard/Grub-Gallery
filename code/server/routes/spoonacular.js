@@ -48,7 +48,7 @@ router.post("/browse", async (req, res) => {
   try {
     const numberOfRecipes = 100
     // initialization for spoonacular api call
-    const param = req.body.searchString // unused input from frontend?
+    // const param = req.body.searchString // unused input from frontend?
     let config = {
       method: 'get',
       url: `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=2ad32db11bc142a9ab36a432b8037889`,
