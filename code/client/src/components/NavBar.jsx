@@ -72,6 +72,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
         firstName = user.name.split(" ")[0]
         profilePic = user.picture
     }
+    console.log(profilePic)
 
     return (
 

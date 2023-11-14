@@ -2,29 +2,32 @@ import Axios from 'axios'
 import { useEffect, useState } from 'react';
 import styled from "styled-components"
 
-function Favorites({ user }) {
+function Favorites({ user, favoritesList, setFavoritesList }) {
+  const localStorageFavorites = localStorage.getItem('favoritesList')
 
   // can set globally within app if want to use elsewhere
-  const [favoritesList, setFavoritesList] = useState([])
+  // const [favoritesList, setFavoritesList] = useState([])
 
   function listFavorites() {
-    // Send "get" request using Axios to the backend and sets favoritesList to its data returned back
-    Axios.get('http://localhost:3000/users/getFavorites',
-      {
-        params: {
-          user
-        }
-      })
-      .then((response) => {
-        console.log(response)
-        // Need to get favorites
-        setFavoritesList(response.data)
-        // update `recipe` (aka `parsedData`) in localStorage
-        localStorage.setItem('favoritesList', JSON.stringify(response.data))
-      })
-      .catch((error) => {
-        console.error('Error fetching favorites:', error);
-      })
+    if (!localStorageFavorites) {
+      // Send "get" request using Axios to the backend and sets favoritesList to its data returned back
+      Axios.get('http://localhost:3000/users/getFavorites',
+        {
+          params: {
+            user
+          }
+        })
+        .then((response) => {
+          console.log(response)
+          // Need to get favorites
+          setFavoritesList(response.data)
+          // update `recipe` (aka `parsedData`) in localStorage
+          localStorage.setItem('favoritesList', JSON.stringify(response.data))
+        })
+        .catch((error) => {
+          console.error('Error fetching favorites:', error);
+        })
+    }
   }
 
   function removeFavorite(response){
@@ -43,6 +46,7 @@ function Favorites({ user }) {
   }
 
   useEffect(() => {
+    console.log("user", user)
     listFavorites()
   }, [])
 
