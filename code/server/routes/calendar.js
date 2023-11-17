@@ -81,7 +81,7 @@ const insertEvent = async (event) => {
 
 let dateTime = dateTimeForCalendar();
 
-// Event for Google Calendar
+// Test event for Google Calendar
 let event = {
     'summary': `This is the summary.`,
     'description': `This is the description.`,
