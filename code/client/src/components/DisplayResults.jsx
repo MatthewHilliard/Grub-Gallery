@@ -21,10 +21,11 @@ function DisplayResults(props) {
             // update `recipe` (aka `parsedData`) in localStorage
             localStorage.setItem('recipe', JSON.stringify(parsedData))
             
+          }
+          ).then(() => {
             // navigate to recipe page
             navigate('/recipe')
-          }
-        )
+          })
       } catch (error) {
         console.log("Error fetching data from backend:", error);
       }
@@ -40,7 +41,7 @@ function DisplayResults(props) {
           title: response.title,
           image: response.image
       }
-      console.log("BODY", body)
+
       // Call backend's MongoDB 'createUsers' endpoint to create the user, backend sends "response" back ("response" pretty useless unless debugging)
       // Backend takes in "req.body", which is the name & email retrieved from Google
       Axios.put("http://localhost:3000/users/addFavorite", body)

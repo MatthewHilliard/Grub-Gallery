@@ -85,6 +85,7 @@ router.get("/getFavorites", async (req, res) => {
 // endpoint to add recipe to user's favorites
 router.put("/addFavorite", async (req, res) => {
   try {
+    console.log(req)
     const body = req.body
     const result = await UserModel.findOneAndUpdate(
       { user_id: body.user_id },

@@ -7,7 +7,6 @@ import React from 'react'
 
 function Recipe({ recipe }) {
     const [activeTab, setActiveTab] = useState('instructions')
-  console.log("RECIPE:", recipe)
 
   return (
     <DetailWrapper>

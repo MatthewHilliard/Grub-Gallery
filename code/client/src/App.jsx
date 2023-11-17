@@ -74,7 +74,7 @@ function App() {
           setIsAuthenticated={setIsAuthenticated}
         />}
         />
-        <Route path='/search/display-results' element={<DisplayResults mealsList={searchMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
+        <Route path='/search/display-results' element={<DisplayResults user={user} mealsList={searchMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
         <Route path='/favorites' element={<Favorites user={user} favoritesList={favoritesList} setFavoritesList={setFavoritesList} isAuthenticated={isAuthenticated} />} />
         <Route path='/schedule' element={<Schedule />} />
         <Route path='/recipe' element={<Recipe recipe={recipe} />} />
