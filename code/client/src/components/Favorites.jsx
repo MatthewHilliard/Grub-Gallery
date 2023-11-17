@@ -9,7 +9,6 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
   function listFavorites() {
     // only run get request if user is authenticated
     if (isAuthenticated) {
-      console.log("yes")
       // Send "get" request using Axios to the backend and sets favoritesList to its data returned back
       Axios.get('http://localhost:3000/users/getFavorites',
         {
@@ -34,10 +33,11 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
     Axios.delete("http://localhost:3000/users/removeFavorite", {
       params: {
         user,
-        response
+        recipe: response
       }
     })
     .then((response) => {
+      listFavorites()
       console.log("Removed from favorited recipes")
     })
     .catch((error) => {
