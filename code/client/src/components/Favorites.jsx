@@ -1,6 +1,8 @@
 import Axios from 'axios'
 import { useEffect, useState } from 'react';
 import styled from "styled-components"
+import { Link } from "react-router-dom";
+
 
 function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
   const localStorageFavorites = localStorage.getItem('favoritesList')
@@ -53,7 +55,9 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
     <Grid key={element.recipe_id}>
       <Card>
         <h4>{element.title}</h4>
-        <img className="h-64" src={element.image}/>
+        <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id)}>
+                <img src={element.image} alt={element.title}/>
+              </Link>
         <button className="pl-14 pt-2" onClick={() => removeFavorite(element)}>Remove from Favorites</button>
       </Card>
     </Grid>
