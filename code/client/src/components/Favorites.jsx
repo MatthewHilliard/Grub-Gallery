@@ -2,39 +2,42 @@ import Axios from 'axios'
 import { useEffect, useState } from 'react';
 import styled from "styled-components"
 
-function Favorites({ user }) {
+function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
+  const localStorageFavorites = localStorage.getItem('favoritesList')
 
-  // can set globally within app if want to use elsewhere
-  const [favoritesList, setFavoritesList] = useState([])
 
   function listFavorites() {
-    // Send "get" request using Axios to the backend and sets favoritesList to its data returned back
-    Axios.get('http://localhost:3000/users/getFavorites',
-      {
-        params: {
-          user
-        }
-      })
-      .then((response) => {
-        console.log(response)
-        // Need to get favorites
-        setFavoritesList(response.data)
-        // update `recipe` (aka `parsedData`) in localStorage
-        localStorage.setItem('favoritesList', JSON.stringify(response.data))
-      })
-      .catch((error) => {
-        console.error('Error fetching favorites:', error);
-      })
+    // only run get request if user is authenticated
+    if (isAuthenticated) {
+      // Send "get" request using Axios to the backend and sets favoritesList to its data returned back
+      Axios.get('http://localhost:3000/users/getFavorites',
+        {
+          params: {
+            user
+          }
+        })
+        .then((response) => {
+          console.log(response)
+          // Need to get favorites
+          setFavoritesList(response.data)
+          // update `recipe` (aka `parsedData`) in localStorage
+          localStorage.setItem('favoritesList', JSON.stringify(response.data))
+        })
+        .catch((error) => {
+          console.error('Error fetching favorites:', error);
+        })
+    }
   }
 
   function removeFavorite(response){
     Axios.delete("http://localhost:3000/users/removeFavorite", {
       params: {
         user,
-        response
+        recipe: response
       }
     })
     .then((response) => {
+      listFavorites()
       console.log("Removed from favorited recipes")
     })
     .catch((error) => {
@@ -47,7 +50,7 @@ function Favorites({ user }) {
   }, [])
 
   const favoritesDisplayList = favoritesList.map((element, index) => (
-    <Grid key={element.id}>
+    <Grid key={element.recipe_id}>
       <Card>
         <h4>{element.title}</h4>
         <img className="h-64" src={element.image}/>
