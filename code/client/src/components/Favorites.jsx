@@ -2,14 +2,14 @@ import Axios from 'axios'
 import { useEffect, useState } from 'react';
 import styled from "styled-components"
 
-function Favorites({ user, favoritesList, setFavoritesList }) {
+function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
   const localStorageFavorites = localStorage.getItem('favoritesList')
 
-  // can set globally within app if want to use elsewhere
-  // const [favoritesList, setFavoritesList] = useState([])
 
   function listFavorites() {
-    if (!localStorageFavorites) {
+    // only run get request if user is authenticated
+    if (isAuthenticated) {
+      console.log("yes")
       // Send "get" request using Axios to the backend and sets favoritesList to its data returned back
       Axios.get('http://localhost:3000/users/getFavorites',
         {
@@ -46,12 +46,11 @@ function Favorites({ user, favoritesList, setFavoritesList }) {
   }
 
   useEffect(() => {
-    console.log("user", user)
     listFavorites()
   }, [])
 
   const favoritesDisplayList = favoritesList.map((element, index) => (
-    <Grid key={element.id}>
+    <Grid key={element.recipe_id}>
       <Card>
         <h4>{element.title}</h4>
         <img className="h-64" src={element.image}/>
