@@ -1,12 +1,11 @@
 import Axios from 'axios'
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import styled from "styled-components"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"
+import handleRecipeClick from "../functions/handleRecipeClick"
 
-
-function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
-  const localStorageFavorites = localStorage.getItem('favoritesList')
-
+function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, setRecipe }) {
+  const navigate = useNavigate()
 
   function listFavorites() {
     // only run get request if user is authenticated
@@ -26,7 +25,7 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
           localStorage.setItem('favoritesList', JSON.stringify(response.data))
         })
         .catch((error) => {
-          console.error('Error fetching favorites:', error);
+          console.error('Error fetching favorites:', error)
         })
     }
   }
@@ -43,7 +42,7 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
       console.log("Removed from favorited recipes")
     })
     .catch((error) => {
-      console.error('Error removing favorite:', error);
+      console.error('Error removing favorite:', error)
     })
   }
 
@@ -51,11 +50,13 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated }) {
     listFavorites()
   }, [])
 
+  console.log(favoritesList)
+
   const favoritesDisplayList = favoritesList.map((element, index) => (
     <Grid key={element.recipe_id}>
       <Card>
         <h4>{element.title}</h4>
-        <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id)}>
+        <Link to={"/recipe"} onClick={() => handleRecipeClick(element.recipe_id, setRecipe, navigate)}>
                 <img src={element.image} alt={element.title}/>
               </Link>
         <button className="pl-14 pt-2" onClick={() => removeFavorite(element)}>Remove from Favorites</button>
