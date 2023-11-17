@@ -68,14 +68,14 @@ function App() {
         <Route path='/browse/display-results' element={<DisplayResults user={user} mealsList={browseMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
         {/* Sets the route pathnames to X, to be used later when trying to route Y to the X's element. So X is used as a pathname to route to X's element */}
         <Route path='/login' element={<Login
-          user={user}
-          setUser={setUser}
-          isAuthenticated={isAuthenticated}
-          setIsAuthenticated={setIsAuthenticated}
-        />}
+                                        user={user}
+                                        setUser={setUser}
+                                        isAuthenticated={isAuthenticated}
+                                        setIsAuthenticated={setIsAuthenticated}
+                                      />}
         />
-        <Route path='/search/display-results' element={<DisplayResults mealsList={searchMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
-        <Route path='/favorites' element={<Favorites user={user} favoritesList={favoritesList} setFavoritesList={setFavoritesList} isAuthenticated={isAuthenticated} />} />
+        <Route path='/search/display-results' element={<DisplayResults user={user} mealsList={searchMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} />} />
+        <Route path='/favorites' element={<Favorites user={user} favoritesList={favoritesList} setFavoritesList={setFavoritesList} isAuthenticated={isAuthenticated} setRecipe={setRecipe} />} />
         <Route path='/schedule' element={<Schedule />} />
         <Route path='/recipe' element={<Recipe recipe={recipe} />} />
       </Routes>

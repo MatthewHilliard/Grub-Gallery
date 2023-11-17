@@ -1,34 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
 import Axios from "axios"
+import handleRecipeClick from "../functions/handleRecipeClick"
 import { useNavigate } from 'react-router-dom'
 
 function DisplayResults(props) {
     const navigate = useNavigate()
-
-    // handleRecipeClick : calls spoonacular api from backend `/search/recipe` endpoint and updates `recipe` object
-    const handleRecipeClick = async (id) => {
-      // Perform the API request using Axios (replace with your API endpoint)
-      // Once data is fetched, navigate to the "APIDataPage"
-      try {
-        Axios.post("http://localhost:3000/search/recipe", { id: id }).then(
-          (response) => {
-            const apiData = response.data
-            // Pass the data as state to the "APIDataPage"
-            const parsedData = JSON.parse(apiData)
-            // Use the setRecipe prop directly
-            props.setRecipe(parsedData)
-            // update `recipe` (aka `parsedData`) in localStorage
-            localStorage.setItem('recipe', JSON.stringify(parsedData))
-            
-            // navigate to recipe page
-            navigate('/recipe')
-          }
-        )
-      } catch (error) {
-        console.log("Error fetching data from backend:", error);
-      }
-    }
 
     function addFavorite(response) {
       // console.log("favorite clicked", response)
@@ -40,7 +17,7 @@ function DisplayResults(props) {
           title: response.title,
           image: response.image
       }
-      console.log("BODY", body)
+
       // Call backend's MongoDB 'createUsers' endpoint to create the user, backend sends "response" back ("response" pretty useless unless debugging)
       // Backend takes in "req.body", which is the name & email retrieved from Google
       Axios.put("http://localhost:3000/users/addFavorite", body)
@@ -50,7 +27,6 @@ function DisplayResults(props) {
       }
 
 
-
     {/* note: we use "props" as a standard to represent every input taken for these lower level components. So props.searchMealsList is the same thing.  */ }
     { /* Uses the map function on the searchMealsList and does some "work" using the element and an index which starts from 0 */ }
     const mealsList = props.mealsList.map((element, index) => (
@@ -58,7 +34,7 @@ function DisplayResults(props) {
         //Sets a unique key based on the index for each div container
         <Grid key={element.id}>
           <Card>
-            <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id)}>
+            <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
                 <img src={element.image} alt={element.title}/>
               </Link>
               <h4>{element.title}</h4>

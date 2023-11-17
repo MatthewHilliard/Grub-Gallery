@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-import { useParams } from "react-router-dom"
-import Axios from "axios"
 
 import React from 'react'
 
 function Recipe({ recipe }) {
     const [activeTab, setActiveTab] = useState('instructions')
-  console.log("RECIPE:", recipe)
 
   return (
     <DetailWrapper>
