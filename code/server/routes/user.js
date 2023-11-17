@@ -73,7 +73,7 @@ router.delete("/removeRestriction", async (req, res) => {
 router.get("/getFavorites", async (req, res) => {
   try {
     const user = req.query.user
-    //console.log("user:", user)
+    // console.log("user:", user)
     const favorites = await UserModel.find({ "email": user.email }, { "favorites": 1, "_id": 0 })
     //console.log(favorites)
     res.status(200).json(favorites[0].favorites)
@@ -84,32 +84,37 @@ router.get("/getFavorites", async (req, res) => {
 
 // endpoint to add recipe to user's favorites
 router.put("/addFavorite", async (req, res) => {
-  console.log("ENTERED backend")
-  const body = req.body
-  const result = await UserModel.findOneAndUpdate(
-    { user_id: body.user_id },
-    {
-      $push: {
-        favorites: {
-          recipe_id: body.recipe_id,
-          title: body.title,
-          image: body.image
+  try {
+    const body = req.body
+    const result = await UserModel.findOneAndUpdate(
+      { user_id: body.user_id },
+      {
+        $push: {
+          favorites: {
+            recipe_id: body.recipe_id,
+            title: body.title,
+            image: body.image
+          }
         }
-      }
-    },
-  )
-
-  // Sends data back and ends request
-  res.send(result)
+      },
+    )
+  
+    // Sends data back and ends request
+    res.send(result)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
 })
 
 // Endpoint to remove recipe from user's favorites .delete is for deleting existing data
 router.delete("/removeFavorite", async (req, res) => {
-  const user = req.user
-  const recipe = req.response
+  // console.log(req.query)
   try {
+    const user = req.query.user
+    const recipe = req.query.recipe
+    console.log(user)
     const result = await UserModel.updateOne(
-      { "email": user.email },
+      { "user_id": user.sub },
       {
         "$pull": {
           "favorites": {
