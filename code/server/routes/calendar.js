@@ -20,7 +20,7 @@ const auth = new google.auth.JWT(
 const TIMEOFFSET = '+05:30';
 
 // Get date-time string for calender
-const dateTimeForCalander = () => {
+const dateTimeForCalendar = () => {
 
     let date = new Date();
 
@@ -56,7 +56,7 @@ const dateTimeForCalander = () => {
     }
 };
 
-console.log(dateTimeForCalander());
+console.log(dateTimeForCalendar());
 
 // Insert new event to Google Calendar
 const insertEvent = async (event) => {
@@ -79,49 +79,49 @@ const insertEvent = async (event) => {
     }
 };
 
-// let dateTime = dateTimeForCalander();
+let dateTime = dateTimeForCalendar();
 
-// // Event for Google Calendar
-// let event = {
-//     'summary': `This is the summary.`,
-//     'description': `This is the description.`,
-//     'start': {
-//         'dateTime': dateTime['start'],
-//         'timeZone': 'Asia/Kolkata'
-//     },
-//     'end': {
-//         'dateTime': dateTime['end'],
-//         'timeZone': 'Asia/Kolkata'
-//     }
-// };
-
-// insertEvent(event)
-//     .then((res) => {
-//         console.log(res);
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     });
-
-// Get all the events between two dates
-const getEvents = async (dateTimeStart, dateTimeEnd) => {
-
-    try {
-        let response = await calendar.events.list({
-            auth: auth,
-            calendarId: calendarId,
-            timeMin: dateTimeStart,
-            timeMax: dateTimeEnd,
-            timeZone: 'Asia/Kolkata'
-        });
-    
-        let items = response['data']['items'];
-        return items;
-    } catch (error) {
-        console.log(`Error at getEvents --> ${error}`);
-        return 0;
+// Event for Google Calendar
+let event = {
+    'summary': `This is the summary.`,
+    'description': `This is the description.`,
+    'start': {
+        'dateTime': dateTime['start'],
+        'timeZone': 'Asia/Kolkata'
+    },
+    'end': {
+        'dateTime': dateTime['end'],
+        'timeZone': 'Asia/Kolkata'
     }
 };
+
+insertEvent(event)
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+// // Get all the events between two dates
+// const getEvents = async (dateTimeStart, dateTimeEnd) => {
+
+//     try {
+//         let response = await calendar.events.list({
+//             auth: auth,
+//             calendarId: calendarId,
+//             timeMin: dateTimeStart,
+//             timeMax: dateTimeEnd,
+//             timeZone: 'Asia/Kolkata'
+//         });
+    
+//         let items = response['data']['items'];
+//         return items;
+//     } catch (error) {
+//         console.log(`Error at getEvents --> ${error}`);
+//         return 0;
+//     }
+// };
 
 // let start = '2020-10-03T00:00:00.000Z';
 // let end = '2020-10-04T00:00:00.000Z';
@@ -133,34 +133,3 @@ const getEvents = async (dateTimeStart, dateTimeEnd) => {
 //     .catch((err) => {
 //         console.log(err);
 //     });
-
-// Delete an event from eventID
-const deleteEvent = async (eventId) => {
-
-    try {
-        let response = await calendar.events.delete({
-            auth: auth,
-            calendarId: calendarId,
-            eventId: eventId
-        });
-
-        if (response.data === '') {
-            return 1;
-        } else {
-            return 0;
-        }
-    } catch (error) {
-        console.log(`Error at deleteEvent --> ${error}`);
-        return 0;
-    }
-};
-
-let eventId = 'hkkdmeseuhhpagc862rfg6nvq4';
-
-deleteEvent(eventId)
-    .then((res) => {
-        console.log(res);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
