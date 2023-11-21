@@ -93,41 +93,48 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
     // If we have a user: show the log out button
 
     return (
-        <div className="grid grid-cols-2 gap-y-6 relative top-[150px] flex-shrink-0"> {/* Outter grid for entire web page */}
-
-            {/* For the photo */}
-            <div className="pl-60">
-                <img src={foodsafety} className="h-80 w-80" />
-            </div>
-
-            {/* If the user is not empty, show sign out button (otherwise show sign-in */}
-            {
-                isAuthenticated &&
-                <>
-                    <button className="google-btn w-60 h-10" onClick={(e) => handleSignOut(e)}>Sign Out</button>
-                </>
-            }
-            {/* This is for the "login" page, displays checkmarks and text about the benefits of loggin in */}
+        <div className="flex justify-center items-center mt-[150px] ml-[300px] mr-[300px]">
+            {/* Column 1 */}
+            <div className='flex flex-col gap-[20px] items-center mr-auto'>
+                <img src={foodsafety} className="max-w-[300px]" />
 
 
-            <div id="signInDiv" className="row-span-2"></div>
-
-            <div className="col-span-2 pl-[130px] py-4">
+                {/* Main Content */}
                 <h1 className="text-4xl font-semibold">Find healthy and trusted recipes</h1>
+                
+                {/* Checkmarks and Text */}
+                <div>
+                    <div className="flex items-center mb-4">
+                        <img src={checkmark} className="h-8 pr-5" />
+                        <h1 className="text-2xl">Find your favorite meals and recipes</h1>
+                    </div>
+                    <div className="flex items-center mb-4">
+                        <img src={checkmark} className="h-8 pr-5" />
+                        <h1 className="text-2xl">Filter suggestions for allergens, macros... etc.</h1>
+                    </div>
+                    <div className="flex items-center">
+                        <img src={checkmark} className="h-8 pr-5" />
+                        <h1 className="text-2xl">Instantly save recipes with Google Calendar</h1>
+                    </div>
+                </div>
             </div>
-            <div className="col-span-2 pl-[160px] flex">
-                <img src={checkmark} className="h-8 pr-5" />
-                <h1 className="text-2xl">Find your favorite meals and recipes</h1>
+
+
+            {/* Column 2 */}
+            <div className=''>
+                {/* Sign Out Button */}
+                {isAuthenticated && (
+                    <button className="google-btn w-60 h-10" onClick={(e) => handleSignOut(e)}>
+                    Sign Out
+                    </button>
+                )}
+
+                {/* Login Page Content */}
+                <div id="signInDiv" className="mb-4 md:mb-0"></div>
             </div>
-            <div className="col-span-2 pl-[160px] flex">
-                <img src={checkmark} className="h-8 pr-5" />
-                <h1 className="text-2xl">Filter suggestions for allergens, macros... etc.</h1>
-            </div>
-            <div className="col-span-2 pl-[160px] flex">
-                <img src={checkmark} className="h-8 pr-5" />
-                <h1 className="text-2xl">Instantly save recipes with Google Calender</h1>
-            </div>
-        </div >
+
+        </div>
+
     )
 }
 

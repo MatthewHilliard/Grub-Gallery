@@ -83,6 +83,11 @@ const Card = styled.div`
     border-radius: 2rem;
     width: 100%;
     max-height: 100%; /* Ensure the image doesn't exceed the container height */
+
+    &:hover {
+      transform: scale(0.97);
+      filter: brightness(0.8)
+    }
   }
   h4 {
     text-align: center;
