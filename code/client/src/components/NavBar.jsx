@@ -81,7 +81,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
             <Link to="/">
                 <div className='flex items-center flex-shrink-0'>
                     <img className='h-16 py-2 px-2' src={logo} />
-                    <h1 className="py-3 text-4xl font-light">Meal Planner</h1>
+                    <h1 className="py-3 text-4xl font-light">Grub Gallery</h1>
                 </div>
             </Link>
 
