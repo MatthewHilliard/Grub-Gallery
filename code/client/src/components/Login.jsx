@@ -26,7 +26,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
                 // Creates a sign in with Google button, with the button being placed within the "signInDiv" container
                 google.accounts.id.renderButton(
                     document.getElementById("signInDiv"),
-                    { theme: "outline", size: "large" }
+                    { theme: "outline", size: "large", shape: "pill" }
                 )
 
                 //prompts user and asks if they want to log in with previously used accounts
@@ -134,7 +134,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
                     </button>
                     :
                     <div className='flex flex-col gap-[50px] text-white'>
-                        <div className='mt-[80px] ml-[50px] mr-[50px]'>
+                        <div className='flex flex-col gap-[20px] mt-[80px] ml-[50px] mr-[50px]'>
                             <h1 className="text-[40px] font-semibold">Sign up or log in</h1>
                             <p className="text-[20px]">Login below to start utilizing GrubGallery’s advanced features (e.g. Google Calendar, personalized meal suggestions...)</p>
                         </div>
