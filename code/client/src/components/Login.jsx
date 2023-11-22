@@ -26,7 +26,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
                 // Creates a sign in with Google button, with the button being placed within the "signInDiv" container
                 google.accounts.id.renderButton(
                     document.getElementById("signInDiv"),
-                    { theme: "outline", size: "large", shape: "pill" }
+                    { theme: "outline", size: "large", shape: "pill", width: "300" }
                 )
 
                 //prompts user and asks if they want to log in with previously used accounts

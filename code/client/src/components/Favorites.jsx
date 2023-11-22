@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import handleRecipeClick from "../functions/handleRecipeClick"
+import removeFavorite from "../functions/removeFavorite"
 
 function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, setRecipe }) {
   const navigate = useNavigate()
@@ -30,22 +31,6 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, set
     }
   }
 
-  function removeFavorite(response){
-    Axios.delete("http://localhost:3000/users/removeFavorite", {
-      params: {
-        user,
-        recipe: response
-      }
-    })
-    .then((response) => {
-      listFavorites()
-      console.log("Removed from favorited recipes")
-    })
-    .catch((error) => {
-      console.error('Error removing favorite:', error)
-    })
-  }
-
   useEffect(() => {
     listFavorites()
   }, [])
@@ -57,9 +42,9 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, set
       <Card>
         <h4>{element.title}</h4>
         <Link to={"/recipe"} onClick={() => handleRecipeClick(element.recipe_id, setRecipe, navigate)}>
-                <img src={element.image} alt={element.title}/>
-              </Link>
-        <button className="pl-14 pt-2" onClick={() => removeFavorite(element)}>Remove from Favorites</button>
+          <img src={element.image} alt={element.title}/>
+        </Link>
+        <button className="pl-14 pt-2" onClick={() => removeFavorite(user, element, listFavorites)}>Remove from Favorites</button>
       </Card>
     </Grid>
   ))
