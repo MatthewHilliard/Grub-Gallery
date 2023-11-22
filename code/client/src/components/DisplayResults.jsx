@@ -1,14 +1,55 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components"
 import Axios from "axios"
 import handleRecipeClick from "../functions/handleRecipeClick"
-import { useNavigate } from 'react-router-dom'
+import removeFavorite from "../functions/removeFavorite"
+import { useNavigate, Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 function DisplayResults(props) {
+    // navigate : redirect to other pages (react-router-dom function)
     const navigate = useNavigate()
+    
+    // mealsList : state variable to map meals to elements rendered on the page
+    const [displayMealsList, setDisplayMealsList] = useState([])
 
+    // useEffect : re-initialize `favoritesId` and `favoritesIdSet` every time `favoritesList` is changed
+    useEffect(() => {
+      // obtain list of favorites
+      const favoritesId = props.favoritesList.map((element, index) => element.recipe_id)
+      // convert to `set` (to increase look-up time effeciency)
+      const favoritesIdSet = new Set(favoritesId)
+
+      // update mealsList
+      setDisplayMealsList(
+        props.mealsList.map((element, index) => (
+          //Sets a unique key based on the index for each div container
+          <Grid key={element.id}>
+            <Card>
+              <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
+                  <img src={element.image} alt={element.title}/>
+                </Link>
+                <h4>{element.title}</h4>
+                {props.isAuthenticated && (
+                  favoritesIdSet.has(String(element.id)) ?
+                  <button onClick={() => removeFavorite(props.user, element)}>
+                    Remove favorite
+                  </button>
+                  :
+                  <button onClick={() => addFavorite(element)}>
+                    Add favorite
+                  </button>
+                )
+                }
+            </Card>
+          </Grid>
+        ))
+    )
+
+    }, [props.favoritesList])
+
+    
+ 
     function addFavorite(response) {
-      // console.log("favorite clicked", response)
 
       // body : object of data being sent to backend endpoint
       const body = {
@@ -22,35 +63,23 @@ function DisplayResults(props) {
       // Backend takes in "req.body", which is the name & email retrieved from Google
       Axios.put("http://localhost:3000/users/addFavorite", body)
           .then((response) => {
+              // create new `favoritesList`
+              // const newFav = [...props.favoritesList, response]
+              // // update state variable list
+              // props.setFavoritesList(newFav)
+
+              // // update local storage (for page refresh)
+              // localStorage.setItem('favoritesList', JSON.stringify(newFav))
+
               console.log("Create User API call response: " + response)
           })
       }
 
 
-    {/* note: we use "props" as a standard to represent every input taken for these lower level components. So props.searchMealsList is the same thing.  */ }
-    { /* Uses the map function on the searchMealsList and does some "work" using the element and an index which starts from 0 */ }
-    const mealsList = props.mealsList.map((element, index) => (
-
-        //Sets a unique key based on the index for each div container
-        <Grid key={element.id}>
-          <Card>
-            <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
-                <img src={element.image} alt={element.title}/>
-              </Link>
-              <h4>{element.title}</h4>
-
-              {props.isAuthenticated &&
-                <button onClick={() => addFavorite(element)}>
-                  Add favorite
-                </button>
-              }
-          </Card>
-        </Grid>
-    ))
     return (
         <div className="mt-20">
             {/* Displays the newly mapped list, which is just a bunch of div containers of information for each element */}
-            <Grid>{mealsList}</Grid>
+            <Grid>{displayMealsList}</Grid>
         </div>
     )
 }

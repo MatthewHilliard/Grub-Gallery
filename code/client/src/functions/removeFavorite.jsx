@@ -8,7 +8,10 @@ async function removeFavorite(user, recipe, listFavorites){
       }
     })
     .then((response) => {
-      listFavorites()
+      // only call `listFavorites` if on `favorites` page
+      if (listFavorites) {
+          listFavorites()
+      }
       console.log("Removed from favorited recipes")
     })
     .catch((error) => {
