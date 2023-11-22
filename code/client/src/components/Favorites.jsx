@@ -20,7 +20,7 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, set
           }
         })
         .then((response) => {
-          console.log(response)
+          console.log("getting favorites", response)
           // Need to get favorites
           setFavoritesList(response.data)
           // update `recipe` (aka `parsedData`) in localStorage

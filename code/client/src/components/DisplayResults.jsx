@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react'
 function DisplayResults(props) {
     // navigate : redirect to other pages (react-router-dom function)
     const navigate = useNavigate()
-    
+
     // mealsList : state variable to map meals to elements rendered on the page
     const [displayMealsList, setDisplayMealsList] = useState([])
 
@@ -31,7 +31,11 @@ function DisplayResults(props) {
                 <h4>{element.title}</h4>
                 {props.isAuthenticated && (
                   favoritesIdSet.has(String(element.id)) ?
-                  <button onClick={() => removeFavorite(props.user, element)}>
+                  <button onClick={() => removeFavorite(props.user, {
+                      recipe_id: element.id,
+                      title: element.title,
+                      image: element.image
+                  })}>
                     Remove favorite
                   </button>
                   :
