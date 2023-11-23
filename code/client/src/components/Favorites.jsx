@@ -7,7 +7,6 @@ import removeFavorite from "../functions/removeFavorite"
 
 function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, setRecipe }) {
   const navigate = useNavigate()
-  console.log(favoritesList)
 
   function listFavorites() {
     // only run get request if user is authenticated
@@ -34,7 +33,7 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, set
 
   useEffect(() => {
     listFavorites()
-  }, [])
+  }, [isAuthenticated])
 
 
   const favoritesDisplayList = favoritesList.map((element, index) => (

@@ -31,11 +31,7 @@ function DisplayResults(props) {
                 <h4>{element.title}</h4>
                 {props.isAuthenticated && (
                   favoritesIdSet.has(String(element.id)) ?
-                  <button onClick={() => removeFavorite(props.user, {
-                      recipe_id: element.id,
-                      title: element.title,
-                      image: element.image
-                  })}>
+                  <button onClick={() => removeFavorite(props.user, { recipe_id: element.id } )}>
                     Remove favorite
                   </button>
                   :
@@ -75,7 +71,7 @@ function DisplayResults(props) {
               // // update local storage (for page refresh)
               // localStorage.setItem('favoritesList', JSON.stringify(newFav))
 
-              console.log("Create User API call response: " + response)
+              console.log("Add favorite api call repsonse: " + response)
           })
       }
 
