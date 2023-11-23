@@ -4,35 +4,18 @@ import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import handleRecipeClick from "../functions/handleRecipeClick"
 import removeFavorite from "../functions/removeFavorite"
+import listFavorites from "../functions/listFavorites"
 
 function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, setRecipe }) {
   const navigate = useNavigate()
 
-  function listFavorites() {
-    // only run get request if user is authenticated
-    if (isAuthenticated) {
-      // Send "get" request using Axios to the backend and sets favoritesList to its data returned back
-      Axios.get('http://localhost:3000/users/getFavorites',
-        {
-          params: {
-            user
-          }
-        })
-        .then((response) => {
-          console.log("getting favorites", response)
-          // Need to get favorites
-          setFavoritesList(response.data)
-          // update `recipe` (aka `parsedData`) in localStorage
-          localStorage.setItem('favoritesList', JSON.stringify(response.data))
-        })
-        .catch((error) => {
-          console.error('Error fetching favorites:', error)
-        })
-    }
+  // Function to call listFavorites with the required parameters
+  const callListFavorites = () => {
+    listFavorites(user, isAuthenticated, setFavoritesList);
   }
-
+  
   useEffect(() => {
-    listFavorites()
+    callListFavorites()
   }, [isAuthenticated])
 
 
@@ -43,7 +26,7 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, set
         <Link to={"/recipe"} onClick={() => handleRecipeClick(element.recipe_id, setRecipe, navigate)}>
           <img src={element.image} alt={element.title}/>
         </Link>
-        <button className="pl-14 pt-2" onClick={() => removeFavorite(user, element, listFavorites)}>Remove from Favorites</button>
+        <button className="pl-14 pt-2" onClick={() => removeFavorite(user, element, callListFavorites)}>Remove from Favorites</button>
       </Card>
     </Grid>
   ))
