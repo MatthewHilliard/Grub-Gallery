@@ -26,7 +26,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
                 // Creates a sign in with Google button, with the button being placed within the "signInDiv" container
                 google.accounts.id.renderButton(
                     document.getElementById("signInDiv"),
-                    { theme: "outline", size: "large" }
+                    { theme: "outline", size: "large", shape: "pill", width: "300" }
                 )
 
                 //prompts user and asks if they want to log in with previously used accounts
@@ -93,41 +93,62 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
     // If we have a user: show the log out button
 
     return (
-        <div className="grid grid-cols-2 gap-y-6 relative top-[150px] flex-shrink-0"> {/* Outter grid for entire web page */}
-
-            {/* For the photo */}
-            <div className="pl-60">
-                <img src={foodsafety} className="h-80 w-80" />
-            </div>
-
-            {/* If the user is not empty, show sign out button (otherwise show sign-in */}
-            {
-                isAuthenticated &&
-                <>
-                    <button className="google-btn w-60 h-10" onClick={(e) => handleSignOut(e)}>Sign Out</button>
-                </>
-            }
-            {/* This is for the "login" page, displays checkmarks and text about the benefits of loggin in */}
+        <div className="flex justify-center items-center gap-[200px] mt-[100px] ml-[100px] mr-[100px]">
+            {/* Column 1 */}
+            <div className='flex flex-col gap-[50px] items-center mr-auto'>
+                <img src={foodsafety} className="max-w-[300px]" />
 
 
-            <div id="signInDiv" className="row-span-2"></div>
+                {/* Main Content */}
+                <h1 className="text-[34px] font-semibold">Find healthy and trusted recipes</h1>
+                
+                {/* Checkmarks and Text */}
+                <div className="flex flex-col gap-[20px] text-[24px]">
+                    <div className="flex items-center mb-4">
+                        <img src={checkmark} className="h-8 pr-5" />
+                        <h1>Find your favorite meals and recipes</h1>
+                    </div>
+                    <div className="flex items-center mb-4">
+                        <img src={checkmark} className="h-8 pr-5" />
+                        <h1>Filter suggestions for allergens, macros... etc.</h1>
+                    </div>
+                    <div className="flex items-center">
+                        <img src={checkmark} className="h-8 pr-5" />
+                        <h1>
+                            Instantly save recipes with{' '}
+                            <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener noreferrer" className="underline">
+                                Google Calendar
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
 
-            <div className="col-span-2 pl-[130px] py-4">
-                <h1 className="text-4xl font-semibold">Find healthy and trusted recipes</h1>
+
+            {/* Column 2 */}
+            <div className="box-border h-[500px] w-[600px] min-w-[400px] rounded-3xl bg-[#B28370] boxShadow">
+                {/* Sign Out Button */}
+                {isAuthenticated ? 
+                    <button className="google-btn w-60 h-10" onClick={(e) => handleSignOut(e)}>
+                        Sign Out
+                    </button>
+                    :
+                    <div className='flex flex-col gap-[50px] text-white'>
+                        <div className='flex flex-col gap-[20px] mt-[80px] ml-[50px] mr-[50px]'>
+                            <h1 className="text-[40px] font-semibold">Sign up or log in</h1>
+                            <p className="text-[20px]">Login below to start utilizing GrubGallery’s advanced features (e.g. Google Calendar, personalized meal suggestions...)</p>
+                        </div>
+                        
+                        <div id="signInDiv" className="mb-4 md:mb-0 ml-auto mr-auto"></div>
+                    </div>
+                }
+
+                {/* Login Page Content (can't remove this fudging thing for some reason (app will break) */}
+                <div id="signInDiv" className="mb-4 md:mb-0"></div>
             </div>
-            <div className="col-span-2 pl-[160px] flex">
-                <img src={checkmark} className="h-8 pr-5" />
-                <h1 className="text-2xl">Find your favorite meals and recipes</h1>
-            </div>
-            <div className="col-span-2 pl-[160px] flex">
-                <img src={checkmark} className="h-8 pr-5" />
-                <h1 className="text-2xl">Filter suggestions for allergens, macros... etc.</h1>
-            </div>
-            <div className="col-span-2 pl-[160px] flex">
-                <img src={checkmark} className="h-8 pr-5" />
-                <h1 className="text-2xl">Instantly save recipes with Google Calender</h1>
-            </div>
-        </div >
+
+        </div>
+
     )
 }
 
