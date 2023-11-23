@@ -1,13 +1,19 @@
 import styled from "styled-components"
 import Axios from "axios"
-import handleRecipeClick from "../functions/handleRecipeClick"
-import removeFavorite from "../functions/removeFavorite"
 import { useNavigate, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import handleRecipeClick from "../functions/handleRecipeClick"
+import removeFavorite from "../functions/removeFavorite"
+import listFavorites from "../functions/listFavorites"
 
 function DisplayResults(props) {
     // navigate : redirect to other pages (react-router-dom function)
     const navigate = useNavigate()
+
+    // Function to call listFavorites with the required parameters
+    const callListFavorites = () => {
+      listFavorites(props.user, props.isAuthenticated, props.setFavoritesList);
+    }
 
     // mealsList : state variable to map meals to elements rendered on the page
     const [displayMealsList, setDisplayMealsList] = useState([])
@@ -31,7 +37,7 @@ function DisplayResults(props) {
                 <h4>{element.title}</h4>
                 {props.isAuthenticated && (
                   favoritesIdSet.has(String(element.id)) ?
-                  <button onClick={() => removeFavorite(props.user, { recipe_id: element.id } )}>
+                  <button onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )}>
                     Remove favorite
                   </button>
                   :
@@ -63,14 +69,7 @@ function DisplayResults(props) {
       // Backend takes in "req.body", which is the name & email retrieved from Google
       Axios.put("http://localhost:3000/users/addFavorite", body)
           .then((response) => {
-              // create new `favoritesList`
-              // const newFav = [...props.favoritesList, response]
-              // // update state variable list
-              // props.setFavoritesList(newFav)
-
-              // // update local storage (for page refresh)
-              // localStorage.setItem('favoritesList', JSON.stringify(newFav))
-
+              callListFavorites()
               console.log("Add favorite api call repsonse: " + response)
           })
       }
