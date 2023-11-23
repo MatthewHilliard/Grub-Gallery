@@ -93,7 +93,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
     // If we have a user: show the log out button
 
     return (
-        <div className="flex justify-center items-center mt-[150px] ml-[300px] mr-[300px]">
+        <div className="flex justify-center items-center gap-[200px] mt-[100px] ml-[100px] mr-[100px]">
             {/* Column 1 */}
             <div className='flex flex-col gap-[50px] items-center mr-auto'>
                 <img src={foodsafety} className="max-w-[300px]" />
