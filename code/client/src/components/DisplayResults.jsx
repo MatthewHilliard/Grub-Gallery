@@ -33,17 +33,20 @@ function DisplayResults(props) {
           //Sets a unique key based on the index for each div container
           <Grid key={element.id}>
             <Card>
-              <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
-                  <img className="recipeImage" src={element.image} alt={element.title}/>
-                </Link>
-                <h4>{element.title}</h4>
-                {props.isAuthenticated && (
-                  favoritesIdSet.has(String(element.id)) ?
-                  <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )} />
-                  :
-                  <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(element)} />
+              {props.isAuthenticated && (
+                favoritesIdSet.has(String(element.id)) ?
+                <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )} />
+                :
+                <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(element)} />
                 )
-                }
+              }
+
+              <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
+                <img className="recipeImage" src={element.image} alt={element.title}/>
+              </Link>
+
+              <h4>{element.title}</h4>
+
             </Card>
           </Grid>
         ))
@@ -104,11 +107,21 @@ const Card = styled.div`
 
   .favoriteIcon {
     position: absolute;
-    width: 30px;
+    margin-top: -20px;
+    margin-left: -20px;
+    width: 40px;
     z-index: 1; /* Ensure the icon is on top */
+
+    backdrop-filter: blur(4px);
+  // box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  // background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  border-radius: 50%; /* Optional: to create a circular background */
+
 
     &:hover {
       cursor: pointer;
+      transform: scale(1.2);
+      filter: brightness(.95)
     }
   }
 `
