@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react'
 import handleRecipeClick from "../functions/handleRecipeClick"
 import removeFavorite from "../functions/removeFavorite"
 import listFavorites from "../functions/listFavorites"
+import favorite from '../assets/addFavorite.png'
+import unFavorite from '../assets/removeFavorite.png'
 
 function DisplayResults(props) {
     // navigate : redirect to other pages (react-router-dom function)
@@ -32,18 +34,14 @@ function DisplayResults(props) {
           <Grid key={element.id}>
             <Card>
               <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
-                  <img src={element.image} alt={element.title}/>
+                  <img className="recipeImage" src={element.image} alt={element.title}/>
                 </Link>
                 <h4>{element.title}</h4>
                 {props.isAuthenticated && (
                   favoritesIdSet.has(String(element.id)) ?
-                  <button onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )}>
-                    Remove favorite
-                  </button>
+                  <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )} />
                   :
-                  <button onClick={() => addFavorite(element)}>
-                    Add favorite
-                  </button>
+                  <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(element)} />
                 )
                 }
             </Card>
@@ -89,19 +87,29 @@ const Card = styled.div`
   min-height: 20rem;
   border-radius: 2rem;
   overflow: hidden;
-  img {
+  .recipeImage {
     border-radius: 2rem;
-    width: 100%;
+
     max-height: 100%; /* Ensure the image doesn't exceed the container height */
 
     &:hover {
-      transform: scale(0.97);
+      transform: scale(0.98);
       filter: brightness(0.8)
     }
   }
   h4 {
     text-align: center;
     padding: 1rem;
+  }
+
+  .favoriteIcon {
+    position: absolute;
+    width: 30px;
+    z-index: 1; /* Ensure the icon is on top */
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 `
 
