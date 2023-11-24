@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import handleRecipeClick from "../functions/handleRecipeClick"
 import removeFavorite from "../functions/removeFavorite"
 import listFavorites from "../functions/listFavorites"
+import addFavorite from "../functions/addFavorite"
 import favorite from '../assets/addFavorite.png'
 import unFavorite from '../assets/removeFavorite.png'
 
@@ -37,7 +38,7 @@ function DisplayResults(props) {
                 favoritesIdSet.has(String(element.id)) ?
                 <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )} />
                 :
-                <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(element)} />
+                <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(props.user.sub, element, callListFavorites)} />
                 )
               }
 
@@ -53,27 +54,6 @@ function DisplayResults(props) {
     )
 
     }, [props.favoritesList])
-
-    
- 
-    function addFavorite(response) {
-
-      // body : object of data being sent to backend endpoint
-      const body = {
-          user_id: props.user.sub,
-          recipe_id: response.id,
-          title: response.title,
-          image: response.image
-      }
-
-      // Call backend's MongoDB 'createUsers' endpoint to create the user, backend sends "response" back ("response" pretty useless unless debugging)
-      // Backend takes in "req.body", which is the name & email retrieved from Google
-      Axios.put("http://localhost:3000/users/addFavorite", body)
-          .then((response) => {
-              callListFavorites()
-              console.log("Add favorite api call repsonse: " + response)
-          })
-      }
 
 
     return (
