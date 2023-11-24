@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react'
 import handleRecipeClick from "../functions/handleRecipeClick"
 import removeFavorite from "../functions/removeFavorite"
 import listFavorites from "../functions/listFavorites"
+import favorite from '../assets/addFavorite.png'
+import unFavorite from '../assets/removeFavorite.png'
 
 function DisplayResults(props) {
     // navigate : redirect to other pages (react-router-dom function)
@@ -31,21 +33,20 @@ function DisplayResults(props) {
           //Sets a unique key based on the index for each div container
           <Grid key={element.id}>
             <Card>
-              <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
-                  <img src={element.image} alt={element.title}/>
-                </Link>
-                <h4>{element.title}</h4>
-                {props.isAuthenticated && (
-                  favoritesIdSet.has(String(element.id)) ?
-                  <button onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )}>
-                    Remove favorite
-                  </button>
-                  :
-                  <button onClick={() => addFavorite(element)}>
-                    Add favorite
-                  </button>
+              {props.isAuthenticated && (
+                favoritesIdSet.has(String(element.id)) ?
+                <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )} />
+                :
+                <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(element)} />
                 )
-                }
+              }
+
+              <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
+                <img className="recipeImage" src={element.image} alt={element.title}/>
+              </Link>
+
+              <h4>{element.title}</h4>
+
             </Card>
           </Grid>
         ))
@@ -89,19 +90,39 @@ const Card = styled.div`
   min-height: 20rem;
   border-radius: 2rem;
   overflow: hidden;
-  img {
+  .recipeImage {
     border-radius: 2rem;
-    width: 100%;
+
     max-height: 100%; /* Ensure the image doesn't exceed the container height */
 
     &:hover {
-      transform: scale(0.97);
+      transform: scale(0.98);
       filter: brightness(0.8)
     }
   }
   h4 {
     text-align: center;
     padding: 1rem;
+  }
+
+  .favoriteIcon {
+    position: absolute;
+    margin-top: -20px;
+    margin-left: -20px;
+    width: 40px;
+    z-index: 1; /* Ensure the icon is on top */
+
+    backdrop-filter: blur(4px);
+  // box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  // background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  border-radius: 50%; /* Optional: to create a circular background */
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+      filter: brightness(.95)
+    }
   }
 `
 
