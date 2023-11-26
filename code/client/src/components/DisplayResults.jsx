@@ -87,15 +87,15 @@ const Card = styled.div`
 
   .favoriteIcon {
     position: absolute;
-    margin-top: -20px;
-    margin-left: -20px;
-    width: 40px;
+    margin-top: -10px;
+    margin-left: -10px;
+    width: 30px;
     z-index: 1; /* Ensure the icon is on top */
 
-    backdrop-filter: blur(4px);
-  // box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  // background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-  border-radius: 50%; /* Optional: to create a circular background */
+    // backdrop-filter: blur(10px);
+    // box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    // background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    // border-radius: 50%; /* Optional: to create a circular background */
 
 
     &:hover {
