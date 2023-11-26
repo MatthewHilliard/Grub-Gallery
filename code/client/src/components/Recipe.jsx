@@ -41,9 +41,15 @@ export default Recipe
 const DetailWrapper = styled.div`
     margin-top: 10rem;
     margin-bottom: 5rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
     display: flex;
     h2 {
+        font-size: 30px;
         margin-bottom: 2rem;
+    }
+    img {
+      border-radius: 20px;
     }
 `;
 
