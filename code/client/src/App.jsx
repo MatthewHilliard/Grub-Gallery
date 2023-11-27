@@ -77,7 +77,7 @@ function App() {
         <Route path='/search/display-results' element={<DisplayResults user={user} mealsList={searchMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} favoritesList={favoritesList} setFavoritesList={setFavoritesList}/>} />
         <Route path='/favorites' element={<Favorites user={user} favoritesList={favoritesList} setFavoritesList={setFavoritesList} isAuthenticated={isAuthenticated} setRecipe={setRecipe} />} />
         <Route path='/schedule' element={<Schedule />} />
-        <Route path='/recipe' element={<Recipe recipe={recipe} />} />
+        <Route path='/recipe' element={<Recipe recipe={recipe} isAuthenticated={isAuthenticated} user={user} favoritesList={favoritesList} setFavoritesList={setFavoritesList} />} />
       </Routes>
     </Router>
   )
