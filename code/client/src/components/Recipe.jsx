@@ -39,7 +39,7 @@ function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList
             </ImageWrapper>
       )
 
-    }, [favoritesList, isAuthenticated])
+    }, [favoritesList, isAuthenticated, recipe])
 
   return (
     <DetailWrapper>
