@@ -1,16 +1,51 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import addFavorite from "../functions/addFavorite"
+import removeFavorite from "../functions/removeFavorite"
+import listFavorites from "../functions/listFavorites"
+import favorite from '../assets/addFavorite.png'
+import unFavorite from '../assets/removeFavorite.png'
 
-import React from 'react'
-
-function Recipe({ recipe }) {
+function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList }) {
     const [activeTab, setActiveTab] = useState('instructions')
+
+
+    // Function to call listFavorites with the required parameters
+    const callListFavorites = () => {
+      listFavorites(user, isAuthenticated, setFavoritesList);
+    }
+
+    // mealsList : state variable to properly display image and favorite/unfavorite icon
+    const [displayImageIcon, setDisplayImageIcon] = useState([])
+    
+    // useEffect : re-initialize `favoritesId` and `favoritesIdSet` every time `favoritesList` is changed
+    useEffect(() => {
+      // obtain list of favorites
+      const favoritesId = favoritesList.map((element, index) => element.recipe_id)
+      // convert to `set` (to increase look-up time effeciency)
+      const favoritesIdSet = new Set(favoritesId)
+
+      // update displayImageIcon
+      setDisplayImageIcon(
+        <ImageWrapper>
+              {isAuthenticated && (
+                  favoritesIdSet.has(String(recipe.id)) ?
+                  <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(user, { recipe_id: recipe.id }, callListFavorites )} />
+                  :
+                  <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(user.sub, recipe, callListFavorites)} />
+                  )
+                }
+              <img src={recipe.image} alt="" style={{ marginRight: '400px' }}/>
+            </ImageWrapper>
+      )
+
+    }, [favoritesList, isAuthenticated])
 
   return (
     <DetailWrapper>
         <div>
             <h2>{recipe.title}</h2>
-            <img src={recipe.image} alt="" style={{ marginRight: '400px' }}/>
+            {displayImageIcon}
         </div>
         <Info>
         
@@ -52,6 +87,23 @@ const DetailWrapper = styled.div`
       border-radius: 20px;
     }
 `;
+
+const ImageWrapper = styled.div`
+  .favoriteIcon {
+    position: absolute;
+    margin-top: -20px;
+    margin-left: -20px;
+    width: 50px;
+    z-index: 1; /* Ensure the icon is on top */
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+      filter: brightness(.95)
+    }
+  }
+`
 
 const Button = styled.button`
     padding: 1rem 2rem;

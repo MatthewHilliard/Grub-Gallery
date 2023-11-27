@@ -3,9 +3,9 @@ import Axios from "axios"
 import { useNavigate, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import handleRecipeClick from "../functions/handleRecipeClick"
+import addFavorite from "../functions/addFavorite"
 import removeFavorite from "../functions/removeFavorite"
 import listFavorites from "../functions/listFavorites"
-import addFavorite from "../functions/addFavorite"
 import favorite from '../assets/addFavorite.png'
 import unFavorite from '../assets/removeFavorite.png'
 
