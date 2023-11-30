@@ -33,7 +33,7 @@ function Home({ setBrowseMealsList }) {
     }
   };
   return (
-    <div className="grid grid-cols-2 gap-y-6 relative top-[200px]"> {/* creates outter grid for home, grids entries start from topleft to bottom right */}
+    <div className="grid grid-cols-2 gap-y-6 relative top-[200px] mr-[50px]"> {/* creates outter grid for home, grids entries start from topleft to bottom right */}
 
       {/* first outter grid entry */}
       <h1 className="text-8xl font-semibold px-10">Find. Plan. Eat.</h1>
