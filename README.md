@@ -105,7 +105,7 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 Please ensure that the following software is installed before cloning the repository:
-* npm
+* npm (you can check the version of `node` you are running with the command `node -v`)
   ```sh
   npm install npm@latest -g
   ```
