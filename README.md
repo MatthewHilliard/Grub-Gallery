@@ -122,6 +122,7 @@ _To install and run locally, please complete the following steps:_
 4. Install NPM packages (will install packages in `code`, `client`, and `server` directories)
    ```sh
    cd 411-Group-22/code
+   npm install
    npm run install-all
    ```
 5. Set up MongoDB cluster... (add specifics)
