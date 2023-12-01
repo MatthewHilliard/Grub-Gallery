@@ -53,7 +53,7 @@ function DisplayResults(props) {
         ))
     )
 
-    }, [props.favoritesList])
+    }, [props.favoritesList, props.mealsList])
 
 
     return (
