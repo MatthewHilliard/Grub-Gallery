@@ -124,11 +124,13 @@ _To install and run locally, please complete the following steps:_
    cd 411-Group-22/code
    npm run install-all
    ```
-6. Enter your API in `config.js`
+5. Set up MongoDB cluster... (add specifics)
+6. Set up Google Cloud Console... (adde specifics)
+7. Enter your API in `config.js`
    ```js
    const API_KEY = 'ENTER YOUR API';
    ```
-7. Run the application
+8. Run the application
    ```sh
    cd 411-Group-22/code/server
    npm start
