@@ -224,7 +224,7 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/wderocco8/ZipSurf.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/MatthewHilliard/411-Group-22.svg?style=for-the-badge
 [contributors-url]: https://github.com/MatthewHilliard/411-Group-22/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/MatthewHilliard/411-Group-22.svg?style=for-the-badge
 [forks-url]: https://github.com/MatthewHilliard/411-Group-22/network/members
