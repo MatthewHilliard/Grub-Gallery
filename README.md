@@ -126,12 +126,13 @@ Please ensure that the following software is installed before cloning the reposi
 
 _To install and run locally, please complete the following steps:_
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Get a free API Keys
+    1.  [https://example.com](https://example.com)
+3. Clone the repo
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install NPM packages (will install packages in `code`, `client`, and `server` directories)
+4. Install NPM packages (will install packages in `code`, `client`, and `server` directories)
    ```sh
    cd 411-Group-22/code
    npm run install-all
