@@ -129,7 +129,7 @@ _To install and run locally, please complete the following steps:_
 1. Get a free API Key from [Spoonacular](https://spoonacular.com/food-api/console#Profile)
 3. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/MatthewHilliard/411-Group-22.git
    ```
 4. Install NPM packages (will install packages in `code`, `client`, and `server` directories)
    ```sh
