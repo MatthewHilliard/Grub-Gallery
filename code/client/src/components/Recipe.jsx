@@ -89,6 +89,7 @@ const DetailWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
+  width: 400px; /* adjust as needed */
   .favoriteIcon {
     position: absolute;
     margin-top: -20px;
