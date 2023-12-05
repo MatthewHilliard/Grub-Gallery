@@ -18,23 +18,20 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/MatthewHilliard/411-Group-22">
+    <img src="code/client/src/assets/forkandknife.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Grub Gallery</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
+    Personalized dishes and recipes with the click of a button!
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/MatthewHilliard/411-Group-22/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/MatthewHilliard/411-Group-22/issues">Request Feature</a>
   </p>
 </div>
 
@@ -122,6 +119,7 @@ _To install and run locally, please complete the following steps:_
 4. Install NPM packages (will install packages in `code`, `client`, and `server` directories)
    ```sh
    cd 411-Group-22/code
+   npm install
    npm run install-all
    ```
 5. Set up MongoDB cluster... (add specifics)
