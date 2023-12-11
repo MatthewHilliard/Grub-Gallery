@@ -68,7 +68,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
 
     // extract first name from `user` (update variable)
     if (isAuthenticated) {
-        firstName = user.name.split(" ")[0]
+        firstName = user.displayName.split(" ")[0]
     }
 
     return (
@@ -101,7 +101,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
                     <>
                         <div className='mr-5'>Hello, {firstName}</div>
                         <button className=''>
-                            <Link to="/login"><img className='h-10 rounded-full' src={user.picture} /></Link>
+                            <Link to="/login"><img className='h-10 rounded-full' src={user.photoURL} /></Link>
                         </button>
                     </>
                     :

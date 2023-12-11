@@ -7,29 +7,46 @@ import Favorites from './components/Favorites'
 import Schedule from './components/Schedule'
 import './index.css'
 import Recipe from './components/Recipe'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { auth } from "./Firebase"
+import { gapi } from 'gapi-script'
+const API_KEY = import.meta.env.VITE_GAPI_KEY
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
+const SCOPES = import.meta.env.VITE_SCOPES
 
 function App() {
 
-
-  // Setting "globally" the searchMeals useState so that multiple components can change/use its information
+  // assign state variables (keep track of meals lists, favorites lists, recipe, and user info)
   const [searchMealsList, setSearchMealsList] = useState([])
   const [browseMealsList, setBrowseMealsList] = useState([])
   const [recipe, setRecipe] = useState({})
-  // states to hold user and authentication status
-  const [user, setUser] = useState({})
   const [favoritesList, setFavoritesList] = useState([])
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  // use Firebase auth to detect if user is logged in
+  const user = auth.currentUser
+  console.log(user, isAuthenticated)
 
   useEffect(() => {
-    // check localStorage cache to see if user has been saved (How is it checking if localStorageUser = true?)
-    const localStorageUser = localStorage.getItem('user')
-    if (localStorageUser) {
-      // update user and authentication status
-      setUser(JSON.parse(localStorageUser))
-      setIsAuthenticated(true)
-    }
+    // firebase function (check if authentication changes...)
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+        setIsAuthenticated(user !== null) // update isAuthenticated based on if user signed in
+    })
+    return unsubscribe
+  }, [])
 
+  // NOTE: MUST SWITCH THIS TO USE GOOGLE CALENDAR SCOPES....
+  // // load + initialize google docs API library (API_KEY, CLIENT_ID, SCOEPS retrieved from Google Cloud Console...)
+  // useEffect(() => {
+  //     gapi.load('client:auth2', () => {
+  //         gapi.client.init({
+  //             apiKey: API_KEY,
+  //             clientId: CLIENT_ID,
+  //             scope: SCOPES,
+  //         })
+  //     })
+  // }, [])
+
+  useEffect(() => {
     // check localStorage cache to see if `searchMealsList` has been saved
     const localStorageSearchMeals = localStorage.getItem('searchMealsList')
     if (localStorageSearchMeals) {
@@ -68,7 +85,6 @@ function App() {
         {/* Sets the route pathnames to X, to be used later when trying to route Y to the X's element. So X is used as a pathname to route to X's element */}
         <Route path='/login' element={<Login
                                         user={user}
-                                        setUser={setUser}
                                         isAuthenticated={isAuthenticated}
                                         setIsAuthenticated={setIsAuthenticated}
                                         />}

@@ -1,15 +1,18 @@
-// obtain Firebase config keys from .env
-const apiKey = VITE_FIREBASE_API_KEY
-const authDomain = VITE_FIREBASE_AUTH_DOMAIN
-const projectId = VITE_FIREBASE_PROJECT_ID
-const storageBucket = VITE_FIREBASE_STORAGE_BUCKET
-const messagingSenderId = VITE_FIREBASE_MESSAGING_SENDER_ID
-const appId = VITE_FIREBASE_APP_ID
-const measurementId = VITE_FIREBASE_MEASUREMENT_ID
+// Obtain Firebase config keys from .env
+const apiKey = import.meta.env.VITE_FIREBASE_API_KEY
+const authDomain = import.meta.env.VITE_FIREBASE_AUTH_DOMAIN
+const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID
+const storageBucket = import.meta.env.VITE_FIREBASE_STORAGE_BUCKET
+const messagingSenderId = import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID
+const appId = import.meta.env.VITE_FIREBASE_APP_ID
+const measurementId = import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "firebase/app"
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { gapi } from 'gapi-script'
+
+import { getAnalytics } from "firebase/analytics"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -26,5 +29,39 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig)
+const analytics = getAnalytics(app)
+
+// Initialize Firebase authentication (code from PedroTech: https://www.youtube.com/watch?v=vDT7EnUpEoo&ab_channel=PedroTech)
+export const auth = getAuth(app)
+
+
+// function to signInWithGoogle (using Firebase authentication)
+export const signInWithGoogle = () => {
+    // initialize provider
+    const provider = new GoogleAuthProvider()
+
+    // use Firebase sign in function
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            console.log("User is:", result)
+        })
+        .catch((error) => {
+            console.log("Error authenticating with Google:", error);
+        })
+  }
+
+  // function to sign out (with firebase authentication)
+ export const handleSignOut = async () => {
+    try {
+        // IMPORTANT: if authenticated with google Calendar api --> sign out (prevents altering somebody else's google calendar)
+        if (gapi.auth2) {
+            await gapi.auth2.getAuthInstance().signOut()
+        }
+        // additionally, sign out with FIREBASE
+        await auth.signOut()
+        console.log("Successfully signed out")
+    } catch (error) {
+        console.log("Error signing out:", error)
+    }
+}
