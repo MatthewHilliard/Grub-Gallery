@@ -116,8 +116,18 @@ _To install and run locally, please complete the following steps:_
    npm install
    npm run install-all
    ```
-5. Set up MongoDB cluster... (add specifics)
-6. Set up Google Cloud Console... (adde specifics)
+5. Create a `.env` file in the `client` directory (paste the following information, filling in the keys from above)
+   ```env
+   ################ Frontend environment variables ################
+   VITE_GOOGLE_CLIENT_ID=secret_client_id_goes_here
+   ```
+6. Create a `.env` file in the `server` directory (paste the following information, filling in the keys from above)
+   ```env
+    ################ Backend environment variables ################
+    PORT=prefered_port                        # typically 3000
+    MONGODB_URI=mongodb_uri_goes_here
+    SPOONACULAR_KEY=spoonacular_api_key_goes_here
+   ```
 7. Enter your API in `config.js`
    ```js
    const API_KEY = 'ENTER YOUR API';
