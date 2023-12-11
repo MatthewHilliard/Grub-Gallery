@@ -7,10 +7,10 @@ import Favorites from './components/Favorites'
 import Schedule from './components/Schedule'
 import './index.css'
 import Recipe from './components/Recipe'
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
+
 
   // Setting "globally" the searchMeals useState so that multiple components can change/use its information
   const [searchMealsList, setSearchMealsList] = useState([])
