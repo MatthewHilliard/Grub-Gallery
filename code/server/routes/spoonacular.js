@@ -8,6 +8,9 @@ const cors = require('cors')
 router.use(express.json())
 router.use(cors())
 
+// obtain Spoonacular API key for environmental variables
+const spoonacular_key = process.env.SPOONACULAR_KEY
+
 // Endpoint for Calling the spoonacular api call for meals based on searchString from req.body
 router.post("/meals", async (req, res) => {
   try {
@@ -16,7 +19,7 @@ router.post("/meals", async (req, res) => {
     const param = req.body.searchString
     let config = {
       method: 'get',
-      url: `https://api.spoonacular.com/recipes/complexSearch?query=${param}&number=${numberOfRecipes}&apiKey=ea7e76522981472aaa961dde6913a48e`,
+      url: `https://api.spoonacular.com/recipes/complexSearch?query=${param}&number=${numberOfRecipes}&apiKey=${spoonacular_key}`,
       headers: { }
     }
 
@@ -51,7 +54,7 @@ router.post("/browse", async (req, res) => {
     // const param = req.body.searchString // unused input from frontend?
     let config = {
       method: 'get',
-      url: `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=2ad32db11bc142a9ab36a432b8037889`,
+      url: `https://api.spoonacular.com/recipes/random?number=${numberOfRecipes}&apiKey=${spoonacular_key}`,
       headers: { }
     }
 
@@ -83,7 +86,7 @@ router.post("/recipe", async (req, res) => {
     // initialization for spoonacular api call
     let config = {
       method: 'get',
-      url: `https://api.spoonacular.com/recipes/${id}/information?apiKey=af7e54fc940247eea38d894e383d7fa9`,
+      url: `https://api.spoonacular.com/recipes/${id}/information?apiKey=${spoonacular_key}`,
       headers: { }
     }
 
