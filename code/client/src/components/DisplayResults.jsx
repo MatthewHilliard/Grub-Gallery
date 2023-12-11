@@ -38,7 +38,7 @@ function DisplayResults(props) {
                 favoritesIdSet.has(String(element.id)) ?
                 <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )} />
                 :
-                <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(props.user.sub, element, callListFavorites)} />
+                <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(props.user.uid, element, callListFavorites)} />
                 )
               }
 

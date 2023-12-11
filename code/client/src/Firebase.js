@@ -38,18 +38,19 @@ export const auth = getAuth(app)
 
 // function to signInWithGoogle (using Firebase authentication)
 export const signInWithGoogle = () => {
-    // initialize provider
-    const provider = new GoogleAuthProvider()
-
-    // use Firebase sign in function
-    signInWithPopup(auth, provider)
-        .then((result) => {
-            console.log("User is:", result)
-        })
-        .catch((error) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
+            console.log("User is:", result.user);
+            resolve(result.user);
+        } catch (error) {
             console.log("Error authenticating with Google:", error);
-        })
-  }
+            reject(error);
+        }
+    });
+};
+
 
   // function to sign out (with firebase authentication)
  export const handleSignOut = async () => {

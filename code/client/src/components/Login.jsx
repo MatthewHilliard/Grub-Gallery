@@ -15,6 +15,33 @@ function Login({ user, isAuthenticated, setIsAuthenticated }) {
 
     // If we have no user: sign in button
     // If we have a user: show the log out button
+    const handleSignIn = async () => {
+        try {
+            // if google auth fails (jump to error catch)
+            const userResult = await signInWithGoogle();
+    
+            if (userResult) {
+                // body: object of data being sent to backend endpoint
+                const body = {
+                    name: userResult.displayName,
+                    email: userResult.email,
+                    user_id: userResult.uid
+                };
+    
+                // Call backend's MongoDB 'createUsers' endpoint to create the user
+                Axios.post("http://localhost:3000/users/createUser", body)
+                    .then((response) => {
+                        console.log("Create User API call response: ", response);
+                    })
+                    .catch((error) => {
+                        console.log("Error making Axios post request:", error);
+                    });
+            }
+        } catch (error) {
+            console.log("Error handling sign in:", error);
+        }
+    };
+    
 
     return (
         <div className="flex justify-center items-center gap-[200px] mt-[100px] ml-[100px] mr-[100px]">
@@ -64,7 +91,7 @@ function Login({ user, isAuthenticated, setIsAuthenticated }) {
                             <p className="text-[20px]">Login below to start utilizing GrubGallery’s advanced features (e.g. Google Calendar, personalized meal suggestions...)</p>
                         </div>
                         
-                        <button className="google-btn mb-4 md:mb-0 ml-auto mr-auto" onClick={signInWithGoogle}>
+                        <button className="google-btn mb-4 md:mb-0 ml-auto mr-auto" onClick={handleSignIn}>
                             Sign In With Google
                         </button>
                     </div>

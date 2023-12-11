@@ -32,7 +32,7 @@ function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList
                   favoritesIdSet.has(String(recipe.id)) ?
                   <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(user, { recipe_id: recipe.id }, callListFavorites )} />
                   :
-                  <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(user.sub, recipe, callListFavorites)} />
+                  <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(user.uid, recipe, callListFavorites)} />
                   )
                 }
               <img src={recipe.image} alt="" style={{ marginRight: '400px' }}/>
