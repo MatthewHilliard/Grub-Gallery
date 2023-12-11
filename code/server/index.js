@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 // obtain .env variables using `dotenv`
 const path = require('path')
-require('dotenv').config({ path: path.join(__dirname, '../.env') }) // Adjust the path accordingly
+require('dotenv').config({ path: path.join(__dirname, '.env') }) // Adjust the path accordingly
 
 const mongoUri = process.env.MONGODB_URI        // obtain URI from .env file
 const port = process.env.PORT
