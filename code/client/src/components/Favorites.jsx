@@ -8,6 +8,7 @@ import listFavorites from "../functions/listFavorites"
 
 function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, setRecipe }) {
   const navigate = useNavigate()
+  console.log(favoritesList)
 
   // Function to call listFavorites with the required parameters
   const callListFavorites = () => {

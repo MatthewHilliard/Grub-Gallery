@@ -13,7 +13,8 @@ function listFavorites(user, isAuthenticated, setFavoritesList) {
         .then((response) => {
           console.log("getting favorites", response)
           const favorites = response.data
-          const length = Object.keys(favorites)
+          const length = Object.keys(favorites).length
+
           // Need to get favorites
           setFavoritesList(length > 0 ? response.data : [])
           // update `recipe` (aka `parsedData`) in localStorage
