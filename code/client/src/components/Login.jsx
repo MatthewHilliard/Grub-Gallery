@@ -4,8 +4,12 @@ import checkmark from "../assets/checkmark.png";
 import foodsafety from "../assets/food-safety.png";
 import Axios from 'axios'
 
+// obtain google client_id from environmental variables
+const client_id = import.meta.env.VITE_GOOGLE_CLIENT_ID
+
+
 function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
-    
+
     // initialize (or retrieve) `user`
     // useEffect renders or loads everything inside, "[isAuthenticated]" makes this render everytime isAuthenticated changes
     useEffect(() => {
@@ -19,7 +23,7 @@ function Login({ user, setUser, isAuthenticated, setIsAuthenticated }) {
                 /* global google */
                 // Initilizes the sign in with Google. If the Google API returns something, then we will handle that response with handleCallbackResponse **** <- unsure
                 google.accounts.id.initialize({
-                    client_id: "1040079796712-hqafp6aje8gvaa6iotq38i478h5n8f83.apps.googleusercontent.com",
+                    client_id: client_id,
                     callback: handleCallbackResponse
                 });
 
