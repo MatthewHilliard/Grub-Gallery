@@ -7,7 +7,7 @@ function listFavorites(user, isAuthenticated, setFavoritesList) {
       Axios.get('http://localhost:3000/users/getFavorites',
         {
           params: {
-            user
+            user_id: user.uid
           }
         })
         .then((response) => {

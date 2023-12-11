@@ -53,7 +53,7 @@ function DisplayResults(props) {
         ))
     )
 
-    }, [props.favoritesList, props.mealsList])
+    }, [props.favoritesList, props.mealsList, props.isAuthenticated])
 
 
     return (

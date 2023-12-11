@@ -72,13 +72,19 @@ router.delete("/removeRestriction", async (req, res) => {
 // endpoint to retrieve all of user's favorite recipes
 router.get("/getFavorites", async (req, res) => {
   try {
-    const user = req.query.user
+    const user_id = req.query.user_id
     // console.log("user:", user)
-    const favorites = await UserModel.find({ "user_id": user.uid }, { "favorites": 1, "_id": 0 })
-    //console.log(favorites)
-    res.status(200).json(favorites[0].favorites)
+    const user = await UserModel.findOne({ "user_id": user_id }, { "favorites": 1, "_id": 0 })
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const favorites = user.favorites || [];
+
+    res.status(200).json(favorites);
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
 })
 
@@ -111,11 +117,11 @@ router.put("/addFavorite", async (req, res) => {
 router.delete("/removeFavorite", async (req, res) => {
   // console.log(req.query)
   try {
-    const user = req.query.user
+    const user_id = req.query.user_id
     const recipe = req.query.recipe
-    console.log(user)
+
     const result = await UserModel.updateOne(
-      { "user_id": user.uid },
+      { "user_id": user_id },
       {
         "$pull": {
           "favorites": {
