@@ -77,14 +77,15 @@ router.get("/getFavorites", async (req, res) => {
     const user = await UserModel.findOne({ "user_id": user_id }, { "favorites": 1, "_id": 0 })
     
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found" })
     }
 
-    const favorites = user.favorites || [];
+    const favorites =  user.favorites
 
-    res.status(200).json(favorites);
+    console.log("fav:", favorites)
+    res.status(200).json(favorites)
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message })
   }
 })
 
