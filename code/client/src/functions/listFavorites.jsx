@@ -13,6 +13,8 @@ function listFavorites(user, isAuthenticated, setFavoritesList) {
         .then((response) => {
           console.log("getting favorites", response)
           const favorites = response.data
+          
+          // convert favorites into object (if not), and grab keys (if length is 0, we found no favorites)
           const length = Object.keys(favorites).length
 
           // Need to get favorites
