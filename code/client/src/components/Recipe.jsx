@@ -7,70 +7,72 @@ import favorite from '../assets/addFavorite.png'
 import unFavorite from '../assets/removeFavorite.png'
 
 function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList }) {
-    const [activeTab, setActiveTab] = useState('instructions')
+  const [activeTab, setActiveTab] = useState('instructions')
 
 
-    // Function to call listFavorites with the required parameters
-    const callListFavorites = () => {
-      listFavorites(user, isAuthenticated, setFavoritesList);
-    }
+  // Function to call listFavorites with the required parameters
+  const callListFavorites = () => {
+    listFavorites(user, isAuthenticated, setFavoritesList);
+  }
 
-    // mealsList : state variable to properly display image and favorite/unfavorite icon
-    const [displayImageIcon, setDisplayImageIcon] = useState([])
-    
-    // useEffect : re-initialize `favoritesId` and `favoritesIdSet` every time `favoritesList` is changed
-    useEffect(() => {
-      // obtain list of favorites
-      const favoritesId = favoritesList.map((element, index) => element.recipe_id)
-      // convert to `set` (to increase look-up time effeciency)
-      const favoritesIdSet = new Set(favoritesId)
+  // mealsList : state variable to properly display image and favorite/unfavorite icon
+  const [displayImageIcon, setDisplayImageIcon] = useState([])
 
-      // update displayImageIcon
-      setDisplayImageIcon(
-        <ImageWrapper>
-              {isAuthenticated && (
-                  favoritesIdSet.has(String(recipe.id)) ?
-                  <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(user, { recipe_id: recipe.id }, callListFavorites )} />
-                  :
-                  <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(user.sub, recipe, callListFavorites)} />
-                  )
-                }
-              <img src={recipe.image} alt="" style={{ marginRight: '400px' }}/>
-            </ImageWrapper>
-      )
+  // useEffect : re-initialize `favoritesId` and `favoritesIdSet` every time `favoritesList` is changed
+  useEffect(() => {
+    // obtain list of favorites
+    const favoritesId = favoritesList.map((element, index) => element.recipe_id)
+    // convert to `set` (to increase look-up time effeciency)
+    const favoritesIdSet = new Set(favoritesId)
 
-    }, [favoritesList, isAuthenticated, recipe])
+    // update displayImageIcon
+    setDisplayImageIcon(
+      <ImageWrapper>
+        {isAuthenticated && (
+          favoritesIdSet.has(String(recipe.id)) ?
+            <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(user, { recipe_id: recipe.id }, callListFavorites)} />
+            :
+            <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(user.sub, recipe, callListFavorites)} />
+        )
+        }
+        <img src={recipe.image} alt="" style={{ marginRight: '400px' }} />
+      </ImageWrapper>
+    )
+
+  }, [favoritesList, isAuthenticated, recipe])
 
   return (
     <DetailWrapper>
-        <div>
-            <h2>{recipe.title}</h2>
-            {displayImageIcon}
-        </div>
-        <Info>
-        
-            <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab("instructions")}>Instructions</Button> 
-            <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab("ingredients")}>Ingredients</Button>
-            {activeTab === 'instructions' && (
-                            <div>
-                            <h1>Overview:</h1>
-                            <h3 dangerouslySetInnerHTML={{ __html: recipe.summary }}></h3>
-                            <h1>Instructions:</h1>
-                            <h3 dangerouslySetInnerHTML={{ __html: recipe.instructions }}></h3>
-                            </div>
-            )}
-            {activeTab === 'ingredients' &&(
-                            <div>{recipe.extendedIngredients.map((ingredient) => (
-                                <li key={ingredient.id}>{ingredient.original}</li>
-                            ))}</div>
-            )}
+      <div>
+        <h2>{recipe.title}</h2>
+        {displayImageIcon}
+      </div>
+      <Info>
 
-        </Info>
+        <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab("instructions")}>Instructions</Button>
+        <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab("ingredients")}>Ingredients</Button>
+        {activeTab === 'instructions' && (
+          <div>
+            <h1> <mark>Overview: </mark></h1>
+            <h3 dangerouslySetInnerHTML={{ __html: recipe.summary }}></h3>
+            <h1><mark>Instructions: </mark></h1>
+            <h3 dangerouslySetInnerHTML={{ __html: recipe.instructions }}></h3>
+          </div>
+        )}
+        {activeTab === 'ingredients' && (
+          <div>{recipe.extendedIngredients.map((ingredient) => (
+            <li key={ingredient.id}>{ingredient.original}</li>
+          ))}</div>
+        )}
+
+      </Info>
     </DetailWrapper>
   )
 }
 
 export default Recipe
+
+
 
 
 const DetailWrapper = styled.div`
