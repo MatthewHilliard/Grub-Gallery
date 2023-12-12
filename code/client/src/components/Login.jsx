@@ -5,7 +5,6 @@ import Axios from 'axios'
 import checkmark from "../assets/checkmark.png";
 import foodsafety from "../assets/food-safety.png";
 
-
 function Login({ isAuthenticated }) {
 
     // handleSignIn : calls signInWithGoogle function from Firebase.js and sends user to backend

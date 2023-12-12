@@ -6,6 +6,12 @@ const storageBucket = import.meta.env.VITE_FIREBASE_STORAGE_BUCKET
 const messagingSenderId = import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID
 const appId = import.meta.env.VITE_FIREBASE_APP_ID
 const measurementId = import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+// Obtain gapi scores from .env
+const API_KEY = import.meta.env.VITE_GAPI_KEY
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
+const scope1 = import.meta.env.VITE_SCOPE1
+const scope2 = import.meta.env.VITE_SCOPE2
+
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
@@ -41,8 +47,30 @@ export const signInWithGoogle = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const provider = new GoogleAuthProvider()
+            provider.addScope(scope1)
+            provider.addScope(scope2)
             const result = await signInWithPopup(auth, provider)
-            // console.log("User is:", result.user)
+            
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const accessToken = credential.accessToken;
+
+
+            // Ensure the gapi.client is initialized
+            await gapi.load('client:auth2', () => {
+                gapi.client.init({
+                    apiKey: null, // Set to null to avoid using the API key
+                    clientId: CLIENT_ID,
+                    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+                    scope: scope1 + " " + scope2,
+                }).then(() => {
+                    // Set the access token for authorization
+                    if (accessToken) {
+                        gapi.auth.setToken({
+                            access_token: accessToken,
+                        });
+                    }
+                });
+            });
             resolve(result.user)
         } catch (error) {
             console.log("Error authenticating with Google:", error)
@@ -51,12 +79,16 @@ export const signInWithGoogle = () => {
     });
 };
 
+// export gapi (to be used in googleCalendar)
+export { gapi }
 
-  // function to sign out (with firebase authentication)
+
+// function to sign out (with firebase authentication)
  export const handleSignOut = async () => {
     try {
         // IMPORTANT: if authenticated with google Calendar api --> sign out (prevents altering somebody else's google calendar)
-        if (gapi.auth2) {
+        // console.log("auth",auth, gapi.auth2.GoogleAuth())
+        if (gapi.auth2 && gapi.auth2.getAuthInstance()) {
             await gapi.auth2.getAuthInstance().signOut()
         }
         // additionally, sign out with FIREBASE

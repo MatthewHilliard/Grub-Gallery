@@ -9,10 +9,6 @@ import './index.css'
 import Recipe from './components/Recipe'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { auth } from "./Firebase"
-import { gapi } from 'gapi-script'
-const API_KEY = import.meta.env.VITE_GAPI_KEY
-const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
-const SCOPES = import.meta.env.VITE_SCOPES
 
 function App() {
 
@@ -24,7 +20,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   // use Firebase auth to detect if user is logged in
   const user = auth.currentUser
-  console.log(user, isAuthenticated)
+  // console.log(user, isAuthenticated)
 
   useEffect(() => {
     // firebase function (check if authentication changes...)
@@ -32,17 +28,6 @@ function App() {
         setIsAuthenticated(user !== null) // update isAuthenticated based on if user signed in
     })
     return unsubscribe
-  }, [])
-
-  // load + initialize google calendar API library (API_KEY, CLIENT_ID, SCOEPS retrieved from Google Cloud Console...)
-  useEffect(() => {
-    gapi.load('client:auth2', () => {
-      gapi.client.init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          scope: SCOPES,
-      })
-    })
   }, [])
 
   useEffect(() => {

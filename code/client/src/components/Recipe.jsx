@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { addEventToCalendar } from "../functions/googleCalendar"
 import styled from "styled-components"
 import addFavorite from "../functions/addFavorite"
 import removeFavorite from "../functions/removeFavorite"
@@ -28,24 +29,43 @@ function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList
       // update displayImageIcon
       setDisplayImageIcon(
         <ImageWrapper>
-              {isAuthenticated && (
-                  favoritesIdSet.has(String(recipe.id)) ?
-                  <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(user, { recipe_id: recipe.id }, callListFavorites )} />
-                  :
-                  <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(user.uid, recipe, callListFavorites)} />
-                  )
-                }
-              <img src={recipe.image} alt="" style={{ marginRight: '400px' }}/>
-            </ImageWrapper>
+          {isAuthenticated && (
+              favoritesIdSet.has(String(recipe.id)) ?
+              <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(user, { recipe_id: recipe.id }, callListFavorites )} />
+              :
+              <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(user.uid, recipe, callListFavorites)} />
+              )
+            }
+          <img src={recipe.image} alt="" style={{ marginRight: '400px' }}/>
+        </ImageWrapper>
       )
 
     }, [favoritesList, isAuthenticated, recipe])
+
+
+    // Google Calendar integration
+    const handleAddEvent = async () => {
+      try {
+        const eventDetails = {
+          summary: 'Meeting with John',
+          description: 'Discuss project updates',
+          startTime: '2023-12-11T22:00:00',
+          endTime: '2023-12-11T23:59:59', 
+        }
+    
+        await addEventToCalendar(eventDetails)
+        console.log('Event added successfully!')
+      } catch (error) {
+        console.error('Error adding event:', error)
+      }
+    };
 
   return (
     <DetailWrapper>
         <div>
             <h2>{recipe.title}</h2>
             {displayImageIcon}
+            {isAuthenticated && <button onClick={handleAddEvent}>Add to gcal</button> }
         </div>
         <Info>
         
