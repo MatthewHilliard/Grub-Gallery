@@ -17,7 +17,7 @@ router.get("/getUsers", async (req, res) => {
 })
 
 // Endpoint for creating a user. Will not create one if the user email already exists. .post is for posting new data
-router.post("/createUsers", async (req, res) => {
+router.post("/createUser", async (req, res) => {
   const user = req.body
   const existUsername = await UserModel.findOne({ email: user.email })
   if (existUsername) {
@@ -72,11 +72,18 @@ router.delete("/removeRestriction", async (req, res) => {
 // endpoint to retrieve all of user's favorite recipes
 router.get("/getFavorites", async (req, res) => {
   try {
-    const user = req.query.user
+    const user_id = req.query.user_id
     // console.log("user:", user)
-    const favorites = await UserModel.find({ "email": user.email }, { "favorites": 1, "_id": 0 })
-    //console.log(favorites)
-    res.status(200).json(favorites[0].favorites)
+    const user = await UserModel.findOne({ "user_id": user_id }, { "favorites": 1, "_id": 0 })
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" })
+    }
+
+    const favorites =  user.favorites
+
+    console.log("fav:", favorites)
+    res.status(200).json(favorites)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
@@ -111,11 +118,11 @@ router.put("/addFavorite", async (req, res) => {
 router.delete("/removeFavorite", async (req, res) => {
   // console.log(req.query)
   try {
-    const user = req.query.user
+    const user_id = req.query.user_id
     const recipe = req.query.recipe
-    console.log(user)
+
     const result = await UserModel.updateOne(
-      { "user_id": user.sub },
+      { "user_id": user_id },
       {
         "$pull": {
           "favorites": {

@@ -69,7 +69,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
 
     // extract first name from `user` (update variable)
     if (isAuthenticated) {
-        firstName = user.name.split(" ")[0]
+        firstName = user.displayName.split(" ")[0]
     }
 
     return (
@@ -107,8 +107,9 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
                         </>
                         :
                         <button className=''>
-                            {/* Makes everything within this Link container a href, which points to the login route of pathname "/login" */}
-                            <Link to="/login"><img className='h-10' src={profile_photo} /></Link>
+
+                            <Link to="/login"><img className='h-10 rounded-full' src={user.photoURL} /></Link>
+
                         </button>
                     }
 

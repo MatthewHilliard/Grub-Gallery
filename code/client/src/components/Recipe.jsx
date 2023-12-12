@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { addEventToCalendar } from "../functions/googleCalendar"
 import styled from "styled-components"
 import addFavorite from "../functions/addFavorite"
 import removeFavorite from "../functions/removeFavorite"
@@ -6,67 +7,123 @@ import listFavorites from "../functions/listFavorites"
 import favorite from '../assets/addFavorite.png'
 import unFavorite from '../assets/removeFavorite.png'
 
+// MUI datetime picker : https://mui.com/x/react-date-pickers/getting-started/
+import dayjs from 'dayjs';
+import 'dayjs/locale/en'; // Import the locale you want to use
+import utc from 'dayjs/plugin/utc';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+dayjs.extend(utc);
+dayjs.extend(localizedFormat);
+// used to grab default date/time
+import { startOfDay, setHours } from 'date-fns';
+
+
+
 function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList }) {
   const [activeTab, setActiveTab] = useState('instructions')
 
-
-  // Function to call listFavorites with the required parameters
-  const callListFavorites = () => {
-    listFavorites(user, isAuthenticated, setFavoritesList);
-  }
-
-  // mealsList : state variable to properly display image and favorite/unfavorite icon
-  const [displayImageIcon, setDisplayImageIcon] = useState([])
-
-  // useEffect : re-initialize `favoritesId` and `favoritesIdSet` every time `favoritesList` is changed
-  useEffect(() => {
-    // obtain list of favorites
-    const favoritesId = favoritesList.map((element, index) => element.recipe_id)
-    // convert to `set` (to increase look-up time effeciency)
-    const favoritesIdSet = new Set(favoritesId)
-
-    // update displayImageIcon
-    setDisplayImageIcon(
-      <ImageWrapper>
-        {isAuthenticated && (
-          favoritesIdSet.has(String(recipe.id)) ?
-            <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(user, { recipe_id: recipe.id }, callListFavorites)} />
-            :
-            <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(user.sub, recipe, callListFavorites)} />
-        )
-        }
-        <img src={recipe.image} alt="" style={{ marginRight: '400px' }} />
-      </ImageWrapper>
+    // selectedDateTime : tracks the start date and time for the user's event
+    const [selectedDateTime, setSelectedDateTime] = useState(
+      dayjs().startOf('day').add(12, 'hours')
     )
+    
+  
+    // Function to call listFavorites with the required parameters
+    const callListFavorites = () => {
+      listFavorites(user, isAuthenticated, setFavoritesList);
+    }
 
-  }, [favoritesList, isAuthenticated, recipe])
+    // mealsList : state variable to properly display image and favorite/unfavorite icon
+    const [displayImageIcon, setDisplayImageIcon] = useState([])
+    
+    // useEffect : re-initialize `favoritesId` and `favoritesIdSet` every time `favoritesList` is changed
+    useEffect(() => {
+      // obtain list of favorites
+      const favoritesId = favoritesList.map((element, index) => element.recipe_id)
+      // convert to `set` (to increase look-up time effeciency)
+      const favoritesIdSet = new Set(favoritesId)
 
+      // update displayImageIcon
+      setDisplayImageIcon(
+        <ImageWrapper>
+          {isAuthenticated && (
+              favoritesIdSet.has(String(recipe.id)) ?
+              <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(user, { recipe_id: recipe.id }, callListFavorites )} />
+              :
+              <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(user.uid, recipe, callListFavorites)} />
+              )
+            }
+          <img src={recipe.image} alt="" style={{ marginRight: '400px' }}/>
+        </ImageWrapper>
+      )
+
+    }, [favoritesList, isAuthenticated, recipe])
+
+
+
+    // Google Calendar integration
+    const handleAddEvent = async () => {
+      try {
+        const endTime = selectedDateTime.add(recipe.readyInMinutes, 'minutes')
+        const eventDetails = {
+          summary: recipe.title,
+          description: recipe.summary,
+          startTime: selectedDateTime.toISOString(),
+          endTime: endTime.toISOString(), 
+        }
+        console.log('eventDetails', eventDetails)
+    
+        await addEventToCalendar(eventDetails)
+        console.log('Event added successfully!')
+      } catch (error) {
+        console.error('Error adding event:', error)
+      }
+    };
+
+    // console.log(selectedDateTime)
   return (
-    <DetailWrapper>
-      <div>
-        <h2>{recipe.title}</h2>
-        {displayImageIcon}
-      </div>
-      <Info>
 
-        <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab("instructions")}>Instructions</Button>
-        <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab("ingredients")}>Ingredients</Button>
-        {activeTab === 'instructions' && (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DetailWrapper>
           <div>
-            <h1> <mark>Overview: </mark></h1>
-            <h3 dangerouslySetInnerHTML={{ __html: recipe.summary }}></h3>
-            <h1><mark>Instructions: </mark></h1>
-            <h3 dangerouslySetInnerHTML={{ __html: recipe.instructions }}></h3>
+              <h2>{recipe.title}</h2>
+              {displayImageIcon}
+              {isAuthenticated && 
+                <>
+                  <DateTimePicker
+                      className="w-[250px]"
+                      value={selectedDateTime}
+                      onChange={(newDateTime) => setSelectedDateTime(newDateTime)}
+                  />
+                  
+                  <button onClick={handleAddEvent}>Add to gcal</button> 
+                </>
+              }
           </div>
-        )}
-        {activeTab === 'ingredients' && (
-          <div>{recipe.extendedIngredients.map((ingredient) => (
-            <li key={ingredient.id}>{ingredient.original}</li>
-          ))}</div>
-        )}
+          <Info>
+          
+              <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab("instructions")}>Instructions</Button> 
+              <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab("ingredients")}>Ingredients</Button>
+              {activeTab === 'instructions' && (
+                              <div>
+                              <h1>Overview:</h1>
+                              <h3 dangerouslySetInnerHTML={{ __html: recipe.summary }}></h3>
+                              <h1>Instructions:</h1>
+                              <h3 dangerouslySetInnerHTML={{ __html: recipe.instructions }}></h3>
+                              </div>
+              )}
+              {activeTab === 'ingredients' &&(
+                              <div>{recipe.extendedIngredients.map((ingredient) => (
+                                  <li key={ingredient.id}>{ingredient.original}</li>
+                              ))}</div>
+              )}
 
-      </Info>
-    </DetailWrapper>
+          </Info>
+      </DetailWrapper>
+    </LocalizationProvider>
+
   )
 }
 

@@ -15,7 +15,9 @@ function addFavorite(user_id, recipe_object, callListFavorites) {
         .then((response) => {
             callListFavorites()
             console.log("Add favorite api call repsonse: " + response)
-        })
+        }).catch((error) => {
+            console.error('Error adding favorite:', error)
+          })
     }
 
 

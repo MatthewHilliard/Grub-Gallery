@@ -38,9 +38,10 @@ function DisplayResults(props) {
               favoritesIdSet.has(String(element.id)) ?
                 <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites)} />
                 :
-                <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(props.user.sub, element, callListFavorites)} />
-            )
-            }
+
+                <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(props.user.uid, element, callListFavorites)} />
+                )
+              }
 
             <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
               <img className="recipeImage" src={element.image} alt={element.title} />
@@ -53,7 +54,8 @@ function DisplayResults(props) {
       ))
     )
 
-  }, [props.favoritesList, props.mealsList])
+    }, [props.favoritesList, props.mealsList, props.isAuthenticated])
+
 
 
   return (

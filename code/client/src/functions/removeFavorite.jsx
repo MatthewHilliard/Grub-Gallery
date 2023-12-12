@@ -3,7 +3,7 @@ import Axios from "axios"
 async function removeFavorite(user, recipe, callListFavorites){
     Axios.delete("http://localhost:3000/users/removeFavorite", {
       params: {
-        user,
+        user_id: user.uid,
         recipe
       }
     })
