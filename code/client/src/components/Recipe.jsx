@@ -68,7 +68,7 @@ function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList
         const endTime = selectedDateTime.add(recipe.readyInMinutes, 'minutes')
         const eventDetails = {
           summary: recipe.title,
-          description: recipe.instructions,
+          description: recipe.summary,
           startTime: selectedDateTime.toISOString(),
           endTime: endTime.toISOString(), 
         }
