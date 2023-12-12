@@ -45,39 +45,45 @@ export const auth = getAuth(app)
 // function to signInWithGoogle (using Firebase authentication)
 export const signInWithGoogle = () => {
     return new Promise(async (resolve, reject) => {
-        try {
-            const provider = new GoogleAuthProvider()
-            provider.addScope(scope1)
-            provider.addScope(scope2)
-            const result = await signInWithPopup(auth, provider)
-            
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const accessToken = credential.accessToken;
+      try {
+        const provider = new GoogleAuthProvider();
+        provider.addScope(scope1);
+        provider.addScope(scope2);
+        const result = await signInWithPopup(auth, provider);
+  
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const accessToken = credential.accessToken;
+  
+        // Ensure the gapi.client is initialized
+        await gapi.load('client:auth2', async () => {
+          await gapi.client.init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+            scope: scope1 + " " + scope2,
+          });
+  
+          
+          // Now, get the token after initialization is complete
+          const accessToken = gapi.auth.getToken().accessToken
 
-
-            // Ensure the gapi.client is initialized
-            await gapi.load('client:auth2', () => {
-                gapi.client.init({
-                    apiKey: null, // Set to null to avoid using the API key
-                    clientId: CLIENT_ID,
-                    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-                    scope: scope1 + " " + scope2,
-                }).then(() => {
-                    // Set the access token for authorization
-                    if (accessToken) {
-                        gapi.auth.setToken({
-                            access_token: accessToken,
-                        });
-                    }
-                });
+          // Set the access token for authorization
+          if (accessToken) {
+            gapi.auth.setToken({
+              access_token: accessToken,
             });
-            resolve(result.user)
-        } catch (error) {
-            console.log("Error authenticating with Google:", error)
-            reject(error)
-        }
+  
+          }
+        });
+  
+        resolve(result.user);
+      } catch (error) {
+        console.log("Error authenticating with Google:", error);
+        reject(error);
+      }
     });
-};
+  };
+  
 
 // export gapi (to be used in googleCalendar)
 export { gapi }

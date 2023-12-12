@@ -17,6 +17,7 @@ export const addEventToCalendar = async (eventDetails) => {
         //     })
         // })
         console.log(gapi)
+        
 
         // Use the gapi.client.calendar object to add an event
         const response = await gapi.client.calendar.events.insert({
