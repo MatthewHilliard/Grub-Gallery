@@ -22,7 +22,7 @@ import { startOfDay, setHours } from 'date-fns';
 
 
 function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList }) {
-    const [activeTab, setActiveTab] = useState('instructions')
+  const [activeTab, setActiveTab] = useState('instructions')
 
     // selectedDateTime : tracks the start date and time for the user's event
     const [selectedDateTime, setSelectedDateTime] = useState(
@@ -62,6 +62,7 @@ function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList
     }, [favoritesList, isAuthenticated, recipe])
 
 
+
     // Google Calendar integration
     const handleAddEvent = async () => {
       try {
@@ -83,6 +84,7 @@ function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList
 
     // console.log(selectedDateTime)
   return (
+
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DetailWrapper>
           <div>
@@ -121,10 +123,13 @@ function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList
           </Info>
       </DetailWrapper>
     </LocalizationProvider>
+
   )
 }
 
 export default Recipe
+
+
 
 
 const DetailWrapper = styled.div`

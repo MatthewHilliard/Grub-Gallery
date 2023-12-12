@@ -10,58 +10,60 @@ import favorite from '../assets/addFavorite.png'
 import unFavorite from '../assets/removeFavorite.png'
 
 function DisplayResults(props) {
-    // navigate : redirect to other pages (react-router-dom function)
-    const navigate = useNavigate()
+  // navigate : redirect to other pages (react-router-dom function)
+  const navigate = useNavigate()
 
-    // Function to call listFavorites with the required parameters
-    const callListFavorites = () => {
-      listFavorites(props.user, props.isAuthenticated, props.setFavoritesList);
-    }
+  // Function to call listFavorites with the required parameters
+  const callListFavorites = () => {
+    listFavorites(props.user, props.isAuthenticated, props.setFavoritesList);
+  }
 
-    // mealsList : state variable to map meals to elements rendered on the page
-    const [displayMealsList, setDisplayMealsList] = useState([])
+  // mealsList : state variable to map meals to elements rendered on the page
+  const [displayMealsList, setDisplayMealsList] = useState([])
 
-    // useEffect : re-initialize `favoritesId` and `favoritesIdSet` every time `favoritesList` is changed
-    useEffect(() => {
-      // obtain list of favorites
-      const favoritesId = props.favoritesList.map((element, index) => element.recipe_id)
-      // convert to `set` (to increase look-up time effeciency)
-      const favoritesIdSet = new Set(favoritesId)
+  // useEffect : re-initialize `favoritesId` and `favoritesIdSet` every time `favoritesList` is changed
+  useEffect(() => {
+    // obtain list of favorites
+    const favoritesId = props.favoritesList.map((element, index) => element.recipe_id)
+    // convert to `set` (to increase look-up time effeciency)
+    const favoritesIdSet = new Set(favoritesId)
 
-      // update mealsList
-      setDisplayMealsList(
-        props.mealsList.map((element, index) => (
-          //Sets a unique key based on the index for each div container
-          <Grid key={element.id}>
-            <Card>
-              {props.isAuthenticated && (
-                favoritesIdSet.has(String(element.id)) ?
-                <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites )} />
+    // update mealsList
+    setDisplayMealsList(
+      props.mealsList.map((element, index) => (
+        //Sets a unique key based on the index for each div container
+        <Grid key={element.id}>
+          <Card>
+            {props.isAuthenticated && (
+              favoritesIdSet.has(String(element.id)) ?
+                <img className="favoriteIcon" src={unFavorite} onClick={() => removeFavorite(props.user, { recipe_id: element.id }, callListFavorites)} />
                 :
+
                 <img className="favoriteIcon" src={favorite} onClick={() => addFavorite(props.user.uid, element, callListFavorites)} />
                 )
               }
 
-              <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
-                <img className="recipeImage" src={element.image} alt={element.title}/>
-              </Link>
+            <Link to={"/recipe"} onClick={() => handleRecipeClick(element.id, props.setRecipe, navigate)}>
+              <img className="recipeImage" src={element.image} alt={element.title} />
+            </Link>
 
-              <h4>{element.title}</h4>
+            <h4>{element.title}</h4>
 
-            </Card>
-          </Grid>
-        ))
+          </Card>
+        </Grid>
+      ))
     )
 
     }, [props.favoritesList, props.mealsList, props.isAuthenticated])
 
 
-    return (
-        <div className="mt-20">
-            {/* Displays the newly mapped list, which is just a bunch of div containers of information for each element */}
-            <Grid>{displayMealsList}</Grid>
-        </div>
-    )
+
+  return (
+    <div className="mt-20">
+      {/* Displays the newly mapped list, which is just a bunch of div containers of information for each element */}
+      <Grid>{displayMealsList}</Grid>
+    </div>
+  )
 }
 
 // template strings below used for styling custom divs
@@ -83,6 +85,7 @@ const Card = styled.div`
   h4 {
     text-align: center;
     padding: 1rem;
+    font-weight: 600;
   }
 
   .favoriteIcon {

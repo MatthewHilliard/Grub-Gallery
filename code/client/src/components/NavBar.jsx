@@ -8,6 +8,7 @@ import { useRef } from "react";
 import { routes } from "../HamburgerMenuRoutes.js";
 import { AnimatePresence, motion } from "framer-motion";
 import Axios from 'axios'
+import './Header.css';
 
 
 function NavBar({ setSearchMealsList, user, isAuthenticated }) {
@@ -72,84 +73,85 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
     }
 
     return (
+        <div className="sticky">
+            <div className="flex flex-row mx-auto my-auto overflow-hidden">
 
-        <div className="flex flex-row mx-auto my-auto overflow-hidden">
+                {/* Makes everything within this Link container a href, which points to the home route of pathname "/" */}
+                <Link to="/">
+                    <div className='flex items-center flex-shrink-0'>
+                        <img className='h-16 py-2 px-2' src={logo} />
+                        <h1 className="py-3 text-4xl font-light">Grub Gallery</h1>
+                    </div>
+                </Link>
 
-            {/* Makes everything within this Link container a href, which points to the home route of pathname "/" */}
-            <Link to="/">
-                <div className='flex items-center flex-shrink-0'>
-                    <img className='h-16 py-2 px-2' src={logo} />
-                    <h1 className="py-3 text-4xl font-light">Grub Gallery</h1>
+                <div className="ml-5 mr-5 mt-2 w-[350px]"> {/* NOT COMMENT: Can change the placement as needed*/}
+                    {/* Creates the input box of type "search", updates searchString by calling handleChange & sees if "enter" is pressed */}
+                    <input
+                        type="search"
+                        placeholder="What would you like to eat today?"
+                        className="w-full p-4 rounded-full focus:outline-none"
+                        name="searchbar"
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}
+                    />
                 </div>
-            </Link>
 
-            <div className="ml-5 mr-5 mt-2 w-[350px]"> {/* NOT COMMENT: Can change the placement as needed*/}
-                {/* Creates the input box of type "search", updates searchString by calling handleChange & sees if "enter" is pressed */}
-                <input
-                    type="search"
-                    placeholder="What would you like to eat today?"
-                    className="w-full p-4 rounded-full focus:outline-none"
-                    name="searchbar"
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
-                />
-            </div>
+                <div className='flex items-center ml-auto mr-5 flex-shrink-0'>
 
-            <div className='flex items-center ml-auto mr-5 flex-shrink-0'>
-
-                {isAuthenticated ?
-                    <>
-                        <div className='mr-5'>Hello, {firstName}</div>
+                    {isAuthenticated ?
+                        <>
+                            <div className='mr-5'>Hello, {firstName}</div>
+                            <button className=''>
+                                <Link to="/login"><img className='h-10 rounded-full' src={user.picture} /></Link>
+                            </button>
+                        </>
+                        :
                         <button className=''>
+
                             <Link to="/login"><img className='h-10 rounded-full' src={user.photoURL} /></Link>
+
                         </button>
-                    </>
-                    :
-                    <button className=''>
-                        {/* Makes everything within this Link container a href, which points to the login route of pathname "/login" */}
-                        <Link to="/login"><img className='h-10' src={profile_photo} /></Link>
-                    </button>
-                }
+                    }
 
 
-                {/* menu bar button */}
-                {/* UNDER CONSTRUCTION */}
-                <button className='ml-5'> {/* NOT COMMENT: Adjust the ml-2 (margin-left) as needed */}
-                    <Hamburger toggled={isOpen} toggle={setOpen} />
-                    <AnimatePresence>
-                        {isOpen && (
-                            <div className="fixed shadow-4xl right-0 top-[4.0rem] p-5 pt-0 border-b border-b-white/20">
-                                <ul className="grid gap-2">
-                                    {routes.map((route, idx) => {
-                                        return (
-                                            <motion.li
-                                                initial={{ scale: 0, opacity: 0 }}
-                                                animate={{ scale: 1, opacity: 1 }}
-                                                transition={{
-                                                    type: "spring",
-                                                    stiffness: 260,
-                                                    damping: 20,
-                                                    delay: 0.1 + idx / 10,
-                                                }}
-                                                key={route.title}
-                                                className="w-full p-[0.08rem] rounded-xl bg-gradient-to-tr from-neutral-800 via-neutral-950 to-neutral-700"
-                                            >
-                                                <Link to={route.href}
-                                                    onClick={() => setOpen((prev) => !prev)}
-                                                    className={
-                                                        "flex items-center justify-between w-full p-5 rounded-xl bg-gray-700"
-                                                    }
+                    {/* menu bar button */}
+                    <button className='ml-5'> {/* NOT COMMENT: Adjust the ml-2 (margin-left) as needed */}
+                        <Hamburger toggled={isOpen} toggle={setOpen} />
+                        <AnimatePresence>
+                            {isOpen && (
+                                <div className="fixed shadow-4xl right-0 top-[4.0rem] p-5 pt-0 border-b border-b-white/20">
+                                    <ul className="grid gap-2">
+                                        {routes.map((route, idx) => {
+                                            return (
+                                                <motion.li
+                                                    initial={{ scale: 0, opacity: 0 }}
+                                                    animate={{ scale: 1, opacity: 1 }}
+                                                    transition={{
+                                                        type: "spring",
+                                                        stiffness: 260,
+                                                        damping: 20,
+                                                        delay: 0.1 + idx / 10,
+                                                    }}
+                                                    key={route.title}
+                                                    className="w-full p-[0.08rem] rounded-xl bg-gradient-to-tr from-neutral-800 via-neutral-950 to-neutral-700"
                                                 >
-                                                    <span className="flex gap-1 text-lg text-white">{route.title}</span>
-                                                </Link>
-                                            </motion.li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-                        )}
-                    </AnimatePresence>
-                </button>
+                                                    <Link to={route.href}
+                                                        onClick={() => setOpen((prev) => !prev)}
+                                                        className={
+                                                            "flex items-center justify-between w-full p-5 rounded-xl bg-gray-700"
+                                                        }
+                                                    >
+                                                        <span className="flex gap-1 text-lg text-white">{route.title}</span>
+                                                    </Link>
+                                                </motion.li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
+                            )}
+                        </AnimatePresence>
+                    </button>
+                </div>
             </div>
         </div>
     )

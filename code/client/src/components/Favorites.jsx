@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import handleRecipeClick from "../functions/handleRecipeClick"
 import removeFavorite from "../functions/removeFavorite"
 import listFavorites from "../functions/listFavorites"
+import x_mark from '../assets/x_mark.png'
 
 function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, setRecipe }) {
   const navigate = useNavigate()
@@ -14,7 +15,7 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, set
   const callListFavorites = () => {
     listFavorites(user, isAuthenticated, setFavoritesList);
   }
-  
+
   useEffect(() => {
     callListFavorites()
   }, [isAuthenticated])
@@ -23,11 +24,13 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, set
   const favoritesDisplayList = favoritesList.map((element, index) => (
     <Grid key={element.recipe_id}>
       <Card>
-        <h4>{element.title}</h4>
+        <img className="favoriteIcon" src={x_mark} onClick={() => removeFavorite(user, element, callListFavorites)} />
         <Link to={"/recipe"} onClick={() => handleRecipeClick(element.recipe_id, setRecipe, navigate)}>
-          <img src={element.image} alt={element.title}/>
+          <img src={element.image} alt={element.title} />
         </Link>
-        <button className="pl-14 pt-2" onClick={() => removeFavorite(user, element, callListFavorites)}>Remove from Favorites</button>
+        {/* <button className="pl-14 pt-2" onClick={() => removeFavorite(user, element, callListFavorites)}>Remove from Favorites</button> */}
+
+        <h4>{element.title}</h4>
       </Card>
     </Grid>
   ))
@@ -39,7 +42,7 @@ function Favorites({ user, favoritesList, setFavoritesList, isAuthenticated, set
         { /* console.log(favoritesList) */}
         {favoritesDisplayList}
       </Grid>
-    </div>
+    </div >
   )
 }
 
@@ -60,6 +63,26 @@ const Card = styled.div`
   h4 {
     text-align: center;
     padding: 1rem;
+    font-weight: 600;
+  }
+  .favoriteIcon {
+    position: absolute;
+    margin-top: -10px;
+    margin-left: -10px;
+    width: 30px;
+    z-index: 1; /* Ensure the icon is on top */
+
+    // backdrop-filter: blur(10px);
+    // box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    // background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    // border-radius: 50%; /* Optional: to create a circular background */
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+      filter: brightness(.95)
+    }
   }
 `
 const Grid = styled.div`
