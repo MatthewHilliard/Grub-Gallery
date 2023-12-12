@@ -40,13 +40,13 @@ export const auth = getAuth(app)
 export const signInWithGoogle = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            const provider = new GoogleAuthProvider();
-            const result = await signInWithPopup(auth, provider);
-            console.log("User is:", result.user);
-            resolve(result.user);
+            const provider = new GoogleAuthProvider()
+            const result = await signInWithPopup(auth, provider)
+            // console.log("User is:", result.user)
+            resolve(result.user)
         } catch (error) {
-            console.log("Error authenticating with Google:", error);
-            reject(error);
+            console.log("Error authenticating with Google:", error)
+            reject(error)
         }
     });
 };

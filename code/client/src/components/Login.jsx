@@ -6,15 +6,9 @@ import checkmark from "../assets/checkmark.png";
 import foodsafety from "../assets/food-safety.png";
 
 
-// obtain google client_id from environmental variables
-const client_id = import.meta.env.VITE_GOOGLE_CLIENT_ID
+function Login({ isAuthenticated }) {
 
-
-function Login({ user, isAuthenticated, setIsAuthenticated }) {
-
-
-    // If we have no user: sign in button
-    // If we have a user: show the log out button
+    // handleSignIn : calls signInWithGoogle function from Firebase.js and sends user to backend
     const handleSignIn = async () => {
         try {
             // if google auth fails (jump to error catch)

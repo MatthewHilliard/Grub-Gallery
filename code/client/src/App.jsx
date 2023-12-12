@@ -34,17 +34,16 @@ function App() {
     return unsubscribe
   }, [])
 
-  // NOTE: MUST SWITCH THIS TO USE GOOGLE CALENDAR SCOPES....
-  // // load + initialize google docs API library (API_KEY, CLIENT_ID, SCOEPS retrieved from Google Cloud Console...)
-  // useEffect(() => {
-  //     gapi.load('client:auth2', () => {
-  //         gapi.client.init({
-  //             apiKey: API_KEY,
-  //             clientId: CLIENT_ID,
-  //             scope: SCOPES,
-  //         })
-  //     })
-  // }, [])
+  // load + initialize google calendar API library (API_KEY, CLIENT_ID, SCOEPS retrieved from Google Cloud Console...)
+  useEffect(() => {
+    gapi.load('client:auth2', () => {
+      gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          scope: SCOPES,
+      })
+    })
+  }, [])
 
   useEffect(() => {
     // check localStorage cache to see if `searchMealsList` has been saved
@@ -83,12 +82,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home setBrowseMealsList={setBrowseMealsList} />} />
         {/* Sets the route pathnames to X, to be used later when trying to route Y to the X's element. So X is used as a pathname to route to X's element */}
-        <Route path='/login' element={<Login
-                                        user={user}
-                                        isAuthenticated={isAuthenticated}
-                                        setIsAuthenticated={setIsAuthenticated}
-                                        />}
-        />
+        <Route path='/login' element={<Login isAuthenticated={isAuthenticated} />} />
         <Route path='/browse/display-results' element={<DisplayResults user={user} mealsList={browseMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} favoritesList={favoritesList} setFavoritesList={setFavoritesList}/>} />
         <Route path='/search/display-results' element={<DisplayResults user={user} mealsList={searchMealsList} setRecipe={setRecipe} isAuthenticated={isAuthenticated} favoritesList={favoritesList} setFavoritesList={setFavoritesList}/>} />
         <Route path='/favorites' element={<Favorites user={user} favoritesList={favoritesList} setFavoritesList={setFavoritesList} isAuthenticated={isAuthenticated} setRecipe={setRecipe} />} />
