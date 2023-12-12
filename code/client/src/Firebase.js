@@ -46,13 +46,15 @@ export const auth = getAuth(app)
 export const signInWithGoogle = () => {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log("starting sign in...")
+
         const provider = new GoogleAuthProvider();
         provider.addScope(scope1);
         provider.addScope(scope2);
         const result = await signInWithPopup(auth, provider);
   
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const accessToken = credential.accessToken;
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
   
         // Ensure the gapi.client is initialized
         await gapi.load('client:auth2', async () => {
@@ -64,8 +66,8 @@ export const signInWithGoogle = () => {
           });
   
           
-          // Now, get the token after initialization is complete
-          const accessToken = gapi.auth.getToken().accessToken
+        //   // Now, get the token after initialization is complete
+        //   const accessToken = gapi.auth.getToken().accessToken
 
           // Set the access token for authorization
           if (accessToken) {
@@ -75,8 +77,9 @@ export const signInWithGoogle = () => {
   
           }
         });
-  
-        resolve(result.user);
+        console.log("finished sign in...")
+        // Resolve with gapi object
+        resolve({ result: result.user, gapi })
       } catch (error) {
         console.log("Error authenticating with Google:", error);
         reject(error);
@@ -85,8 +88,8 @@ export const signInWithGoogle = () => {
   };
   
 
-// export gapi (to be used in googleCalendar)
-export { gapi }
+// // export gapi (to be used in googleCalendar)
+// export { gapi }
 
 
 // function to sign out (with firebase authentication)

@@ -7,10 +7,29 @@ import listFavorites from "../functions/listFavorites"
 import favorite from '../assets/addFavorite.png'
 import unFavorite from '../assets/removeFavorite.png'
 
+// MUI datetime picker : https://mui.com/x/react-date-pickers/getting-started/
+import dayjs from 'dayjs';
+import 'dayjs/locale/en'; // Import the locale you want to use
+import utc from 'dayjs/plugin/utc';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+dayjs.extend(utc);
+dayjs.extend(localizedFormat);
+// used to grab default date/time
+import { startOfDay, setHours } from 'date-fns';
+
+
+
 function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList }) {
     const [activeTab, setActiveTab] = useState('instructions')
 
-
+    // selectedDateTime : tracks the start date and time for the user's event
+    const [selectedDateTime, setSelectedDateTime] = useState(
+      dayjs().startOf('day').add(12, 'hours')
+    )
+    
+  
     // Function to call listFavorites with the required parameters
     const callListFavorites = () => {
       listFavorites(user, isAuthenticated, setFavoritesList);
@@ -46,12 +65,14 @@ function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList
     // Google Calendar integration
     const handleAddEvent = async () => {
       try {
+        const endTime = selectedDateTime.add(recipe.readyInMinutes, 'minutes')
         const eventDetails = {
-          summary: 'Meeting with John',
-          description: 'Discuss project updates',
-          startTime: '2023-12-11T22:00:00',
-          endTime: '2023-12-11T23:59:59', 
+          summary: recipe.title,
+          description: recipe.instructions,
+          startTime: selectedDateTime.toISOString(),
+          endTime: endTime.toISOString(), 
         }
+        console.log('eventDetails', eventDetails)
     
         await addEventToCalendar(eventDetails)
         console.log('Event added successfully!')
@@ -60,33 +81,46 @@ function Recipe({ recipe, isAuthenticated, user, favoritesList, setFavoritesList
       }
     };
 
+    // console.log(selectedDateTime)
   return (
-    <DetailWrapper>
-        <div>
-            <h2>{recipe.title}</h2>
-            {displayImageIcon}
-            {isAuthenticated && <button onClick={handleAddEvent}>Add to gcal</button> }
-        </div>
-        <Info>
-        
-            <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab("instructions")}>Instructions</Button> 
-            <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab("ingredients")}>Ingredients</Button>
-            {activeTab === 'instructions' && (
-                            <div>
-                            <h1>Overview:</h1>
-                            <h3 dangerouslySetInnerHTML={{ __html: recipe.summary }}></h3>
-                            <h1>Instructions:</h1>
-                            <h3 dangerouslySetInnerHTML={{ __html: recipe.instructions }}></h3>
-                            </div>
-            )}
-            {activeTab === 'ingredients' &&(
-                            <div>{recipe.extendedIngredients.map((ingredient) => (
-                                <li key={ingredient.id}>{ingredient.original}</li>
-                            ))}</div>
-            )}
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DetailWrapper>
+          <div>
+              <h2>{recipe.title}</h2>
+              {displayImageIcon}
+              {isAuthenticated && 
+                <>
+                  <DateTimePicker
+                      className="w-[250px]"
+                      value={selectedDateTime}
+                      onChange={(newDateTime) => setSelectedDateTime(newDateTime)}
+                  />
+                  
+                  <button onClick={handleAddEvent}>Add to gcal</button> 
+                </>
+              }
+          </div>
+          <Info>
+          
+              <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab("instructions")}>Instructions</Button> 
+              <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab("ingredients")}>Ingredients</Button>
+              {activeTab === 'instructions' && (
+                              <div>
+                              <h1>Overview:</h1>
+                              <h3 dangerouslySetInnerHTML={{ __html: recipe.summary }}></h3>
+                              <h1>Instructions:</h1>
+                              <h3 dangerouslySetInnerHTML={{ __html: recipe.instructions }}></h3>
+                              </div>
+              )}
+              {activeTab === 'ingredients' &&(
+                              <div>{recipe.extendedIngredients.map((ingredient) => (
+                                  <li key={ingredient.id}>{ingredient.original}</li>
+                              ))}</div>
+              )}
 
-        </Info>
-    </DetailWrapper>
+          </Info>
+      </DetailWrapper>
+    </LocalizationProvider>
   )
 }
 

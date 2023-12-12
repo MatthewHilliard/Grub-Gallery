@@ -11,8 +11,8 @@ function Login({ isAuthenticated }) {
     const handleSignIn = async () => {
         try {
             // if google auth fails (jump to error catch)
-            const userResult = await signInWithGoogle();
-    
+            const { userResult } = await signInWithGoogle();
+            
             if (userResult) {
                 // body: object of data being sent to backend endpoint
                 const body = {
@@ -20,16 +20,17 @@ function Login({ isAuthenticated }) {
                     email: userResult.email,
                     user_id: userResult.uid
                 };
-    
+                
                 // Call backend's MongoDB 'createUsers' endpoint to create the user
                 Axios.post("http://localhost:3000/users/createUser", body)
-                    .then((response) => {
-                        console.log("Create User API call response: ", response);
-                    })
-                    .catch((error) => {
-                        console.log("Error making Axios post request:", error);
-                    });
+                .then((response) => {
+                    console.log("Create User API call response: ", response);
+                })
+                .catch((error) => {
+                    console.log("Error making Axios post request:", error);
+                });
             }
+            
         } catch (error) {
             console.log("Error handling sign in:", error);
         }

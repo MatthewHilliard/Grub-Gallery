@@ -1,24 +1,18 @@
-import { gapi } from '../Firebase'
-const API_KEY = import.meta.env.VITE_GAPI_KEY
-const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
-const scope1 = import.meta.env.VITE_SCOPE1
-const scope2 = import.meta.env.VITE_SCOPE2
+// import { gapi } from '../Firebase'
+import { signInWithGoogle } from "../Firebase"
 
 // Function to add an event to the user's default calendar
 export const addEventToCalendar = async (eventDetails) => {
     try {
-        // // Ensure the gapi.client is initialized
-        // await gapi.load('client:auth2', () => {
-        //     gapi.client.init({
-        //         apiKey: API_KEY,
-        //         clientId: CLIENT_ID,
-        //         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-        //         scope: scope1 + " " + scope2,
-        //     })
-        // })
-        console.log(gapi)
+        // reauthenticate with google (ensures gapi is loaded on page refresh)
+        const { gapi } = await signInWithGoogle();
         
+        // Ensure that gapi.client is available and wait if necessary
+        while (!gapi.client) {
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 100 milliseconds
+        }
 
+        console.log("calling gapi")
         // Use the gapi.client.calendar object to add an event
         const response = await gapi.client.calendar.events.insert({
         'calendarId': 'primary', // Use 'primary' for the user's default calendar
