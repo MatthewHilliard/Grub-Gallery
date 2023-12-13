@@ -12,6 +12,7 @@ import './Header.css';
 
 
 function NavBar({ setSearchMealsList, user, isAuthenticated }) {
+
     // navigate : used to redirect user to other urls...
     const navigate = useNavigate()
     const ref = useRef(null);
@@ -102,13 +103,13 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
                         <>
                             <div className='mr-5'>Hello, {firstName}</div>
                             <button className=''>
-                                <Link to="/login"><img className='h-10 rounded-full' src={user.picture} /></Link>
+                                <Link to="/login"><img className='h-10 rounded-full' src={user.photoURL} /></Link>
                             </button>
                         </>
                         :
                         <button className=''>
 
-                            <Link to="/login"><img className='h-10 rounded-full' src={user.photoURL} /></Link>
+                            <Link to="/login"><img className='h-10 rounded-full' src={profile_photo} /></Link>
 
                         </button>
                     }

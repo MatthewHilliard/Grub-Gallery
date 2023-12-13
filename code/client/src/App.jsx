@@ -8,7 +8,7 @@ import Schedule from './components/Schedule'
 import './index.css'
 import Recipe from './components/Recipe'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { auth } from "./Firebase"
+import { auth, handleSignOut } from "./Firebase"
 
 function App() {
 
