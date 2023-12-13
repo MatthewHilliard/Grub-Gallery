@@ -74,8 +74,8 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
     }
 
     return (
-        <div className="sticky">
-            <div className="flex flex-row mx-auto my-auto overflow-hidden">
+        <div className="sticky bg-[#fad7b9] ">
+            <div className="flex flex-row justify-center items-center mx-auto my-auto overflow-hidden">
 
                 {/* Makes everything within this Link container a href, which points to the home route of pathname "/" */}
                 <Link to="/">
@@ -85,7 +85,7 @@ function NavBar({ setSearchMealsList, user, isAuthenticated }) {
                     </div>
                 </Link>
 
-                <div className="ml-5 mr-5 mt-2 w-[350px]"> {/* NOT COMMENT: Can change the placement as needed*/}
+                <div className="ml-5 mr-5 w-[350px]"> {/* NOT COMMENT: Can change the placement as needed*/}
                     {/* Creates the input box of type "search", updates searchString by calling handleChange & sees if "enter" is pressed */}
                     <input
                         type="search"

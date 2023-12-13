@@ -11,14 +11,14 @@ function Login({ isAuthenticated }) {
     const handleSignIn = async () => {
         try {
             // if google auth fails (jump to error catch)
-            const { userResult } = await signInWithGoogle();
-            
-            if (userResult) {
+            const { result } = await signInWithGoogle();
+            console.log(result)
+            if (result) {
                 // body: object of data being sent to backend endpoint
                 const body = {
-                    name: userResult.displayName,
-                    email: userResult.email,
-                    user_id: userResult.uid
+                    name: result.displayName,
+                    email: result.email,
+                    user_id: result.uid
                 };
                 
                 // Call backend's MongoDB 'createUsers' endpoint to create the user
