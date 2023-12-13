@@ -68,10 +68,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Grub Gallery][product-screenshot]](https://example.com)
+Grub Gallery is a dynamic web application built using the MERN (MongoDB, Express.js, React, Node.js) stack, integrating Google OAuth, Spoonacular API, and Google Calendar API. This project allows users to discover and personalize dishes and recipes effortlessly.
 
-Uses Google OAuth, Spoonacular API, and Google Calender API. Created using MERN stack.
-Project demo here: https://www.youtube.com/watch?v=HiiPeKkUXfM
+Project demo: https://www.youtube.com/watch?v=HiiPeKkUXfM
+[![Video](code/client/src/assets/appscreenshot.jpeg)](https://www.youtube.com/watch?v=HiiPeKkUXfM)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -89,7 +89,7 @@ Project demo here: https://www.youtube.com/watch?v=HiiPeKkUXfM
 ## Getting Started
 
 This is an example of how you can set up the project locally.
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
@@ -98,8 +98,9 @@ Please ensure that the following software is installed before cloning the reposi
   ```sh
   npm install npm@latest -g
   ```
-* Google Cloud Console (please follow these steps from [Google](https://support.google.com/cloud/answer/6158849?hl=en) to initialize your project and obtain a `client ID`)
-* MongDB (please follow these steps from [MongoDB](https://www.mongodb.com/docs/compass/current/connect/) to set up your cluster and obtain your cluster `URI`)
+* Google Cloud Console (please follow these steps from [Google](https://support.google.com/cloud/answer/6158849?hl=en) to initialize your project and obtain a `client ID` and `API_KEY`)
+* Firebase (please follow these steps from [Firebase](https://firebase.google.com/docs/web/setup) to setup `OAuth 2.0` and obtain a `firebaseConfig` object)
+* MongoDB (please follow these steps from [MongoDB](https://www.mongodb.com/docs/compass/current/connect/) to set up your cluster and obtain your cluster `URI`)
 * Spoonacular (please follow these steps from [Spoonacular API](https://spoonacular.com/food-api/console#Dashboard) to obtain your Spoonacular `API_KEY`)
 
 ### Installation
@@ -113,8 +114,22 @@ _To install and run locally, please complete the following steps:_
    ```
 4. Create a `.env` file in the `client` directory (paste the following information, filling in the keys from above)
    ```env
-   ################ Frontend environment variables ################
-   VITE_GOOGLE_CLIENT_ID=secret_client_id_goes_here
+    ################ Frontend environment variables ################
+    # used for Google Calendar API (gapi service)
+    VITE_GAPI_KEY="obtain gapi key from Google Cloud console"
+    VITE_GOOGLE_CLIENT_ID="obtain client_id key from Google Cloud console"
+    # leave scopes unchanged (not secret, but good practice to store here)
+    VITE_SCOPE1=https://www.googleapis.com/auth/calendar
+    VITE_SCOPE2=https://www.googleapis.com/auth/calendar.events
+
+    # Firebase config keys
+    VITE_FIREBASE_API_KEY="obtain from firebaseConfig"
+    VITE_FIREBASE_AUTH_DOMAIN="obtain from firebaseConfig"
+    VITE_FIREBASE_PROJECT_ID="obtain from firebaseConfig"
+    VITE_FIREBASE_STORAGE_BUCKET="obtain from firebaseConfig"
+    VITE_FIREBASE_MESSAGING_SENDER_ID="obtain from firebaseConfig"
+    VITE_FIREBASE_APP_ID="obtain from firebaseConfig"
+    VITE_FIREBASE_MEASUREMENT_ID="obtain from firebaseConfig"
    ```
 5. Create a `.env` file in the `server` directory (paste the following information, filling in the keys from above)
    ```env
