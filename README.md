@@ -27,7 +27,7 @@
   <p align="center">
     Personalized dishes and recipes with the click of a button!
     <br />
-    <a href="https://www.youtube.com/watch?v=HiiPeKkUXfM" target=”_blank”>View Demo</a>
+    <a href="https://www.youtube.com/watch?v=HiiPeKkUXfM" target= "_blank">View Demo</a>
     ·
     <a href="https://github.com/MatthewHilliard/411-Group-22/issues">Report Bug</a>
     ·
