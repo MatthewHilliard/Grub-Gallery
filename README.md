@@ -54,10 +54,10 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <!-- <li><a href="#usage">Usage</a></li> -->
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <!-- <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -116,20 +116,20 @@ _To install and run locally, please complete the following steps:_
    ```env
     ################ Frontend environment variables ################
     # used for Google Calendar API (gapi service)
-    VITE_GAPI_KEY="obtain gapi key from Google Cloud console"
-    VITE_GOOGLE_CLIENT_ID="obtain client_id key from Google Cloud console"
+    VITE_GAPI_KEY=obtain_gapi_key_from_Google_Cloud_console
+    VITE_GOOGLE_CLIENT_ID=obtain_client_id_key_from_Google_Cloud_console
     # leave scopes unchanged (not secret, but good practice to store here)
     VITE_SCOPE1=https://www.googleapis.com/auth/calendar
     VITE_SCOPE2=https://www.googleapis.com/auth/calendar.events
 
     # Firebase config keys
-    VITE_FIREBASE_API_KEY="obtain from firebaseConfig"
-    VITE_FIREBASE_AUTH_DOMAIN="obtain from firebaseConfig"
-    VITE_FIREBASE_PROJECT_ID="obtain from firebaseConfig"
-    VITE_FIREBASE_STORAGE_BUCKET="obtain from firebaseConfig"
-    VITE_FIREBASE_MESSAGING_SENDER_ID="obtain from firebaseConfig"
-    VITE_FIREBASE_APP_ID="obtain from firebaseConfig"
-    VITE_FIREBASE_MEASUREMENT_ID="obtain from firebaseConfig"
+    VITE_FIREBASE_API_KEY=obtain_from_firebaseConfig
+    VITE_FIREBASE_AUTH_DOMAIN=obtain_from_firebaseConfig
+    VITE_FIREBASE_PROJECT_ID=obtain_from_firebaseConfig
+    VITE_FIREBASE_STORAGE_BUCKET=obtain_from_firebaseConfig
+    VITE_FIREBASE_MESSAGING_SENDER_ID=obtain_from_firebaseConfig
+    VITE_FIREBASE_APP_ID=obtain_from_firebaseConfig
+    VITE_FIREBASE_MEASUREMENT_ID=obtain_from_firebaseConfig
    ```
 5. Create a `.env` file in the `server` directory (paste the following information, filling in the keys from above)
    ```env
@@ -154,7 +154,7 @@ _To install and run locally, please complete the following steps:_
 
 
 
-<!-- USAGE EXAMPLES -->
+<!-- USAGE EXAMPLES 
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
@@ -163,20 +163,60 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
+-->
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
+### Backend Development
+- [x] Edit users SCHEMA in the backend
+  - User information fields: name (str), age (number), username/id (str), diet (list of strings), favorites (list of recipes), history (list of recipes)
+- [x] User OAuth implementation in frontend
+  - Connect frontend to backend
+  - Profile picture placement and save functionality
+  - Design improvements for signed-in users
+- [x] Setup endpoint for /searchMeal
+  - Create search bar in the frontend
+  - Make API call in the backend
+  - Potential addition of filters in the future
+- [x] React routing
+- [x] Connect backend endpoints to frontend for add/remove favorites and history
+- [ ] Abstract Google login into a backend API call (for security purposes)
+- [ ] Fix users addFavorite --> prevent duplicates
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+### Frontend Development
+- [x] Move profile picture to the top right
+- [x] Create a separate page for a user already signed in (Unsure if needed yet)
+- [x] Hamburger dropdown
+  - Favorites
+  - History
+- [ ] Create default image for recipes missing image URLs
+
+### UI/UX Design
+- [x] Design the recipes page for browsing meals and the search function
+  - Convert into a component
+- [x] Create a favorites page
+  - Styling
+  - Connect backend endpoints to frontend for add/remove favorites
+  - Use localStorage in SearchResults and BrowseMeals to maintain the list of dishes on page refresh
+
+### Functionality Improvements
+- [x] Add support for npm i and npm start in code and backend directories respectively (use concurrently)
+- [x] Create addFavorite function (separate file)
+- [x] Add UI polish for add/remove favorite (use a star PNG)
+- [x] Immediately call listFavorites (refactored) after adding/removing a favorite
+- [x] Refactor listFavorites to turn it into a separate function to grab the list of favorites from the backend
+
+### Bug Fixes
+- [x] Fix the search-meals bug (automatically re-load when BrowseMealsList changes)
+- [x] Remove from favorites
+- [x] Add an undo button for favorites
+
+### Documentation and Maintenance
+- [x] Add API keys to the .env file
+- [x] Update GitHub README
+
+See the [open issues](https://github.com/MatthewHilliard/411-Group-22/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -201,11 +241,11 @@ Don't forget to give the project a star! Thanks again!
 
 
 <!-- LICENSE -->
-## License
+<!-- ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 
 
