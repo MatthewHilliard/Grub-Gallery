@@ -70,7 +70,8 @@
 
 [![Grub Gallery][product-screenshot]](https://example.com)
 
-Project description...
+Uses Google OAuth, Spoonacular API, and Google Calender API. Created using MERN stack.
+Project demo here: https://www.youtube.com/watch?v=HiiPeKkUXfM
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
