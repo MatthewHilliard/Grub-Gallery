@@ -19,7 +19,7 @@ function Home({ setBrowseMealsList }) {
           const apiData = JSON.parse(response.data)
           // Pass the data as state to the "APIDataPage"
           const results = apiData.recipes
-          
+
           // update browseMealsList
           setBrowseMealsList(results)
 
@@ -54,7 +54,7 @@ function Home({ setBrowseMealsList }) {
 
       {/* third outter grid entry */}
       <div className="px-10 text-lg py-6">
-        <h2>Discover delectable dishes and seamlessly integrate them into your schedule with Google Calender integration. Elevate your dining experience effortlessly with Meal Planner.</h2>
+        <h2>Discover delectable dishes and seamlessly integrate them into your schedule with Google Calender integration. Elevate your dining experience effortlessly with the Grub Gallery.</h2>
       </div>
 
       {/* fourth outter grid entry */}
