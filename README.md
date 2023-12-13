@@ -272,7 +272,8 @@ Here are some extremely helpful resources if you are interested in working on th
 * React Google Authentication - [PedroTech](https://www.youtube.com/watch?v=vDT7EnUpEoo)
 * MERN Stack Tutorial - [PedroTech](https://www.youtube.com/watch?v=I7EDAR2GRVo)
 * Google Docs API Tutorial - [Cooper Codes](https://www.youtube.com/watch?v=0KoZSVnTnkA)
-* [Tailwind CSS](https://tailwindcss.com/)
+* [Tailwind CSS Docs](https://tailwindcss.com/)
+* [Vite-React Docs](https://vitejs.dev/guide/)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
