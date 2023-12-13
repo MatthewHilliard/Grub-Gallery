@@ -75,7 +75,7 @@ function Login({ isAuthenticated }) {
             <div className="flex justify-center items-center box-border h-[500px] w-[600px] min-w-[400px] rounded-3xl bg-[#B28370] boxShadow">
                 {/* Sign Out Button */}
                 {isAuthenticated ?
-                    <button className="google-btn w-60 h-10" onClick={handleSignOut}>
+                    <button className="google-btn w-60 " onClick={handleSignOut}>
                         Sign Out
                     </button>
                     :
