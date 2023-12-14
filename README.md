@@ -18,7 +18,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/MatthewHilliard/411-Group-22">
+  <a href="https://github.com/MatthewHilliard/Grub-Gallery">
     <img src="code/client/src/assets/forkandknife.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -29,9 +29,9 @@
     <br />
     <a href="https://www.youtube.com/watch?v=HiiPeKkUXfM" target= "_blank">View Demo</a>
     ·
-    <a href="https://github.com/MatthewHilliard/411-Group-22/issues">Report Bug</a>
+    <a href="https://github.com/MatthewHilliard/Grub-Gallery/issues">Report Bug</a>
     ·
-    <a href="https://github.com/MatthewHilliard/411-Group-22/issues">Request Feature</a>
+    <a href="https://github.com/MatthewHilliard/Grub-Gallery/issues">Request Feature</a>
   </p>
 </div>
 
@@ -110,7 +110,7 @@ _To install and run locally, please complete the following steps:_
 1. Ensure that your have followed all of the steps from [prerequisites](#prerequisites)
 3. Clone the repo
    ```sh
-   git clone https://github.com/MatthewHilliard/411-Group-22.git
+   git clone https://github.com/MatthewHilliard/Grub-Gallery.git
    ```
 4. Create a `.env` file in the `client` directory (paste the following information, filling in the keys from above)
    ```env
@@ -140,13 +140,13 @@ _To install and run locally, please complete the following steps:_
    ```
 6. Install NPM packages (will install packages in `code`, `client`, and `server` directories)
    ```sh
-   cd 411-Group-22/code
+   cd Grub-Gallery/code
    npm install
    npm run install-all
    ```
 7. Run the application
    ```sh
-   cd 411-Group-22/code/server
+   cd Grub-Gallery/code/server
    npm start
    ```
 
@@ -216,7 +216,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Add API keys to the .env file
 - [x] Update GitHub README
 
-See the [open issues](https://github.com/MatthewHilliard/411-Group-22/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/MatthewHilliard/Grub-Gallery/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -258,7 +258,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 * Mensun Wang - mensun@bu.edu
 * Sean Fung - sfung10@bu.edu
 
-Project Link: [https://github.com/MatthewHilliard/411-Group-22](https://github.com/MatthewHilliard/411-Group-22)
+Project Link: [https://github.com/MatthewHilliard/Grub-Gallery](https://github.com/MatthewHilliard/Grub-Gallery)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -282,16 +282,16 @@ Here are some extremely helpful resources if you are interested in working on th
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/MatthewHilliard/411-Group-22.svg?style=for-the-badge
-[contributors-url]: https://github.com/MatthewHilliard/411-Group-22/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/MatthewHilliard/411-Group-22.svg?style=for-the-badge
-[forks-url]: https://github.com/MatthewHilliard/411-Group-22/network/members
-[stars-shield]: https://img.shields.io/github/stars/MatthewHilliard/411-Group-22.svg?style=for-the-badge
-[stars-url]: https://github.com/MatthewHilliard/411-Group-22/stargazers
-[issues-shield]: https://img.shields.io/github/issues/MatthewHilliard/411-Group-22.svg?style=for-the-badge
-[issues-url]: https://github.com/MatthewHilliard/411-Group-22/issues
-[license-shield]: https://img.shields.io/github/license/MatthewHilliard/411-Group-22.svg?style=for-the-badge
-[license-url]: https://github.com/MatthewHilliard/411-Group-22/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/MatthewHilliard/Grub-Gallery.svg?style=for-the-badge
+[contributors-url]: https://github.com/MatthewHilliard/Grub-Gallery/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/MatthewHilliard/Grub-Gallery.svg?style=for-the-badge
+[forks-url]: https://github.com/MatthewHilliard/Grub-Gallery/network/members
+[stars-shield]: https://img.shields.io/github/stars/MatthewHilliard/Grub-Gallery.svg?style=for-the-badge
+[stars-url]: https://github.com/MatthewHilliard/Grub-Gallery/stargazers
+[issues-shield]: https://img.shields.io/github/issues/MatthewHilliard/Grub-Gallery.svg?style=for-the-badge
+[issues-url]: https://github.com/MatthewHilliard/Grub-Gallery/issues
+[license-shield]: https://img.shields.io/github/license/MatthewHilliard/Grub-Gallery.svg?style=for-the-badge
+[license-url]: https://github.com/MatthewHilliard/Grub-Gallery/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 <!-- [linkedin-url]: https://linkedin.com/in/othneildrew -->
 <!-- [product-screenshot]: images/screenshot.png -->
