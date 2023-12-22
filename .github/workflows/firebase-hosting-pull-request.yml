@@ -15,3 +15,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GRUB_GALLERY_40B70 }}'
           projectId: grub-gallery-40b70
+          entryPoint: 'code/client/firebase.json'  # Adjust this path as needed
