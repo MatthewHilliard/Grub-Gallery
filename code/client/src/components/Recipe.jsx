@@ -14,10 +14,9 @@ import utc from 'dayjs/plugin/utc';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-dayjs.extend(utc);
-dayjs.extend(localizedFormat);
-// used to grab default date/time
-import { startOfDay, setHours } from 'date-fns';
+// formatting for dates
+dayjs.extend(utc)
+dayjs.extend(localizedFormat)
 
 
 
