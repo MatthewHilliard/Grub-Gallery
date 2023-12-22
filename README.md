@@ -19,7 +19,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/MatthewHilliard/Grub-Gallery">
-    <img src="code/client/src/assets/forkandknife.png" alt="Logo" width="80" height="80">
+    <img src="client/src/assets/forkandknife.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Grub Gallery</h3>
@@ -71,7 +71,7 @@
 Grub Gallery is a dynamic web application built using the MERN (MongoDB, Express.js, React, Node.js) stack, integrating Google OAuth, Spoonacular API, and Google Calendar API. This project allows users to discover and personalize dishes and recipes effortlessly.
 
 Project demo: https://www.youtube.com/watch?v=HiiPeKkUXfM
-[![Video](code/client/src/assets/appscreenshot.jpeg)](https://www.youtube.com/watch?v=HiiPeKkUXfM)
+[![Video](client/src/assets/appscreenshot.jpeg)](https://www.youtube.com/watch?v=HiiPeKkUXfM)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -138,15 +138,14 @@ _To install and run locally, please complete the following steps:_
     MONGODB_URI=mongodb_uri_goes_here
     SPOONACULAR_KEY=spoonacular_api_key_goes_here
    ```
-6. Install NPM packages (will install packages in `code`, `client`, and `server` directories)
+6. Install NPM packages (will install packages in `root`, `client`, and `server` directories)
    ```sh
-   cd Grub-Gallery/code
-   npm install
+   cd Grub-Gallery
    npm run install-all
    ```
 7. Run the application
    ```sh
-   cd Grub-Gallery/code/server
+   cd Grub-Gallery/server
    npm start
    ```
 
