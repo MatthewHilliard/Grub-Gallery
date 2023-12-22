@@ -12,6 +12,7 @@ const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
 const scope1 = import.meta.env.VITE_SCOPE1
 const scope2 = import.meta.env.VITE_SCOPE2
 
+console.log("env", authDomain, projectId)
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
