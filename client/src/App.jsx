@@ -11,9 +11,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { auth, handleSignOut } from "./Firebase"
 
 function App() {
-  // testing firebase github actions
-  console.log("testing git actions")
-  console.log("testing git actions 2.0")
 
   // assign state variables (keep track of meals lists, favorites lists, recipe, and user info)
   const [searchMealsList, setSearchMealsList] = useState([])
